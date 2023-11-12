@@ -25,7 +25,7 @@ export default function Navbar() {
             },
             active: router.pathname === '/'
         },
-        {
+        /*{
             link: '/about',
             label: 'About',
             icon: {
@@ -51,7 +51,7 @@ export default function Navbar() {
                 active: 'fas fa-newspaper'
             },
             active: router.pathname === '/posts'
-        }
+        }*/
     ]
 
     const setIsOpen = (value) => {

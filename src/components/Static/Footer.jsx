@@ -7,7 +7,7 @@ import k4itrunConfig from "../../../k4itrun.config";
 export default function Footer() {
     const router = useRouter();
 
-    let [heartColor, setHeartColor] = useState('#4F3DFE');
+    let [heartColor, setHeartColor] = useState('#f363ac');
 
     function randomColor() {
         let color = '#';
