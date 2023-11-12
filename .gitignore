@@ -24,6 +24,7 @@ config/config.json
 
 # Cache
 .cache/
+.next/
 
 # Local configuration files (e.g., for IDE)
 .vscode/
