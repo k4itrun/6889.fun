@@ -5,12 +5,12 @@ export default function MyDocument() {
         <Html lang="en">
             <Head>
                 <meta charSet="utf-8" />
-                <meta name="theme-color" content="#f363ac" />
+                <meta name="theme-color" content="#ffffff" />
                 <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-                <meta name="description" content="16 y/o. Full-stack Developer" />
+                <meta name="description" content="bio >.<" />
                 <link rel="icon" href="/api/images/yvk" type="image/x-icon"/>
             </Head>
             <body>
