@@ -24,11 +24,11 @@ function MyApp({ Component, pageProps }) {
               <div>
                 {event.hasBack && (<Item icon={<i className="fa fa-arrow-left" />} text="Back" kbd={["Alt", "◀"]} onClick={event.goBack} />)}
                 {event.hasForward && (<Item icon={<i className="fa fa-arrow-right" />} text="Forward" kbd={["Alt", "▶"]} onClick={event.goForward} />)}
-                <Item icon={<i className="fa fa-redo" />} text="Refresh" kbd={["Ctrl", "R"]} onClick={event.refreshPage} />
               </div>
 
               <div className="pt-2">
-                <Item icon={<i className="fa fa-code" />} text="View Source" onClick={event.viewSource} />
+              <Item icon={<i className="fa fa-redo" />} text="Refresh" kbd={["Ctrl", "R"]} onClick={event.refreshPage} />
+               {/* <Item icon={<i className="fa fa-code" />} text="View Source" onClick={event.viewSource} /> */}
               </div>
             </>}
           >
