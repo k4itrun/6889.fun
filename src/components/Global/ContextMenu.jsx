@@ -51,7 +51,7 @@ const ContextMenu = ({ content, children }) => {
             window.location.reload();
         },
         viewSource: () => {
-            window.open("https://github.com/k4itrun/k4itrun.live", "_blank");
+            window.open("https://github.com/k4itrun/", "_blank");
         }
     };
 

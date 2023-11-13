@@ -27,9 +27,9 @@ function MyApp({ Component, pageProps }) {
                 <Item icon={<i className="fa fa-redo" />} text="Refresh" kbd={["Ctrl", "R"]} onClick={event.refreshPage} />
               </div>
 
-              {/*<div className="pt-2">
+              <div className="pt-2">
                 <Item icon={<i className="fa fa-code" />} text="View Source" onClick={event.viewSource} />
-              </div>*/}
+              </div>
             </>}
           >
             <Navbar />
