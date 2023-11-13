@@ -24,7 +24,7 @@ export default function Footer() {
                 <p className="text-lg text-zinc-400">© 2018 - {new Date().getFullYear()} {k4itrunConfig.name}.</p>
                 <div className="text-right">
                     <p className="text-lg text-zinc-400 select-none">Made with <i onClick={() => { setHeartColor(randomColor()) }} className="fas fa-heart" style={{ color: heartColor, cursor: 'pointer' }} /> by <a href="" className="text-zinc-400 hover:text-primary hover:dark:text-white">k4itrun</a></p>
-                    <p className="text-sm text-zinc-400 select-none">Powered by <a href="https://vercel.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Vercel</a> & <a href="https://tailwindcss.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Tailwind CSS</a></p>
+                    <p className="text-sm text-zinc-400 select-none">All thanks to <a href="https://vercel.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Vercel</a> & <a href="https://tailwindcss.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Tailwind CSS</a></p>
                 </div>
             </div>
         </div>
