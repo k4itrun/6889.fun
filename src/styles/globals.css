@@ -70,10 +70,10 @@ body {
 }
 
 .layout-blue {
-    background: radial-gradient(at 150% 0%, #3D25FA 0, transparent 50%);
+    background: radial-gradient(at 150% 0%, #8825fa 0, transparent 50%);
 }
 
 .layout-purple {
     top: 25%;
-    background: radial-gradient(at 0% 150%, #8825fa 0, transparent 50%);
+    background: radial-gradient(at 0% 150%, #8ad4c2 0, transparent 50%);
 }

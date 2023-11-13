@@ -6,7 +6,7 @@ module.exports = {
     githubKey: process.env.GITHUB_KEY,
     softwareerKey: process.env.SOFTWAREER_KEY,
     discordToken: process.env.DISCORD_TOKEN,
-    email: 'root@k4itrun.me',
+    email: 'k4itrun@6889.fun',
     errors: {
         404: "This page could not be found.",
         500: "An error occurred while processing your request."

@@ -42,7 +42,7 @@ const Page = ({ id, data }) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const request = await axios.get('https://k4itrun.me/api/post?id=' + context?.query.id).then(res => res.data).catch(err => err.response);
+    const request = await axios.get('https://6889.fun/api/post?id=' + context?.query.id).then(res => res.data).catch(err => err.response);
 
     if (!request) return {
         notFound: true
