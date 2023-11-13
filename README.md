@@ -1,4 +1,4 @@
-# Portfolio Website by k4itrun.<br/>
+# 6889.fun Website by k4itrun.<br/>
 
 ## Getting Started
 
@@ -30,7 +30,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new/import?s=https://github.com/k4itrun/portfolio&utm_source=github.com/k4itrun) from the k4itrun.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new/import?s=https://github.com/k4itrun/6889.fun&utm_source=github.com/k4itrun) from the k4itrun.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
