@@ -19,15 +19,21 @@ export default function Home() {
   return <>
     <div className="h-[40rem] flex flex-col justify-center items-center mb-72">
       {discordinfos && discordinfos.avatar && (
+      <img
+        src={`https://cdn.discordapp.com/avatars/${discordinfos.id}/${discordinfos.avatar}.png`}
+        alt="k4itrun"
+        className="rounded-full border-4 border-primary p-2 mt-2 w-16 h-16 sm:mt-4 sm:w-40 sm:h-40"
+        onError={(e) => {
+          e.target.src = '/api/images/k4itrun';
+          e.target.alt = 'k4itrun';
+        }}
+      />
+      )}
+      {(!discordinfos || !discordinfos.avatar) && (
         <img
-          src={`https://cdn.discordapp.com/avatars/${discordinfos.id}/${discordinfos.avatar}.png`}
+          src="/api/images/k4itrun"
           alt="k4itrun"
-          className="rounded-full border-4 border-primary p-2 mt-4 sm:mt-10"
-          onError={(e) => {
-            e.target.onerror = null; 
-            e.target.src = '/api/images/yvk';
-            e.target.alt = 'k4itrun';
-          }}
+          className="rounded-full border-4 border-primary p-2 mt-2 w-16 h-16 sm:mt-4 sm:w-40 sm:h-40"
         />
       )}
       <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium sm:text-7xl text-black dark:text-white text-center">
@@ -137,8 +143,8 @@ export default function Home() {
           </Carousel>
         )}
 
-        {/* <div className="absolute right-0 bottom-0 h-full w-48 bg-gradient-to-l from-[#050505]" />
-        <div className="absolute left-0 bottom-0 h-full w-48 bg-gradient-to-r from-[#050505]" /> */}
+         <div className="absolute right-0 bottom-0 h-full w-48 bg-gradient-to-l from-[#050505]" />
+        <div className="absolute left-0 bottom-0 h-full w-48 bg-gradient-to-r from-[#050505]" />
       </div>
 
       <div className="flex justify-end">
@@ -152,19 +158,5 @@ export default function Home() {
       </div>
 
     </div>
-    {/*
-    <div className="mx-auto max-w-7xl my-24">
-      <h1 className="font-display text-5xl font-medium sm:text-7xl text-black dark:text-white text-right">My <span className="relative whitespace-nowrap text-primary"><svg aria-hidden="true" viewBox="0 0 418 42" className="absolute -mt-1 ml-1 top-3/5 left-0 h-[0.45em] w-full fill-primary/20 rotate-180" preserveAspectRatio="none"><path d="M203.371.916c-26.013-2.078-76.686 1.963-124.73 9.946L67.3 12.749C35.421 18.062 18.2 21.766 6.004 25.934 1.244 27.561.828 27.778.874 28.61c.07 1.214.828 1.121 9.595-1.176 9.072-2.377 17.15-3.92 39.246-7.496C123.565 7.986 157.869 4.492 195.942 5.046c7.461.108 19.25 1.696 19.17 2.582-.107 1.183-7.874 4.31-25.75 10.366-21.992 7.45-35.43 12.534-36.701 13.884-2.173 2.308-.202 4.407 4.442 4.734 2.654.187 3.263.157 15.593-.78 35.401-2.686 57.944-3.488 88.365-3.143 46.327.526 75.721 2.23 130.788 7.584 19.787 1.924 20.814 1.98 24.557 1.332l.066-.011c1.201-.203 1.53-1.825.399-2.335-2.911-1.31-4.893-1.604-22.048-3.261-57.509-5.556-87.871-7.36-132.059-7.842-23.239-.254-33.617-.116-50.627.674-11.629.54-42.371 2.494-46.696 2.967-2.359.259 8.133-3.625 26.504-9.81 23.239-7.825 27.934-10.149 28.304-14.005.417-4.348-3.529-6-16.878-7.066Z" /></svg><span className="relative">skills</span></span></h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-12">
-        {skills?.map((skill, index) => (
-          <div key={index} className="group flex justify-between items-center relative bg-gray-600/5 dark:shadow-2xl overflow-hidden border border-gray-500/25 hover:border-primary hover:shadow-xl rounded-lg overflow-hidden p-2.5 transition-all duration-200">
-            <img src={skill.icon} width="32" height="32" className="bg-white/5 p-1 w-[32px] h-[32px] rounded-md " />
-            <div className="relative">
-              <h2 className="font-display text-xl font-medium text-black dark:text-white">{skill.name}</h2>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div> */}
   </>
 }
