@@ -10,9 +10,6 @@ import Carousel from "react-multi-carousel";
 
 export default function Home() {
   const { page } = usePage();
-  const { data: $skills } = useSWR('/api/skills');
-  const skills = $skills?.data;
-
   const { data: $repositories } = useSWR('/api/repos');
   const repositories = $repositories?.data;
 
@@ -59,7 +56,7 @@ export default function Home() {
         </div>
         <div className="rounded-lg border-2 border-gray-500/10 border-dotted px-4 py-2 text-center">
           <span className="text-primary uppercase">Technologies & Languages</span>
-          <p className="text-gray-500 dark:text-gray-300 font-semibold text-xl">{skills?.length || "30"}+</p>
+          <p className="text-gray-500 dark:text-gray-300 font-semibold text-xl">30+</p>
         </div>
         <div className="rounded-lg border-2 border-gray-500/10 border-dotted px-4 py-2 text-center">
           <span className="text-primary uppercase">Years of Experience</span>
