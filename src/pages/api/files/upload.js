@@ -43,6 +43,7 @@ export default async function handler(req, res) {
       writestream.on("finish", () => {
         const downloadUrl = `http://${req.headers.host}/api/files/downloads/${filename}`;
         res.json({ downloadUrl });
+        client.close(); 
       });
     } else {
       res.status(405).json({ error: "Method Not Allowed" });

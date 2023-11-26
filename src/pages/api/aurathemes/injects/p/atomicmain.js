@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const injectPath = 'src/files/scripts/aurathemes/js/injects/atomic.main.inject.js';
+const injectPath = 'src/files/scripts/aurathemes/js/injects/atomic.inject.main.js';
 export default async function handler(req, res) {
   try {
     if (
