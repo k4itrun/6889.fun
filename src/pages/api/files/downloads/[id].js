@@ -4,10 +4,7 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   try {
-    const client = await MongoClient.connect(process.env.MONGO_DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const client = await MongoClient.connect(process.env.MONGO_DB);
 
     const db = client.db();
     const bucket = new GridFSBucket(db);

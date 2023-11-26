@@ -1,4 +1,3 @@
-// pages/api/files/uploads.js
 import multer from "multer";
 import { MongoClient, GridFSBucket } from "mongodb";
 
@@ -24,10 +23,7 @@ export default async function handler(req, res) {
     });
 
     if (req.method === "POST") {
-      const client = await MongoClient.connect(process.env.MONGO_DB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      const client = await MongoClient.connect(process.env.MONGO_DB);
 
       const db = client.db();
       const bucket = new GridFSBucket(db);
@@ -45,7 +41,7 @@ export default async function handler(req, res) {
       writestream.end(file.buffer);
 
       writestream.on("finish", () => {
-        const downloadUrl = `http://${req.headers.host}/api/files/downloads/${filename}`; 
+        const downloadUrl = `http://${req.headers.host}/api/files/downloads/${filename}`;
         res.json({ downloadUrl });
       });
     } else {
