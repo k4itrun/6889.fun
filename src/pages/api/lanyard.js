@@ -1,13 +1,9 @@
-const fetch = require('isomorphic-unfetch');
+import fetch from 'isomorphic-unfetch';
 import k4itrunConfig from '../../../k4itrun.config';
 
 export default async (req, res) => {
     try {
-        let _ = await fetch(`https://api.github.com/users/${k4itrunConfig.githubName}/repos`, {
-            headers: {
-                Authorization: `token ${k4itrunConfig.githubKey}`
-            }
-        });
+        let _ = await fetch(`https://api.lanyard.rest/v1/users/${k4itrunConfig.discordId}`);
         if (!_.ok) {
             throw new Error(`Failed:`, _.status);
         }

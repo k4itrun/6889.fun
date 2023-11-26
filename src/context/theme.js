@@ -9,8 +9,6 @@ export const ThemeProvider = ({ children }) => {
     let [inStorage, setInStorage] = useState(null);
     let [theme, setTheme] = useState("dark");
 
-
-
     useEffect(() => {
         if (inStorage === null) {
             let storedTheme = localStorage.getItem("theme");

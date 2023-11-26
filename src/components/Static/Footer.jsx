@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { useRouter } from "next/router"
+import Link from "next/link";
 import { useState } from "react";
 import k4itrunConfig from "../../../k4itrun.config";
 
@@ -14,20 +14,20 @@ const Footer = ({ better }) => {
     }
     return color;
   }
-
+  
   return (
     <>
       <div className="bg-[#04050E] dark:bg-[#090b18] bg-opacity-95 dark:bg-opacity-95 w-full px-6 lg:px-12 py-6">
         <div className="lg:flex justify-between w-full">
           <Link href="/">
             <p className="cursor-pointer flex items-center font-semibold text-2xl">
-              <span 
+              <span
                 className="bg-[#04050E] dark:bg-[#f363ac] text-xs px-2 py-1 mr-2 rounded-lg">
-                  @3
+                v{k4itrunConfig.version} 
               </span>
               {k4itrunConfig.name}
               <span style={{ zIndex: 4 }} className="relative text-cIndigo">
-              <i onClick={() => { setHeartColor(randomColor()) }} style={{ fontSize: '1.5rem', cursor: 'pointer', color: heartColor }}>.</i>
+                <i onClick={() => { setHeartColor(randomColor()) }} style={{ fontSize: '1.5rem', cursor: 'pointer', color: heartColor }}>.</i>
               </span>
             </p>
           </Link>

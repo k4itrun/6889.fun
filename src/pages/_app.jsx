@@ -1,7 +1,7 @@
+import dynamic from 'next/dynamic';
 import { Fragment, useEffect, useState } from "react";
 import { PageProvider } from 'context/page';
 import { ThemeProvider } from 'context/theme';
-import dynamic from 'next/dynamic';
 import 'styles/globals.css';
 import Head from 'next/head';
 import { Transition } from "@headlessui/react";
@@ -11,15 +11,10 @@ import CustomCursor from 'components/Global/Cursor';
 import ContextMenu, { Item } from 'components/Global/ContextMenu';
 import k4itrunConfig from '../../k4itrun.config';
 import Footer from 'components/Static/Footer';
-import Header from '../components/Static/Header';
+import Nav from '../components/Static/Header';
 
 function MyApp({ Component, pageProps }) {
-  const betters = [
-    'design',
-    'write',
-    'develop',
-    'moderate'
-  ];
+  const betters = ['design', 'write', 'develop', 'moderate', 'create', 'explore', 'collaborate'];
   const [load, setLoad] = useState(false);
   let [better, setBetter] = useState(betters[Math.floor(Math.random() * betters.length)]);
   useEffect(() => { setBetter(better) }, [better]);
@@ -91,8 +86,6 @@ function MyApp({ Component, pageProps }) {
                       onClick={event.goForward}
                     />
                   )}
-                </div>
-                <div className="pt-2">
                   <Item
                     icon={<i className="fa fa-redo" />}
                     text="Refresh"
@@ -137,7 +130,7 @@ function MyApp({ Component, pageProps }) {
 
             <main className="border-b-[7px] border-t-[7px] h-full border-[#191932] w-full">
               <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
-                <Header />
+                <Nav />
                 <Component {...pageProps} />
               </div>
             </main>

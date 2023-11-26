@@ -1,22 +1,19 @@
-import { usePage } from 'context/page'
-import useSWR from 'hooks/useSWR'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from "next/link";
 import { Transition, Dialog } from '@headlessui/react'
 import { Fragment } from 'react'
-import Link from "next/link";
+import useSWR from 'hooks/useSWR'
 import k4itrunConfig from '../../k4itrun.config'
 import Tippy from "@tippyjs/react";
 import { GlowEffect } from "components/Elements/Client/GlowEffect";
 
 export default function Home() {
-  const { page } = usePage();
-
-  const { data: _profile } = useSWR("https://api.lanyard.rest/v1/users/" + k4itrunConfig.discordId);
+  const { data: _profile } = useSWR("/api/lanyard");
   const profile = _profile ? _profile.data : null;
 
   const { data: _repositories } = useSWR("/api/repos");
-  const repositories = _repositories ? _repositories.data : null;
+  const repositories = _repositories ? _repositories: null;
   const statuses = {
     dnd: {
       label: "Do not Disturb",
