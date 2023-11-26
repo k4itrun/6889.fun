@@ -99,10 +99,18 @@ function MyApp({ Component, pageProps }) {
                     kbd={["Ctrl", "R"]}
                     onClick={event.refreshPage}
                   />
-                  {/* <Item 
-                    icon={<i className="fa fa-code" />} 
-                    text="View Source" onClick={event.viewSource} 
-                  /> */}
+                </div>
+                <div className="pt-3">
+                  <Item
+                    icon={<i className="fab fa-github" />}
+                    text="Github"
+                    onClick={event.viewGithub}
+                  />
+                  <Item
+                    icon={<i className="fab fa-youtube" />}
+                    text="YouTube"
+                    onClick={event.viewYoutube}
+                  />
                 </div>
               </>
             )}

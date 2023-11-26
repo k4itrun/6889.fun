@@ -50,8 +50,11 @@ const ContextMenu = ({ content, children }) => {
         refreshPage: () => {
             window.location.reload();
         },
-        viewSource: () => {
+        viewGithub: () => {
             window.open("https://github.com/k4itrun/", "_blank");
+        },
+        viewYoutube: () => {
+            window.open("https://youtube.com/channel/UCa6sR_p87T0kB4FdvOJiVjw", "_blank");
         }
     };
 
