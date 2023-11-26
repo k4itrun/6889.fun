@@ -1,4 +1,5 @@
 import k4itrunConfig from "../../../k4itrun.config";
+const fetch = require('isomorphic-unfetch')
 
 export default async (req, res) => {
     let _ = await (await fetch('https://api.github.com/users/' + k4itrunConfig.githubName + '/repos', {
@@ -8,14 +9,8 @@ export default async (req, res) => {
     })).json();
 
     try {
-        res.send({
-            success: true,
-            data: [..._]
-        })
+        res.send([..._])
     } catch {
-        res.status(500).send({
-            success: false,
-            data: []
-        });
+        res.status(500);
     }
 }
