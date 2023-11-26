@@ -128,7 +128,7 @@ export default function Home() {
       <div className="py-20">
         <p className="text-3xl text-white font-semibold">Repositories</p>
         <p className="text-xl text-white/50 font-normal">
-          My open source codes on Github.
+          Github random Code.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4 items-center mt-2">
