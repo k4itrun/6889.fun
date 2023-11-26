@@ -19,12 +19,18 @@ export default function Footer() {
     }
 
     return <>
-        <div className="max-w-7xl mx-auto py-12 border-t border-gray-500/10">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-                <p className="text-lg text-zinc-400">© 2018 - {new Date().getFullYear()} {k4itrunConfig.name}.</p>
-                <div className="text-right">
-                    <p className="text-lg text-zinc-400 select-none">Made with <i onClick={() => { setHeartColor(randomColor()) }} className="fas fa-heart" style={{ color: heartColor, cursor: 'pointer' }} /> by <a href="" className="text-zinc-400 hover:text-primary hover:dark:text-white">k4itrun</a></p>
-                    <p className="text-sm text-zinc-400 select-none">All thanks to <a href="https://vercel.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Vercel</a> & <a href="https://tailwindcss.com/" className="text-zinc-400 hover:text-primary hover:dark:text-white">Tailwind CSS</a></p>
+        <div className="bg-[#191932]/10">
+            <div className="max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
+                <div className="md:flex w-full items-center justify-between">
+                    <div>
+                    <p className="text-lg text-zinc-400">© 2018 - {new Date().getFullYear()} {k4itrunConfig.name} - Made with <i onClick={() => { setHeartColor(randomColor()) }} className="fas fa-heart" style={{ color: heartColor, cursor: 'pointer' }} /> by {k4itrunConfig.name}.</p>
+                    </div>
+                    <div className="mt-2 md:mt-0 flex items-center">
+                        <a href="https://discord.com" target="_blank" rel="noreferrer" className="w-full md:w-auto rounded-lg bg-[#191932]/20 p-2 px-6 hover:bg-[#191932]/30 shadow-lg shadow-white/0 hover:shadow-3xl hover:shadow-[#191932]/20 transition-all duration-200">
+                            <i className="fab fa-discord mr-2" />Contact with Discord
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
