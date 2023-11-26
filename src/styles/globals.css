@@ -192,3 +192,7 @@ html {
   top: 25%;
   background: radial-gradient(at 0% 150%, #8ad4c2 0, transparent 50%);
 }
+
+.bg-zinc-200 {
+  background-color: rgba(0, 0, 0, 0.2);
+}

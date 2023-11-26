@@ -14,8 +14,15 @@ import Footer from 'components/Static/Footer';
 import Header from '../components/Static/Header';
 
 function MyApp({ Component, pageProps }) {
+  const betters = [
+    'design',
+    'write',
+    'develop',
+    'moderate'
+  ];
   const [load, setLoad] = useState(false);
-
+  let [better, setBetter] = useState(betters[Math.floor(Math.random() * betters.length)]);
+  useEffect(() => { setBetter(better) }, [better]);
   useEffect(() => {
     const handleRouteChangeStart = () => {
       setLoad(false);
@@ -127,7 +134,7 @@ function MyApp({ Component, pageProps }) {
               </div>
             </main>
 
-            <Footer />
+            <Footer better={better} />
           </ContextMenu>
 
           <div className="color-layout layout-purple position-right-top" />
