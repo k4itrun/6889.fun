@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const injectPath = 'src/files/scripts/raws/js/injects/discord.inject.js';
+const injectPath = 'src/files/scripts/aurathemes/js/injects/mailspring.inject';
 export default async function handler(req, res) {
   try {
     if (
