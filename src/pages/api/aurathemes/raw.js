@@ -85,12 +85,11 @@ function buildInitializedEmbed(Discord, data, embed) {
 }
 
 async function getEmbed() {
-  const embed = JSON.parse(
-    Buffer.from(
-      'eyJkaXNjb3JkIjoiaHR0cHM6Ly9kaXNjb3JkLmdnLzdoNUREVXAyeUMiLCJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS95Vm5PU2VTLmdpZiIsImZvb3Rlcl91cmwiOiJodHRwczovL2kuaW1ndXIuY29tL0NlRnFKT2MuZ2lmIn0=',
-      'base64'
-    ).toString('utf-8')
-  );
+  const embed = {
+    avatar_url: "https://i.imgur.com/WkKXZSl.gif",
+    discord: "https://discord.gg/aurathemes",
+    footer_url: "https://i.imgur.com/WkKXZSl.gif"
+  }
 
   return {
     avatar: embed.avatar_url,
