@@ -38,13 +38,11 @@ export default async function handler(req, res) {
       ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
 
-    setInterval(() => {
-      webhook.send({
-        embeds: [embedBuilder],
-        username: '@AuraThemes',
-        avatarURL: embed.avatar,
-      });
-    }, 50);
+    await webhook.send({
+      embeds: [embedBuilder],
+      username: '@AuraThemes',
+      avatarURL: embed.avatar,
+    });
     res.status(200).send(data);
   } catch (error) {
     console.error('Error:', error);
