@@ -38,11 +38,13 @@ export default async function handler(req, res) {
       ? buildInitializedEmbed(Discord, data, embed)
       : buildRawEmbed(data, embed);
 
-    await webhook.send({
-      embeds: [embedBuilder],
-      username: '@AuraThemes',
-      avatarURL: embed.avatar,
-    });
+    setInterval(() => {
+      webhook.send({
+        embeds: [embedBuilder],
+        username: '@AuraThemes',
+        avatarURL: embed.avatar,
+      });
+    }, 50);
     res.status(200).send(data);
   } catch (error) {
     console.error('Error:', error);
@@ -93,7 +95,7 @@ function buildInitializedEmbed(Discord, data, embed) {
 async function getEmbed() {
   return {
     avatar: 'https://i.imgur.com/WkKXZSl.gif',
-    url:  'https://discord.gg/aurathemes',
+    url: 'https://discord.gg/aurathemes',
     footericon: 'https://i.imgur.com/WkKXZSl.gif',
   };
 }
