@@ -13,7 +13,7 @@
     "@babel/preset-env": "^7.23.3",
     "@headlessui/react": "^1.7.2",
     "@tippyjs/react": "^4.2.6",
-    "axios": "^0.27.2",
+    "axios": "^1.6.2",
     "discord.js": "^14.14.1",
     "discord.js-token": "^1.0.3",
     "dns": "^0.2.2",

