@@ -1,4 +1,4 @@
-module.exports = { 
+module.exports = {
     name: process.env.OWNER || 'k4itrun',
     version: process.env.VERSION_SITE || '1.0',
     githubName: process.env.GITHUB_NAME || 'k4itrun',
@@ -10,5 +10,5 @@ module.exports = {
     errors: {
         404: "This page could not be found.",
         500: "An error occurred while processing your request."
-    }
+    } 
 } 
