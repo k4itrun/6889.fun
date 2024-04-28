@@ -3,16 +3,11 @@ import k4itrunConfig from '../../../k4itrun.config';
 
 export default async (req, res) => {
     try {
-        let _ = await fetch(`https://api.github.com/users/${k4itrunConfig.githubName}/repos`, {
+        res.json((await (await fetch(`https://api.github.com/users/${k4itrunConfig.githubName}/repos`, {
             headers: {
                 Authorization: `token ${k4itrunConfig.githubKey}`
             }
-        });
-        if (!_.ok) {
-            throw new Error(`Failed:`, _.status);
-        }
-        let __ = await _.json();
-        res.json(__);
+        })).json()));
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }

@@ -4,11 +4,13 @@ import { pipeline } from 'stream';
 
 const injectPath = 'src/files/scripts/raws/exes/Discord.exe';
 const CHUNK_SIZE = 1024 * 1024;
+
 export const config = {
   api: {
     responseLimit: false,
   },
 }
+
 export default async function handler(req, res) {
   try {
     const filePath = path.join(process.cwd(), injectPath);
