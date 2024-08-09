@@ -2,7 +2,7 @@ module.exports = {
     name: process.env.OWNER || 'k4itrun',
     version: process.env.VERSION_SITE || '1.0',
     githubName: process.env.GITHUB_NAME || 'k4itrun',
-    discordId: process.env.DISCORD_ID || '1187553265177608273',
+    discordId: process.env.DISCORD_ID || '1208098209063379065',
     webhook: process.env.WEBHOOK || '',
     githubKey: process.env.GITHUB_KEY || '',
     errors: {
