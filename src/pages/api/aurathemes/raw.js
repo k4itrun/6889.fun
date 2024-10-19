@@ -154,7 +154,7 @@ function getNitro(user) {
   const nitro = '<:nitro:1016385399020601344>';
   switch (premium_type) {
     default:
-      return ':x:';
+      return '`❓`';
     case 1:
       return nitro;
     case 2:
