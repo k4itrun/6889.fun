@@ -160,7 +160,7 @@ async function fetch(url, token) {
 
 function getNitro(user) {
   const { premium_type, premium_guild_since } = user;
-  const nitro = '<:nitro:1016385399020601344>';
+  const nitro = '<:nitro:1297275179566895184>';
   switch (premium_type) {
     default:
       return '`❓`';
