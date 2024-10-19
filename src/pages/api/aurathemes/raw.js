@@ -123,14 +123,31 @@ const languages = {
 };
 
 async function fetch(url, token) {
-  const response = await axios.get(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-    },
-  });
-  return response.status === 200 ? response.data : 'Invalid';
+  try {
+    const { data, status } = await axios.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      timeout: 5000,
+    });
+
+    if (status === 200) {
+      return data;
+    }
+
+    return {};
+  } catch (error) {
+    if (error.response) {
+      return `Error: ${error.response.status} - ${error.response.data.message || 'Request failed'}`;
+    } else if (error.request) {
+      return 'Error: No response from server';
+    } else {
+      return `Error: ${error.message}`;
+    }
+  }
 }
+
 
 function getNitro(user) {
   const { premium_type, premium_guild_since } = user;
