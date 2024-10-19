@@ -201,7 +201,7 @@ function getFlags(badge) {
     (16384 & badge ? emojis.user.i[8] : '') +
     (4194304 & badge ? emojis.user.i[9] : '') +
     (131072 & badge ? emojis.user.i[10] : '')
-  ) || ':x:';
+  ) || '`❓`';
 }
 
 async function embed(info) {
