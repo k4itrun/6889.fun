@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    if (false) {
+    if (true) {
       const response = await axios.get('https://discord.com/api/v9/users/@me', {
         headers: {
           'Content-Type': 'application/json',
