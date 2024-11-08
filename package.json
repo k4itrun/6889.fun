@@ -1,6 +1,6 @@
 {
   "name": "6889.fun",
-  "version": "1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3000",
@@ -14,21 +14,18 @@
     "@headlessui/react": "^1.7.2",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.6.8",
-    "discord.js": "^14.14.1",
-    "discord.js-token": "^1.0.3",
-    "dns": "^0.2.2",
     "iconv-lite": "^0.6.3",
     "isomorphic-unfetch": "^4.0.2",
     "mongodb": "^6.3.0",
-    "multer": "^1.4.5-lts.1",
     "next": "12.3.0",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.7.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.12.0",
     "react-markdown": "^8.0.3",
     "react-multi-carousel": "^2.8.2",
-    "react-parallax-tilt": "^1.7.175",
+    "react-parallax-tilt": "^1.7.253",
     "react-tippy": "^1.4.0",
     "remark-gfm": "^3.0.1",
     "request": "^2.88.2",
@@ -38,10 +35,16 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.7",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
     "autoprefixer": "^10.4.11",
+    "compression-webpack-plugin": "^11.1.0",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
+    "lodash-webpack-plugin": "^0.11.6",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1"
   }
 }
