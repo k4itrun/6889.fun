@@ -87,7 +87,7 @@ export default function Home() {
                             animation="shift-away"
                             arrow={false}
                           >
-                            <div className="w-8 h-8 bg-[#04050E] border-2 border-red-600 rounded-full" />
+                            <div className={`w-8 h-8 bg-[#04050E] border-2 border-${profile.discord_status} rounded-full`} />
                           </Tippy>
                         </div>
                       </div>

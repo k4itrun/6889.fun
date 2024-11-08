@@ -6,8 +6,6 @@ html {
   background: #04050E;
   --scrollbar-background: #434243;
   color: #fff;
-  overflow-x: hidden !important;
-
 }
 
 ::-webkit-scrollbar {
@@ -17,7 +15,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+  background-color: #696869;
   border-color: transparent;
   border-style: solid;
   border-width: 2px;
@@ -46,6 +44,7 @@ html {
 /* AVATAR */
 .pulse-avatar-dnd {
   background-color: red;
+  border-color: #ca0404;
   border-radius: 50%;
   animation: pulse-dnd 2s infinite;
 }
@@ -68,6 +67,21 @@ html {
   animation: pulse-offline 2s infinite;
 }
 
+.border-dnd {
+  border-color: #ca0404;
+}
+
+.border-online {
+  border-color: #04ca2f;
+}
+
+.border-idle {
+  border-color: #ca8a04;
+}
+
+.border-offline {
+  border-color: grey;
+}
 
 @keyframes pulse-dnd {
   0% {
@@ -205,5 +219,5 @@ html {
 }
 
 .bg-zinc-200 {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgb(255, 255, 255);
 }
