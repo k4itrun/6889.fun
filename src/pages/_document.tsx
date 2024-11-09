@@ -5,30 +5,24 @@ import { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
 function MyDocument({ profile }: MyDocumentProps) {
   return (
-    <Html lang="en">
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
-        <meta name="description" content={headerConfig.description} />
-        <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-        <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="icon"
-          href={
-            profile?.discord_user?.avatar
-              ? `https://cdn.discordapp.com/avatars/${profile.discord_user.id}/${profile.discord_user.avatar}`
-              : "https://github.githubassets.com/favicons/favicon.png"
-          }
-          type="image/x-icon"
-        />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+    <>
+      <Html lang="en">
+        <Head>
+          <meta charSet="utf-8" />
+          <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
+          <meta name="description" content={headerConfig.description} />
+          <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+          <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="icon" href={profile?.discord_user?.avatar ? `https://cdn.discordapp.com/avatars/${profile.discord_user.id}/${profile.discord_user.avatar}` : "https://github.githubassets.com/favicons/favicon.png"} type="image/x-icon" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    </>
   );
 }
 

@@ -62,6 +62,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     };
 
     return (
-        <ThemeContext.Provider value={{ isTheme: theme, toggleTheme, setTheme: changeTheme }}>{children}</ThemeContext.Provider>
+        <>
+            <ThemeContext.Provider value={{ isTheme: theme, toggleTheme, setTheme: changeTheme }}>{children}</ThemeContext.Provider>
+        </>
     );
 };

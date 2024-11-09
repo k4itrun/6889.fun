@@ -30,6 +30,8 @@ export function PageProvider({ children, value }: PageProviderProps) {
     }, [router]);
 
     return (
-        <PageContext.Provider value={{ page }}>{children}</PageContext.Provider>
+        <>
+            <PageContext.Provider value={{ page }}>{children}</PageContext.Provider>
+        </>
     );
 };

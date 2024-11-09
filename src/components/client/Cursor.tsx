@@ -39,28 +39,30 @@ export default function Cursor() {
         };
     }, []);
 
-    return <>
-        <div
-            className={`hidden lg:block fixed ring-2 ring-primary rounded-full w-10 h-10 bg-white/50 dark:bg-black/50 pointer-events-none`}
-            style={{
-                left: (delayX ?? 0) - 16,
-                top: (delayY ?? 0) - 16,
-                zIndex: 9999999999999,
-                transition: 'opacity 0.1s ease-in-out',
-                opacity: 0,
-            }}
-            ref={mouseRef}
-        >
-            <div className="w-full h-full flex justify-center items-center">
-                <div
-                    className="bg-primary rounded-full w-2 h-2 fixed pointer-events-none"
-                    style={{
-                        left: x ?? 0,
-                        top: y ?? 0,
-                    }}
-                    ref={dotRef}
-                />
+    return (
+        <>
+            <div
+                className={`hidden lg:block fixed ring-2 ring-primary rounded-full w-10 h-10 bg-white/50 dark:bg-black/50 pointer-events-none`}
+                style={{
+                    left: (delayX ?? 0) - 16,
+                    top: (delayY ?? 0) - 16,
+                    zIndex: 9999999999999,
+                    transition: 'opacity 0.1s ease-in-out',
+                    opacity: 0,
+                }}
+                ref={mouseRef}
+            >
+                <div className="w-full h-full flex justify-center items-center">
+                    <div
+                        className="bg-primary rounded-full w-2 h-2 fixed pointer-events-none"
+                        style={{
+                            left: x ?? 0,
+                            top: y ?? 0,
+                        }}
+                        ref={dotRef}
+                    />
+                </div>
             </div>
-        </div>
-    </>;
+        </>
+    );
 };

@@ -53,88 +53,90 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
   }, []);
 
   return (
-    <ThemeProvider>
-      <PageProvider>
-        <Head>
-          <title>{headerConfig.title}</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </Head>
+    <>
+      <ThemeProvider>
+        <PageProvider>
+          <Head>
+            <title>{headerConfig.title}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          </Head>
 
-        <Cursor />
+          <Cursor />
 
-        <ContextMenu
-          content={(event) => (
-            <>
-              <div>
-                {event.hasBack && (
+          <ContextMenu
+            content={(event) => (
+              <>
+                <div>
+                  {event.hasBack && (
+                    <Item
+                      icon={<i className="fa fa-arrow-left" />}
+                      text="Back"
+                      kbd={["Alt", "◀"]}
+                      onClick={event.goBack}
+                    />
+                  )}
+                  {event.hasForward && (
+                    <Item
+                      icon={<i className="fa fa-arrow-right" />}
+                      text="Forward"
+                      kbd={["Alt", "▶"]}
+                      onClick={event.goForward}
+                    />
+                  )}
                   <Item
-                    icon={<i className="fa fa-arrow-left" />}
-                    text="Back"
-                    kbd={["Alt", "◀"]}
-                    onClick={event.goBack}
+                    icon={<i className="fa fa-redo" />}
+                    text="Refresh"
+                    kbd={["Ctrl", "R"]}
+                    onClick={event.refreshPage}
                   />
-                )}
-                {event.hasForward && (
-                  <Item
-                    icon={<i className="fa fa-arrow-right" />}
-                    text="Forward"
-                    kbd={["Alt", "▶"]}
-                    onClick={event.goForward}
-                  />
-                )}
-                <Item
-                  icon={<i className="fa fa-redo" />}
-                  text="Refresh"
-                  kbd={["Ctrl", "R"]}
-                  onClick={event.refreshPage}
-                />
-              </div>
-              <div className="pt-3">
-                <Item icon={<i className="fab fa-github" />} text="Github" onClick={event.viewGithub} />
-                <Item icon={<i className="fab fa-youtube" />} text="YouTube" onClick={event.viewYoutube} />
-              </div>
-            </>
-          )}
-        >
-          <Transition
-            as={Fragment}
-            show={!loading}
-            enter="transform transition duration-[100ms]"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transform duration-[250ms] transition ease-in-out"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+                </div>
+                <div className="pt-3">
+                  <Item icon={<i className="fab fa-github" />} text="Github" onClick={event.viewGithub} />
+                  <Item icon={<i className="fab fa-youtube" />} text="YouTube" onClick={event.viewYoutube} />
+                </div>
+              </>
+            )}
           >
-            <div
-              style={{ zIndex: 99999 }}
-              className="fixed bg-black/50 w-full h-screen flex justify-center items-center pointer-events-none"
+            <Transition
+              as={Fragment}
+              show={!loading}
+              enter="transform transition duration-[100ms]"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transform duration-[250ms] transition ease-in-out"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
             >
-              <div className="flex items-center gap-x-6 animate-pulse">
-                <div className="text-center">
-                  <p className="text-6xl mb-5 font-semibold">{metaConfig.name}</p>
-                  <p className="uppercase text-xl font-semibold text-white">
-                    <i className="fal fa-spinner-third fa-spin" />
-                  </p>
+              <div
+                style={{ zIndex: 99999 }}
+                className="fixed bg-black/50 w-full h-screen flex justify-center items-center pointer-events-none"
+              >
+                <div className="flex items-center gap-x-6 animate-pulse">
+                  <div className="text-center">
+                    <p className="text-6xl mb-5 font-semibold">{metaConfig.name}</p>
+                    <p className="uppercase text-xl font-semibold text-white">
+                      <i className="fal fa-spinner-third fa-spin" />
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Transition>
+            </Transition>
 
-          <main className="border-primary/30 dark:border-secondary border-b-[7px] border-t-[7px] h-full w-full">
-            <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
-              <Nav />
-              <Component {...pageProps} />
-            </div>
-          </main>
+            <main className="border-primary/30 dark:border-secondary border-b-[7px] border-t-[7px] h-full w-full">
+              <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
+                <Nav />
+                <Component {...pageProps} />
+              </div>
+            </main>
 
-          <Footer better={better} />
-        </ContextMenu>
+            <Footer better={better} />
+          </ContextMenu>
 
-        <div className="color-layout layout-purple position-right-top" />
-        <div className="color-layout layout-blue position-left-bottom" />
-        
-      </PageProvider>
-    </ThemeProvider>
+          <div className="color-layout layout-purple position-right-top" />
+          <div className="color-layout layout-blue position-left-bottom" />
+
+        </PageProvider>
+      </ThemeProvider>
+    </>
   );
 };

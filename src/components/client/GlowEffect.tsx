@@ -36,18 +36,20 @@ export default function GlowEffect({ children, className }: GlowEffectProps) {
 
   if (!enabled) return <>{children}</>;
 
-  return <>
-    <Tilt
-      glareEnable={enabled}
-      glareMaxOpacity={isDarkMode ? 0.2 : 0.1}
-      glareColor={isDarkMode ? "#ffffff" : "#000000"}
-      glarePosition="all"
-      glareBorderRadius="8px"
-      tiltMaxAngleX={5}
-      tiltMaxAngleY={5}
-      className={className}
-    >
-      {children}
-    </Tilt>
-  </>;
+  return (
+    <>
+      <Tilt
+        glareEnable={enabled}
+        glareMaxOpacity={isDarkMode ? 0.2 : 0.1}
+        glareColor={isDarkMode ? "#ffffff" : "#000000"}
+        glarePosition="all"
+        glareBorderRadius="8px"
+        tiltMaxAngleX={5}
+        tiltMaxAngleY={5}
+        className={className}
+      >
+        {children}
+      </Tilt>
+    </>
+  );
 }
