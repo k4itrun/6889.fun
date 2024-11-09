@@ -55,7 +55,7 @@ export const technologiesConfig: Tech[] = [
 
 export const headerConfig = {
     title: metaConfig.name,
-    description: metaConfig.description,
+    description: metaConfig.shortDescription,
     pages: (router: NextRouter): Page[] => [
         {
             link: '/',

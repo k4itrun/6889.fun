@@ -39,7 +39,7 @@ export default function Home() {
                   <div className="flex flex-col lg:flex-row justify-between w-full p-6 px-8 items-center h-full">
                     <div className="flex flex-col lg:justify-start justify-center items-center lg:items-start mt-5 lg:mt-0 w-full">
                       <div className="flex items-center">
-                        <p className="text-black dark:text-white text-4xl font-semibold">{metaConfig.name}</p>
+                        <p className="text-black dark:text-white text-4xl font-semibold">{metaConfig.name}†</p>
                         {profile.discord_status !== "offline" && (
                           <Tippy
                             content={`${statuses[profile.discord_status].label} on Discord`}

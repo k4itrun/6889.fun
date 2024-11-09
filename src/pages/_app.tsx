@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 
 import { MyAppProps } from "@/interfaces";
-import { headerConfig } from '@k4itrunconfig';
+import { metaConfig, headerConfig } from '@k4itrunconfig';
 
 import { ContextMenu, Item } from '@/components/client/ContextMenu';
 import Cursor from '@/components/client/Cursor';
@@ -112,7 +112,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
             >
               <div className="flex items-center gap-x-6 animate-pulse">
                 <div className="text-center">
-                  <p className="text-6xl mb-5 font-semibold">{headerConfig.title}</p>
+                  <p className="text-6xl mb-5 font-semibold">{metaConfig.name}</p>
                   <p className="uppercase text-xl font-semibold text-white">
                     <i className="fal fa-spinner-third fa-spin" />
                   </p>
@@ -133,6 +133,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
 
         <div className="color-layout layout-purple position-right-top" />
         <div className="color-layout layout-blue position-left-bottom" />
+        
       </PageProvider>
     </ThemeProvider>
   );
