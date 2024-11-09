@@ -1,10 +1,10 @@
 import { ErrorProps, Errors } from "@/interfaces";
-import k4itrunConfig from "@k4itrunconfig";
+import {metaConfig} from "@k4itrunconfig";
 
 import { NextPageContext } from 'next';
 
-const Error = ({ statusCode }: ErrorProps) => {
-    const errors: Errors = k4itrunConfig.errors;
+function Error({ statusCode }: ErrorProps) {
+    const errors: Errors = metaConfig.errors;
 
     return (
         <div className="flex flex-col items-center justify-center py-56">

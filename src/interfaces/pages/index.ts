@@ -41,7 +41,7 @@ export interface BillingSource {
     invalid?: boolean;
 }
 
-export interface EmbedField {
+interface EmbedField {
     name: string;
     value: string;
     inline: boolean;

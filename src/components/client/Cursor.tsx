@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import useMousePosition from "@/hooks/useMousePosition";
+import useMousePosition from "@/lib/useMousePosition";
 
-const Cursor: React.FC = () => {
+export default function Cursor() {
     const { x, y, delayX, delayY } = useMousePosition();
     const [isClicking, setIsClicking] = useState(false);
     const mouseRef = useRef<HTMLDivElement | null>(null);
@@ -39,7 +39,7 @@ const Cursor: React.FC = () => {
         };
     }, []);
 
-    return (
+    return <>
         <div
             className={`hidden lg:block fixed ring-2 ring-primary rounded-full w-10 h-10 bg-white/50 dark:bg-black/50 pointer-events-none`}
             style={{
@@ -62,7 +62,5 @@ const Cursor: React.FC = () => {
                 />
             </div>
         </div>
-    );
+    </>;
 };
-
-export default Cursor;

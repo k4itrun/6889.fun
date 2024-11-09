@@ -5,8 +5,9 @@ import { GlowEffectProps } from "@/interfaces";
 import { useEffect, useState } from "react";
 import Tilt from "react-parallax-tilt";
 
-export function GlowEffect({ children, className }: GlowEffectProps) {
+export default function GlowEffect({ children, className }: GlowEffectProps) {
   const [enabled, setEnabled] = useState<boolean>(true);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
     const glowSetting = localStorage.getItem("glow");
@@ -20,20 +21,26 @@ export function GlowEffect({ children, className }: GlowEffectProps) {
       setEnabled(localStorage.getItem("glow") === "true");
     };
 
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDarkMode(mediaQuery.matches);
+
+    mediaQuery.addEventListener("change", (e) => setIsDarkMode(e.matches));
+
     window.addEventListener("glowEffect", handleGlowEffect);
 
     return () => {
       window.removeEventListener("glowEffect", handleGlowEffect);
+      mediaQuery.removeEventListener("change", (e) => setIsDarkMode(e.matches));
     };
   }, []);
 
   if (!enabled) return <>{children}</>;
 
-  return (
+  return <>
     <Tilt
       glareEnable={enabled}
-      glareMaxOpacity={0.1}
-      glareColor="#ffffff"
+      glareMaxOpacity={isDarkMode ? 0.2 : 0.1}
+      glareColor={isDarkMode ? "#ffffff" : "#000000"}
       glarePosition="all"
       glareBorderRadius="8px"
       tiltMaxAngleX={5}
@@ -42,5 +49,5 @@ export function GlowEffect({ children, className }: GlowEffectProps) {
     >
       {children}
     </Tilt>
-  );
+  </>;
 }

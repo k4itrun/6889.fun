@@ -1,11 +1,10 @@
 import { ThemeContextType, ThemeProviderProps } from "@/interfaces";
 
 import { useContext, createContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const useTheme = (): ThemeContextType => {
+export function useTheme(): ThemeContextType {
     const context = useContext(ThemeContext);
     if (!context) {
         throw new Error('useTheme must be used within a ThemeProvider');
@@ -13,8 +12,7 @@ export const useTheme = (): ThemeContextType => {
     return context;
 };
 
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-    const router = useRouter();
+export function ThemeProvider({ children }: ThemeProviderProps) {
     const [inStorage, setInStorage] = useState<boolean | null>(null);
     const [theme, setTheme] = useState<string>("dark");
 
@@ -64,8 +62,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     };
 
     return (
-        <ThemeContext.Provider value={{ isTheme: theme, toggleTheme, setTheme: changeTheme }}>
-            {children}
-        </ThemeContext.Provider>
+        <ThemeContext.Provider value={{ isTheme: theme, toggleTheme, setTheme: changeTheme }}>{children}</ThemeContext.Provider>
     );
 };

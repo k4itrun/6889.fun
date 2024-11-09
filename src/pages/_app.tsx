@@ -1,15 +1,15 @@
 import '@/styles/globals.css';
 
 import { MyAppProps } from "@/interfaces";
-import k4itrunConfig from '@k4itrunconfig';
+import { headerConfig } from '@k4itrunconfig';
 
-import ContextMenu, { Item } from '@/components/Global/ContextMenu';
-import CustomCursor from '@/components/Global/Cursor';
-import Footer from '@/components/Static/Footer';
-import Nav from '@/components/Static/Header';
+import { ContextMenu, Item } from '@/components/client/ContextMenu';
+import Cursor from '@/components/client/Cursor';
+import Footer from '@/components/Footer';
+import Nav from '@/components/Nav';
 
-import { PageProvider } from '@/context/page';
-import { ThemeProvider } from '@/context/theme';
+import { PageProvider } from '@/context/PageProvider';
+import { ThemeProvider } from '@/context/ThemeProvider';
 
 import Router from 'next/router';
 import Head from 'next/head';
@@ -17,7 +17,7 @@ import Head from 'next/head';
 import { Fragment, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
 
-const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+export default function MyApp({ Component, pageProps }: MyAppProps) {
   const betters = ['design', 'write', 'develop', 'moderate', 'create', 'explore', 'collaborate'];
   const [loading, setLoading] = useState<boolean>(false);
   const [better, setBetter] = useState<string>(() => {
@@ -56,12 +56,11 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     <ThemeProvider>
       <PageProvider>
         <Head>
-          <title>{k4itrunConfig.name}</title>
+          <title>{headerConfig.title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet" />
         </Head>
 
-        <CustomCursor />
+        <Cursor />
 
         <ContextMenu
           content={(event) => (
@@ -113,7 +112,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
             >
               <div className="flex items-center gap-x-6 animate-pulse">
                 <div className="text-center">
-                  <p className="text-6xl mb-5 font-semibold">{k4itrunConfig.name}</p>
+                  <p className="text-6xl mb-5 font-semibold">{headerConfig.title}</p>
                   <p className="uppercase text-xl font-semibold text-white">
                     <i className="fal fa-spinner-third fa-spin" />
                   </p>
@@ -122,7 +121,7 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
             </div>
           </Transition>
 
-          <main className="border-b-[7px] border-t-[7px] h-full border-[#191932] w-full">
+          <main className="border-primary/30 dark:border-secondary border-b-[7px] border-t-[7px] h-full w-full">
             <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
               <Nav />
               <Component {...pageProps} />
@@ -138,5 +137,3 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
     </ThemeProvider>
   );
 };
-
-export default MyApp;

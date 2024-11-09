@@ -1,11 +1,11 @@
-import { PageContextType } from "@/interfaces";
+import { PageContextType, PageProviderProps } from "@/interfaces";
 
-import { useContext, createContext, useState, useEffect, ReactNode } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const PageContext = createContext<PageContextType | undefined>(undefined);
 
-export const usePage = (): PageContextType => {
+export function usePage(): PageContextType {
     const context = useContext(PageContext);
     if (!context) {
         throw new Error('usePage must be used within a PageProvider');
@@ -13,12 +13,7 @@ export const usePage = (): PageContextType => {
     return context;
 };
 
-type PageProviderProps = {
-    children: ReactNode;
-    value?: string;
-};
-
-export const PageProvider = ({ children, value }: PageProviderProps) => {
+export function PageProvider({ children, value }: PageProviderProps) {
     const router = useRouter();
 
     function getPage() {
@@ -35,10 +30,6 @@ export const PageProvider = ({ children, value }: PageProviderProps) => {
     }, [router]);
 
     return (
-        <PageContext.Provider value={{ page }}>
-            {children}
-        </PageContext.Provider>
+        <PageContext.Provider value={{ page }}>{children}</PageContext.Provider>
     );
 };
-
-export default PageContext;

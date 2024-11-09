@@ -1,18 +1,15 @@
-export * from './elements/gloweffect';
+export * from './components/gloweffect';
+export * from './components/contextmenu';
+export * from './components/Input';
+export * from './components/key';
+export * from './components/footer';
+export * from './components/header';
 
-export * from './global/button';
-export * from './global/contextmenu';
-export * from './global/Input';
-export * from './global/key';
+export * from './context/pageprovider';
+export * from './context/themeprovider';
 
-export * from './static/footer';
-export * from './static/header';
-
-export * from './context/page';
-export * from './context/theme';
-
-export * from './hooks/mouse';
-export * from './hooks/swr';
+export * from './lib/mouse';
+export * from './lib/swr';
 
 export * from './pages/index';
 

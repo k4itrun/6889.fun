@@ -1,8 +1,7 @@
 import { MousePosition } from "@/interfaces";
-
 import { useEffect, useState } from "react";
 
-const useMousePosition = (): MousePosition => {
+export default function useMousePosition(): MousePosition {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
     x: null,
     y: null,
@@ -11,22 +10,29 @@ const useMousePosition = (): MousePosition => {
   });
 
   useEffect(() => {
+    let animationFrameId: number;
+
     const mouseMoveHandler = (event: MouseEvent) => {
       const { clientX, clientY } = event;
+
       setMousePosition((prevState) => ({ ...prevState, x: clientX, y: clientY }));
-      setTimeout(() => {
-        setMousePosition((prevState) => ({ ...prevState, delayX: clientX, delayY: clientY }));
-      }, 100);
+
+      animationFrameId = requestAnimationFrame(() => {
+        setMousePosition((prevState) => ({
+          ...prevState,
+          delayX: clientX,
+          delayY: clientY,
+        }));
+      });
     };
 
     document.addEventListener("mousemove", mouseMoveHandler);
 
     return () => {
       document.removeEventListener("mousemove", mouseMoveHandler);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return mousePosition;
-};
-
-export default useMousePosition;
+}

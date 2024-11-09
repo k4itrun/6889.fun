@@ -2,7 +2,7 @@ import { KeyProps } from "@/interfaces";
 
 import React from "react";
 
-const Key: React.FC<KeyProps> = ({ keys, ...props }) => {
+export default function Key({ keys, ...props }: KeyProps) {
     return (
         <div className="bg-gray-600/5 text-zinc-400 transition-all px-2 py-1 flex items-center justify-center duration-200 gap-2 rounded-lg text-xs">
             {keys.map((keya, index) => (
@@ -14,5 +14,3 @@ const Key: React.FC<KeyProps> = ({ keys, ...props }) => {
         </div>
     );
 };
-
-export default Key;

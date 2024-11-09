@@ -1,12 +1,37 @@
-export interface Config {
-    name: string;
-    version: string;
-    discordId: string;
-    webhook: string;
-    githubName: string;
-    githubKey: string;
-    errors: {
-        404: string;
-        500: string;
+export interface MetaConfig {
+  version: string;
+  name: string;
+  description: string;
+  shortDescription: string;
+  url: string;
+  accounts: {
+    github: {
+      username: string;
+      repo: string;
+      url?: string;
+      key?: string | undefined;
     };
+    youtube: {
+      username: string;
+      url?: string;
+    };
+    discord: {
+      username: string;
+      server: string;
+      id?: string;
+    };
+    instagram: {
+      username: string;
+      url?: string;
+    };
+    spotify: {
+      url?: string;
+    };
+  };
+  webhook?: string | any;
+  tailwindColors: Record<string, string>;
+  errors: {
+    404: string;
+    500: string;
+  };
 }

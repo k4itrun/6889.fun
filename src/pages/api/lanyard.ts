@@ -1,14 +1,14 @@
 import { LanyardResponse } from "@/interfaces";
-import k4itrunConfig from '@k4itrunconfig';
+import { metaConfig } from '@k4itrunconfig';
 
 import { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'isomorphic-unfetch';
+import axios from 'axios';
 
 export default async (
     request: NextApiRequest,
     response: NextApiResponse
 ): Promise<void> => {
-    let lanyard: LanyardResponse = await (await fetch(`https://api.lanyard.rest/v1/users/${k4itrunConfig.discordId}`)).json();
+    let lanyard: LanyardResponse = (await axios.get(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`)).data;
 
     try {
         response.send({...lanyard});

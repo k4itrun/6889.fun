@@ -2,7 +2,7 @@ import { InputProps } from "@/interfaces";
 
 import { memo, useCallback, useEffect, useState } from "react";
 
-const Input: React.FC<InputProps> = (props) => {
+function Input(props: InputProps) {
     const { 
         className, 
         startsWith, 

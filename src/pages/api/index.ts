@@ -2,9 +2,9 @@ import { ResponseData, ResponseError } from "@/interfaces";
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const obj: ResponseData = {
+const data: ResponseData = {
   success: true,
-  message: '💀',
+  message: '🖤',
   data: {
     timestamp: new Date().toISOString(),
   },
@@ -12,10 +12,10 @@ const obj: ResponseData = {
 
 export default (
   request: NextApiRequest,
-  response: NextApiResponse<ResponseData | ResponseError>
+  response: NextApiResponse<ResponseData|ResponseError>
 ) => {
   try {
-    response.send({...obj});
+    response.send({...data});
   } catch (error) {
     response.status(500);
   }

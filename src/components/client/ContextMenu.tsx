@@ -1,9 +1,9 @@
 import { EventActions, ContextMenuProps, ItemProps } from "@/interfaces";
 
 import { useEffect, useState } from "react";
-import Key from "./Key";
+import Key from "../Key";
 
-const ContextMenu = ({ content, children }: ContextMenuProps) => {
+export function ContextMenu({ content, children }: ContextMenuProps) {
     const [hasBack, setHasBack] = useState<boolean>(false);
     const [hasForward, setHasForward] = useState<boolean>(false);
 
@@ -62,7 +62,7 @@ const ContextMenu = ({ content, children }: ContextMenuProps) => {
                     zIndex: 9999999,
                     display: "none",
                 }}
-                className="context-menu absolute bg-[#04050E] dark:bg-[#090b18] rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
+                className="bg-white dark:bg-secondary context-menu absolute rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
             >
                 {content(event)}
             </div>
@@ -72,10 +72,8 @@ const ContextMenu = ({ content, children }: ContextMenuProps) => {
     );
 };
 
-export default ContextMenu;
-
-export const Item = ({ icon, text, kbd, onClick, ...props }: ItemProps) => {
-    return (
+export function Item({ icon, text, kbd, onClick, ...props }: ItemProps) {
+    return <>
         <div onClick={onClick} className="flex flex-col text-sm" {...props}>
             <div className="flex gap-2 w-full justify-between items-center hover:bg-gray-600/5 p-2 px-4 transition-all duration-200">
                 <div className="flex items-center gap-2">
@@ -85,5 +83,5 @@ export const Item = ({ icon, text, kbd, onClick, ...props }: ItemProps) => {
                 {kbd && <Key keys={kbd} />}
             </div>
         </div>
-    );
+    </>;
 };

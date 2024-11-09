@@ -1,20 +1,19 @@
 import { MyDocumentProps, LanyardResponse } from "@/interfaces";
-import k4itrunConfig from '@k4itrunconfig';
+import { metaConfig } from '@k4itrunconfig';
 
 import { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import fetch from 'isomorphic-unfetch';
 
 function MyDocument({ profile }: MyDocumentProps) {
   return (
     <Html lang="en">
       <Head>
         <meta charSet="utf-8" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
+        <meta name="description" content={metaConfig.description} />
         <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <meta name="description" content="bio >.<" />
         <link
           rel="icon"
           href={
@@ -35,7 +34,7 @@ function MyDocument({ profile }: MyDocumentProps) {
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const props = await ctx.defaultGetInitialProps(ctx);
-  const profile: LanyardResponse =  (await (await fetch(`https://api.lanyard.rest/v1/users/${k4itrunConfig.discordId}`)).json())?.data;
+  const profile: LanyardResponse = (await (await fetch(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`)).json())?.data;
   try {
     return { ...props, profile };
   } catch {
