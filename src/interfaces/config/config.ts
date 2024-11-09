@@ -18,7 +18,7 @@ export interface MetaConfig {
     discord: {
       username: string;
       server: string;
-      id?: string;
+      id?: string|any;
     };
     instagram: {
       username: string;

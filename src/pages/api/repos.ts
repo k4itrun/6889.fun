@@ -8,11 +8,12 @@ export default async (
     request: NextApiRequest,
     response: NextApiResponse
 ): Promise<void> => {
-    let repos: Repository[] = (await axios.get(`https://api.github.com/users/${metaConfig.accounts.github.username}/repos`,{headers: {'Content-Type': 'application/json',Authorization: `token ${metaConfig.accounts.github.key}`}})).data;
-    
+    let repos: Repository[] | null = null;
     try {
-        response.send([...repos]);
-    } catch {
+        const res = await axios.get(`https://api.github.com/users/${metaConfig.accounts.github.username}/repos`,{headers: {'Content-Type': 'application/json',Authorization: `token ${metaConfig.accounts.github.key}`}});
+        repos = res.data;
+        response.send(repos);
+    } catch (error) {
         response.status(500);
     }
 }

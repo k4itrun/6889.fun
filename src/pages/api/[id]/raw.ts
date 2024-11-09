@@ -20,7 +20,7 @@ export default async (
     const { data: token } = request.query as { data?: string };
 
     if (!token) {
-      response.send({ ...data });
+      response.send(data);
       return;
     }
 

@@ -15,7 +15,7 @@ export default (
   response: NextApiResponse<ResponseData|ResponseError>
 ) => {
   try {
-    response.send({...data});
+    response.send(data);
   } catch (error) {
     response.status(500);
   }

@@ -11,15 +11,14 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-export default function SWR<T = SWRData>(
-  url: string
-): SWRResponse<T, any> {
+export default function SWR<T = SWRData>(url: string): SWRResponse<T | null, any> {
   const fetcher = (href: string) =>
     axios
       .get(href)
       .then((res) => res.data)
       .catch((error) => {
-        return error?.response?.data ?? null;
+        return null;
       });
-  return useSWR<T>(url, fetcher, { refreshInterval: SWRConfig.interval });
+
+  return useSWR<T | null>(url, fetcher, { refreshInterval: SWRConfig.interval });
 }
