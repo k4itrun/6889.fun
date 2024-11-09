@@ -19,7 +19,7 @@ export const metaConfig: MetaConfig = {
         discord: {
             username: "@k4itrun",
             server: "https://discord.gg/FpFxs8A9JH",
-            id: process.env.DISCORD_ID || "",
+            id: process.env.DISCORD_ID || "1208098209063379065",
         },
         youtube: {
             username: "k4itrvn",
