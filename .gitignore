@@ -28,4 +28,4 @@ package-lock.json
 
 # Folder for temporary files (e.g., file uploads)
 tmp/
-[id]
+*[id]*/
