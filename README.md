@@ -1,6 +1,6 @@
 # Next.js Portfolio
 
-[![ko-fi](https://storage.ko-fi.com/cdn/kofi3.png)](https://ko-fi.com/A0A11481X5)
+<a href='https://ko-fi.com/A0A11481X5'><img width=150 src='https://storage.ko-fi.com/cdn/kofi3.png'></a>
 
 This is a simple Next.js portfolio template, designed with a theme that changes based on the time of day. The layout is clean and modern, making it perfect for showcasing your work, skills, and projects.
 
