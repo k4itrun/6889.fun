@@ -1,9 +1,8 @@
-<div align="center">
-
 # Next.js Portfolio
-This is a simple Next.js portfolio template, themed according to time.
 
-</div>
+[![ko-fi](='https://storage.ko-fi.com/cdn/kofi3.png)](https://ko-fi.com/A0A11481X5)
+
+This is a simple Next.js portfolio template, designed with a theme that changes based on the time of day. The layout is clean and modern, making it perfect for showcasing your work, skills, and projects.
 
 ## Table of Contents
 1. [Information](#information)
@@ -11,7 +10,7 @@ This is a simple Next.js portfolio template, themed according to time.
    - [Themes](#themes)
 2. [Deployment](#deployment)
       - [Self Hosting](#self-Hosting)
-      - [▲ Vercel (recommended)](#-vercel-recommended)
+      - [▲ Vercel (recommended)](#-vercel-recommended-for-next-js)
       - [Other options](#other-options)
 3. [Environment Variables](#environment-variables)
 4. [Contributing](#contributing)
@@ -32,38 +31,26 @@ To change the colors of the themes see the configuration of [tailwindColors](htt
 
 ### Self Hosting
 
-1. Clone the repository with:
-   ```
-   git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git
-   ```
-2. Install dependencies:
-   ```
-   npm i
-   ```
+1. Clone the repo: `git clone https://github.com/k4itrun/k4itrun.github.io.git`
+2. Install dependencies: `npm i`
 3. Copy `.env.example` and rename it to `.env`.
-4. Set these values in the `.env` file:
+4. Set these values in `.env`:
    - `DISCORD_ID`: for public account info.
    - `WEBHOOK`: for the contact form (coming soon).
-5. Edit the configuration in [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (e.g., `name`, `description`, `socials`).
-6. Build the project:
-   ```
-   npm run build
-   ```
-7. For development mode, run:
-   ```
-   npm run dev
-   ```
-8. Open [http://localhost:3000](http://localhost:3000) to view your site!
+5. Edit [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (e.g., `name`, `description`, `socials`).
+6. Build the project: `npm run build`
+7. For development, run: `npm run dev`
+8. Open [http://localhost:3000](http://localhost:3000) to view the site!
 
-### ▲ Vercel (recommended)
+### ▲ Vercel (recommended for Next.js)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=DISCORD_ID,WEBHOOK&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
 
-1. Click the button above or visit [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=DISCORD_ID,WEBHOOK&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2Fk4itrun.dev&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
-2. Add your `DISCORD_ID` for account info (public).
-3. Add your `WEBHOOK` for the contact form (coming soon).
-4. Hit the `Deploy` button and wait for it to deploy.
-5. In your forked repo, update values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (like `name`, `description`, `socials`, etc.). 
+1. Click the button above or go to: [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=DISCORD_ID,WEBHOOK&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
+1. Add your `DISCORD_ID` for account info.
+2. Add the `WEBHOOK` for the contact form (coming soon).
+3. Click the `Deploy` button and wait.
+4. In your forked repo, update the values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (e.g., `name`, `description`, `socials`, etc.).
 
 ### Other options
 To deploy this site, you can use platforms like:
@@ -86,8 +73,6 @@ You can configure environment variables in the `.env` file. Example:
 
 ## Contributing
 Support this project by donating to help fund new improvements, or simply add a ⭐ star to this repository.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A11481X5)
 
 Thank you for your interest and support! ✌️
 
