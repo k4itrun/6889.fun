@@ -14,7 +14,7 @@ export default function MyDocument({ profile }: MyDocumentProps) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
-        <meta name="description" content={headerConfig.description} />
+        {/*<meta name="description" content={headerConfig.description} />*/}
         <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
