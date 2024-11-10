@@ -33,18 +33,26 @@ To change the colors of the themes see the configuration of [tailwindColors](htt
 ### Self Hosting
 
 1. Clone the repository with:
-```git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git```
+   ```
+   git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git
+   ```
 2. Install dependencies:
-```npm i```
+   ```
+   npm i
+   ```
 3. Copy `.env.example` and rename it to `.env`.
 4. Set these values in the `.env` file:
    - `DISCORD_ID`: for public account info.
    - `WEBHOOK`: for the contact form (coming soon).
 5. Edit the configuration in [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (e.g., `name`, `description`, `socials`).
 6. Build the project:
-```npm run build```
+   ```
+   npm run build
+   ```
 7. For development mode, run:
-```npm run dev```
+   ```
+   npm run dev
+   ```
 8. Open [http://localhost:3000](http://localhost:3000) to view your site!
 
 ### ▲ Vercel (recommended)
