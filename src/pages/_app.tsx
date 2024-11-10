@@ -11,6 +11,8 @@ import Nav from '@/components/Nav';
 import { PageProvider } from '@/context/PageProvider';
 import { ThemeProvider } from '@/context/ThemeProvider';
 
+import Progress from '@/lib/useProgress';
+
 import Router from 'next/router';
 import Head from 'next/head';
 
@@ -60,7 +62,6 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
             <title>{headerConfig.title}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
-
           <Cursor />
 
           <ContextMenu
@@ -97,7 +98,9 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
               </>
             )}
           >
-            <Transition
+            <Progress />
+            {/* Named loading mode - OLD
+           <Transition
               as={Fragment}
               show={!loading}
               enter="transform transition duration-[100ms]"
@@ -120,9 +123,9 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
                   </div>
                 </div>
               </div>
-            </Transition>
+            </Transition>*/}
 
-            <main className="border-primary/30 dark:border-secondary border-b-[7px] border-t-[7px] h-full w-full">
+            <main className="border-primary/30 dark:border-secondary border-b-[8px] border-t-[0px] h-full w-full">
               <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
                 <Nav />
                 <Component {...pageProps} />

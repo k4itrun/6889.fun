@@ -12,6 +12,7 @@ export default function Home() {
 
   const { data: _repositories } = useSWR<Repository[]|any>("/api/repos");
   const repositories = _repositories;
+
   return (
     <>
       <ProfileComponent profile={profile} _profile />
