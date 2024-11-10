@@ -1,61 +1,55 @@
 <div align="center">
 
-# Next.js Site
-This is a simple Next.js site template.
+# Next.js Portfolio
+This is a simple Next.js Portfolio template.
 
 </div>
 
-## Features
+## Information
 
-- Server-side rendering (SSR)
-- Static site generation (SSG)
-- API routes
-- Responsive design
-- Tailwind CSS integration (if applicable)
-- TypeScript support (if applicable)
+### Config
+Make sure to update the pre-configured values in the `k4itrun.config.ts` file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
 
-## Screenshots
-![Home page](.github/assets/screenshot.png)
+### Themes
+To change the colors of the themes see the configuration of `k4itrun.config.ts` --> `tailwindColors` --> (`primary`, `secondary`)
 
-## Installation
+1. Primary: Handle lighter colors.
+2. Secondary: Handles the darkest colors.
 
-1. Clone the repository:
+## Deployment
 
-   ```bash
-   git clone https://github.com/k4itrun/k4itrun.github.io
-   ```
+### Self Hosting
 
-2. Navigate to the project directory:
+1. Clone [this repository](https://github.com/k4itrun/k4itrun.github.io) with `git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git`.
+2. Run `npm i` to install dependencies.
+3. Copy `.env.example` and rename it to `.env`.
+4. In the `.env` file, set these values:
+   - `DISCORD_ID` for account info (public).
+   - `WEBHOOK` for the contact form (coming soon).
+5. Update values in `k4itrun.config.ts` (like `name`, `description`, `socials`, etc.).
+6. Run `npm run build` to build the project or `npm run dev` to start it in development mode.
+7. Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-   ```bash
-   cd k4itrun.github.io
-   ```
+### ▲ Vercel (recommended)
 
-3. Install dependencies:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=DISCORD_ID,WEBHOOK&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
 
-   ```bash
-   npm install
-   ```
+1. Click the button above or visit [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=DISCORD_ID,WEBHOOK&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2Fk4itrun.dev&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
+2. Add your `DISCORD_ID` for account info (public).
+3. Add your `WEBHOOK` for the contact form (coming soon).
+4. Hit the `Deploy` button and wait for it to deploy.
+5. Once deployed, click `Visit` to see your site live.
+6. In your forked repo, update values in the `k4itrun.config.ts` file (like `name`, `description`, `socials`, etc.). 
 
-   Or, if you use Yarn:
+### Other options
+To deploy this site, you can use platforms like:
 
-   ```bash
-   yarn
-   ```
+1. Vercel (recommended for Next.js)
+2. Netlify
+3. AWS
+4. DigitalOcean
 
-4. Run the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   Or with Yarn:
-
-   ```bash
-   yarn dev
-   ```
-
-5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to see the site.
+Simply push your code to a GitHub repository, and connect it to your preferred platform for continuous deployment.
 
 ## Environment Variables
 
@@ -65,21 +59,6 @@ You can configure environment variables in the `.env.local` file. Example:
 | --------------------- | ---------------------------------------------------------------- | -------- |
 | `WEBHOOK` | Discord Webhook URL for contact form                             | `No` |
 | `DISCORD_ID` | Discord Webhook URL for contact form                             | `Yes` |
-
-## Deployment
-
-To deploy this site, you can use platforms like:
-
-- Vercel (recommended for Next.js)
-- Netlify
-- AWS
-- DigitalOcean
-
-Simply push your code to a GitHub repository, and connect it to your preferred platform for continuous deployment.
-
-### ▲ Vercel (recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io&env=GITHUB_ACCESS_TOKEN,DISCORD_WEBHOOK_URL&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fk4itrun.github.io%23-self-hosting&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
 
 ## License
 
