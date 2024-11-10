@@ -102,5 +102,6 @@ export const redirectsConfig = [
     { source: "/github", destination: metaConfig.accounts.github.url, permanent: true },
     { source: "/instagram", destination: metaConfig.accounts.instagram.url, permanent: true },
     { source: "/youngxsanty", destination: "https://guns.lol/youngxsanty", permanent: true },
+    { source: "/contact", destination: "/discord", permanent: true },
     { source: "/r/:path*", destination: "/:path*", permanent: true },
 ];
