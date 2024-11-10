@@ -3,7 +3,7 @@ export interface MetaConfig {
   name: string;
   description: string;
   shortDescription: string;
-  email: string;
+  email?: string;
   url: string;
   accounts: {
     github: {

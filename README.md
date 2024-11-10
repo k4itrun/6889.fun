@@ -1,9 +1,21 @@
 <div align="center">
 
 # Next.js Portfolio
-This is a simple Next.js Portfolio template.
+This is a simple Next.js portfolio template, themed according to time.
 
 </div>
+
+## Table of Contents
+1. [Information](#information)
+   - [Config](#config)
+   - [Themes](#themes)
+2. [Deployment](#deployment)
+      - [Self Hosting](#self-Hosting)
+      - [▲ Vercel (recommended)](#-vercel-recommended)
+      - [Other options](#other-options)
+3. [Environment Variables](#environment-variables)
+4. [Contributing](#contributing)
+5. [License](#license)
 
 ## Information
 
@@ -57,8 +69,15 @@ You can configure environment variables in the `.env.local` file. Example:
 
 | Variable              | Description                                                      | Required |
 | --------------------- | ---------------------------------------------------------------- | -------- |
-| `WEBHOOK` | Discord Webhook URL for contact form                             | `No` |
-| `DISCORD_ID` | Discord Webhook URL for contact form                             | `Yes` |
+| `WEBHOOK` | For the contact form (coming soon).                             | `No` |
+| `DISCORD_ID` | For account info (public).                             | `Yes` |
+
+## Contributing
+Support this project by donating to help fund new improvements, or simply add a ⭐ star to this repository.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A11481X5)
+
+Thank you for your interest and support! ✌️
 
 ## License
 
