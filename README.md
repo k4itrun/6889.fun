@@ -72,10 +72,10 @@ You can configure environment variables in the `.env` file. Example:
 | `DISCORD_ID` | For account info (public).                             | `Yes` |
 
 ## Contributing
-Support this project by donating to help fund new improvements, or simply add a ⭐ star to this repository.
+Support this project by [Donating](https://ko-fi.com/A0A11481X5) to help fund new improvements, or simply add a ⭐ star to this repository.
 
 Thank you for your interest and support! ✌️
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](license.md) file for details.
