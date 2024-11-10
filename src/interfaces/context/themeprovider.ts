@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 export type ThemeContextType = {
-    isTheme: string;
+    isTheme: 'dark' | 'light';
     toggleTheme: () => void;
-    setTheme: (theme: string) => void;
+    setTheme: (theme: 'dark' | 'light') => void;
 };
 
 export type ThemeProviderProps = {
