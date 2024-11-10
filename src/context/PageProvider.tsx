@@ -6,9 +6,7 @@ const PageContext = createContext<PageContextType | undefined>(undefined);
 
 export function usePage(): PageContextType {
     const context = useContext(PageContext);
-    if (!context) {
-        throw new Error('usePage must be used within a PageProvider');
-    }
+    if (!context) throw new Error('usePage must be used within a PageProvider');
     return context;
 }
 

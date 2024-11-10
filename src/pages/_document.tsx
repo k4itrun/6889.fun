@@ -2,6 +2,7 @@ import { MyDocumentProps, LanyardResponse } from "@/interfaces";
 import { metaConfig, headerConfig } from '@k4itrunconfig';
 
 import { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import axios from 'axios';
 
 export default function MyDocument({ profile }: MyDocumentProps) {
   const avatarUrl = profile?.discord_user?.avatar
@@ -34,11 +35,9 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   let profile: LanyardResponse | null = null;
 
   try {
-    const res = await fetch(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`);
-    const data = await res.json();
-    profile = data?.data || null; 
+    const res = await axios.get(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`);
+    profile = res?.data?.data;
   } catch (error) {
-    console.error('Error fetching Discord profile:', error);
   }
 
   return { ...props, profile };

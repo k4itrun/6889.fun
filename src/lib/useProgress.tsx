@@ -1,16 +1,9 @@
+import {NextNProgressProps} from '@/interfaces'
 import { metaConfig } from '@k4itrunconfig';
+
 import { useEffect, useRef } from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-
-interface NextNProgressProps {
-  color?: string;
-  startPosition?: number;
-  stopDelayMs?: number;
-  height?: number;
-  showOnShallow?: boolean;
-  options?: object;
-}
 
 const NextNProgress: React.FC<NextNProgressProps> = ({
   color = metaConfig.tailwindColors.primary,

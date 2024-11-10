@@ -11,7 +11,7 @@ export default async (
     let repos: Repository[] | null = null;
     try {
         const res = await axios.get(`https://api.github.com/users/${metaConfig.accounts.github.username}/repos`,{headers: {'Content-Type': 'application/json',Authorization: `token ${metaConfig.accounts.github.key}`}});
-        repos = res.data;
+        repos = res?.data;
         response.send(repos);
     } catch (error) {
         response.status(500);

@@ -7,8 +7,8 @@ import TechsComponent from "@/components/Tech";
 import useSWR from '@/lib/useSWR';
 
 export default function Home() {
-  const { data: _profile } = useSWR<{ data: Profile }|any>("/api/lanyard");
-  const profile = _profile ? _profile.data : null;
+  const { data: _profile } = useSWR<Profile|any>("/api/lanyard");
+  const profile = _profile;
 
   const { data: _repositories } = useSWR<Repository[]|any>("/api/repos");
   const repositories = _repositories;

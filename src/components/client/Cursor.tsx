@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import useMousePosition from "@/lib/useMousePosition";
 
+interface MousePosition {
+    x: number | null;
+    y: number | null;
+}
+
 export default function Cursor() {
-    const { x, y } = useMousePosition();
-    const [isClicking, setIsClicking] = useState(false);
+    const { x, y }: MousePosition = useMousePosition();
+    const [isClicking, setIsClicking] = useState<boolean>(false);
     const cursorRef = useRef<HTMLDivElement | null>(null);
     const innerDotRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,8 +36,8 @@ export default function Cursor() {
             <div
                 ref={cursorRef}
                 className={`hidden lg:block fixed pointer-events-none transition-opacity duration-200 
-                    ${isClicking ? 'scale-90 bg-primary/50' : 'scale-100 bg-transparent'} 
-                    rounded-full border-2 border-primary`}
+          ${isClicking ? 'scale-90 bg-primary/50' : 'scale-100 bg-transparent'} 
+          rounded-full border-2 border-primary`}
                 style={{
                     width: "40px",
                     height: "40px",
@@ -46,7 +51,7 @@ export default function Cursor() {
             <div
                 ref={innerDotRef}
                 className={`fixed pointer-events-none rounded-full transition-transform duration-100
-                    ${isClicking ? 'scale-125' : 'scale-100'} bg-primary`}
+          ${isClicking ? 'scale-125' : 'scale-100'} bg-primary`}
                 style={{
                     width: "8px",
                     height: "8px",

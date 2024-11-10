@@ -12,7 +12,7 @@ export default async (
 
     try {
         const res = await axios.get(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`);
-        lanyard = res.data;
+        lanyard = res?.data?.data;
         response.send(lanyard);
     } catch (error) {
         response.status(500);
