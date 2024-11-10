@@ -1,9 +1,9 @@
 import '@/styles/globals.css';
 
 import { MyAppProps } from "@/interfaces";
-import { metaConfig, headerConfig } from '@k4itrunconfig';
+import { headerConfig } from '@k4itrunconfig';
 
-import { ContextMenu, Item } from '@/components/client/ContextMenu';
+import { ContextMenu, MenuItem } from '@/components/client/ContextMenu';
 import Cursor from '@/components/client/Cursor';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
@@ -69,7 +69,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
               <>
                 <div>
                   {event.hasBack && (
-                    <Item
+                    <MenuItem
                       icon={<i className="fa fa-arrow-left" />}
                       text="Back"
                       kbd={["Alt", "◀"]}
@@ -77,14 +77,14 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
                     />
                   )}
                   {event.hasForward && (
-                    <Item
+                    <MenuItem
                       icon={<i className="fa fa-arrow-right" />}
                       text="Forward"
                       kbd={["Alt", "▶"]}
                       onClick={event.goForward}
                     />
                   )}
-                  <Item
+                  <MenuItem
                     icon={<i className="fa fa-redo" />}
                     text="Refresh"
                     kbd={["Ctrl", "R"]}
@@ -92,8 +92,8 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
                   />
                 </div>
                 <div className="pt-3">
-                  <Item icon={<i className="fab fa-github" />} text="Github" onClick={event.viewGithub} />
-                  <Item icon={<i className="fab fa-youtube" />} text="YouTube" onClick={event.viewYoutube} />
+                  <MenuItem icon={<i className="fab fa-github" />} text="Github" onClick={event.viewGithub} />
+                  <MenuItem icon={<i className="fab fa-youtube" />} text="YouTube" onClick={event.viewYoutube} />
                 </div>
               </>
             )}

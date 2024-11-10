@@ -1,5 +1,5 @@
 import { MousePosition } from "@/interfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function useMousePosition(): MousePosition {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
@@ -9,15 +9,21 @@ export default function useMousePosition(): MousePosition {
     delayY: null,
   });
 
-  useEffect(() => {
-    let animationFrameId: number;
+  const rafId = useRef<number | null>(null);
 
+  useEffect(() => {
     const mouseMoveHandler = (event: MouseEvent) => {
       const { clientX, clientY } = event;
 
-      setMousePosition((prevState) => ({ ...prevState, x: clientX, y: clientY }));
+      setMousePosition((prevState) => ({
+        ...prevState,
+        x: clientX,
+        y: clientY,
+      }));
 
-      animationFrameId = requestAnimationFrame(() => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      
+      rafId.current = requestAnimationFrame(() => {
         setMousePosition((prevState) => ({
           ...prevState,
           delayX: clientX,
@@ -30,7 +36,7 @@ export default function useMousePosition(): MousePosition {
 
     return () => {
       document.removeEventListener("mousemove", mouseMoveHandler);
-      cancelAnimationFrame(animationFrameId);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, []);
 

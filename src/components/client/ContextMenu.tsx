@@ -1,53 +1,48 @@
-import { EventActions, ContextMenuProps, ItemProps } from "@/interfaces";
-
 import { useEffect, useState } from "react";
-import Key from "../Key";
+import { EventActions, ContextMenuProps, ItemProps } from "@/interfaces";
+import KeyShortcut from "../KeyShortcut";
 
 export function ContextMenu({ content, children }: ContextMenuProps) {
-    const [hasBack, setHasBack] = useState<boolean>(false);
-    const [hasForward, setHasForward] = useState<boolean>(false);
+    const [isBackEnabled, setIsBackEnabled] = useState(false);
+    const [isForwardEnabled, setIsForwardEnabled] = useState(false);
 
     useEffect(() => {
-        const contextListener = (e: MouseEvent) => {
-            e.preventDefault();
+        const handleContextMenu = (event: MouseEvent) => {
+            event.preventDefault();
             const menu = document.querySelector(".context-menu") as HTMLElement;
-            const menuPosition = { x: e.pageX, y: e.pageY };
-            const windowSize = { width: window.innerWidth, height: window.innerHeight };
-
-            if (menu && windowSize.width - menuPosition.x < menu.offsetWidth) {
-                menu.style.left = `${windowSize.width - menu.offsetWidth - 24}px`;
-            } else if (menu) {
-                menu.style.left = `${menuPosition.x}px`;
-            }
+            const { pageX: x, pageY: y } = event;
+            const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
 
             if (menu) {
-                menu.style.top = `${menuPosition.y}px`;
+                menu.style.left = x + menu.offsetWidth > windowWidth ? `${windowWidth - menu.offsetWidth - 24}px` : `${x}px`;
+                menu.style.top = `${y}px`;
                 menu.style.display = "block";
             }
         };
 
-        const clickListener = () => {
-            const content = document.querySelector(".context-menu") as HTMLElement;
-            if (content) content.style.display = "none";
+        const handleClickOutside = () => {
+            const menu = document.querySelector(".context-menu") as HTMLElement;
+            if (menu) menu.style.display = "none";
         };
 
-        document.addEventListener("contextmenu", contextListener);
-        document.addEventListener("click", clickListener);
+        document.addEventListener("contextmenu", handleContextMenu);
+        document.addEventListener("click", handleClickOutside);
 
         return () => {
-            document.removeEventListener("contextmenu", contextListener);
-            document.removeEventListener("click", clickListener);
+            document.removeEventListener("contextmenu", handleContextMenu);
+            document.removeEventListener("click", handleClickOutside);
         };
-    }, [content]);
-
-    useEffect(() => {
-        setHasBack(window.history.length > 1);
-        setHasForward(window.history.length > 1);
     }, []);
 
-    const event: EventActions = {
-        hasForward,
-        hasBack,
+    useEffect(() => {
+        const hasHistory = window.history.length > 1;
+        setIsBackEnabled(hasHistory);
+        setIsForwardEnabled(hasHistory);
+    }, []);
+
+    const actions: EventActions = {
+        hasForward: isForwardEnabled,
+        hasBack: isBackEnabled,
         goBack: () => window.history.back(),
         goForward: () => window.history.forward(),
         refreshPage: () => window.location.reload(),
@@ -58,32 +53,29 @@ export function ContextMenu({ content, children }: ContextMenuProps) {
     return (
         <>
             <div
+                className="context-menu absolute bg-white dark:bg-secondary rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
                 style={{
-                    zIndex: 9999999,
                     display: "none",
+                    zIndex: 9*10000,
                 }}
-                className="bg-white dark:bg-secondary context-menu absolute rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
             >
-                {content(event)}
+                {content(actions)}
             </div>
-
             {children}
         </>
     );
-};
+}
 
-export function Item({ icon, text, kbd, onClick, ...props }: ItemProps) {
+export function MenuItem({ icon, text, kbd, onClick, ...props }: ItemProps) {
     return (
-        <>
-            <div onClick={onClick} className="flex flex-col text-sm" {...props}>
-                <div className="flex gap-2 w-full justify-between items-center hover:bg-primary/10 p-2 px-4 transition-all duration-200">
-                    <div className="flex items-center gap-2">
-                        {icon}
-                        <p className="text-sm">{text}</p>
-                    </div>
-                    {kbd && <Key keys={kbd} />}
+        <div className="text-sm flex flex-col" onClick={onClick} {...props}>
+            <div className="flex gap-2 justify-between items-center w-full hover:bg-primary/10 p-2 px-4 transition-all duration-200">
+                <div className="flex items-center gap-2">
+                    {icon}
+                    <p>{text}</p>
                 </div>
+                {kbd && <KeyShortcut keys={kbd} />}
             </div>
-        </>
+        </div>
     );
-};
+}

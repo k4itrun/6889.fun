@@ -11,19 +11,19 @@ const randomColor = (): string => '#' + Array.from({ length: 6 }, () => '0123456
 
 export default function Nav() {
     const router = useRouter();
-    const [heartColor, setHeartColor] = useState<string | any>(metaConfig.tailwindColors.primary);
+    const [heartColor, setHeartColor] = useState<string|any>(metaConfig.tailwindColors.primary);
     const [isOpen, setMenu] = useState(false);
     const [isSettingsOpen, setSettingsState] = useState(false);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const { isTheme, setTheme } = useTheme();
 
-    const setIsOpen = (value: Boolean | any) => {
+    const setIsOpen = (value: Boolean|any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
         setMenu(value);
     };
 
-    const setSettingsOpen = (value: Boolean | any) => {
+    const setSettingsOpen = (value: Boolean|any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
         setSettingsState(value);
     };
@@ -48,7 +48,6 @@ export default function Nav() {
                 </div>
             </div>
 
-            {/* Configuration Modal */}
             <Transition show={isSettingsOpen} appear>
                 <TransitionChild
                     as={"div"}

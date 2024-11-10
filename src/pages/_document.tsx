@@ -3,37 +3,43 @@ import { metaConfig, headerConfig } from '@k4itrunconfig';
 
 import { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
-function MyDocument({ profile }: MyDocumentProps) {
+export default function MyDocument({ profile }: MyDocumentProps) {
+  const avatarUrl = profile?.discord_user?.avatar
+    ? `https://cdn.discordapp.com/avatars/${profile.discord_user.id}/${profile.discord_user.avatar}`
+    : "https://github.githubassets.com/favicons/favicon.png";
+
   return (
-    <>
-      <Html lang="en">
-        <Head>
-          <meta charSet="utf-8" />
-          <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
-          <meta name="description" content={headerConfig.description} />
-          <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-          <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="icon" href={profile?.discord_user?.avatar ? `https://cdn.discordapp.com/avatars/${profile.discord_user.id}/${profile.discord_user.avatar}` : "https://github.githubassets.com/favicons/favicon.png"} type="image/x-icon" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    </>
+    <Html lang="en">
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="theme-color" content={metaConfig.tailwindColors.primary} />
+        <meta name="description" content={headerConfig.description} />
+        <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+        <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="icon" href={avatarUrl} type="image/x-icon" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
   );
 }
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const props = await ctx.defaultGetInitialProps(ctx);
-  const profile: LanyardResponse = (await (await fetch(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`)).json())?.data;
-  try {
-    return { ...props, profile };
-  } catch {
-    return { ...props, profile: null };
-  }
-};
 
-export default MyDocument;
+  let profile: LanyardResponse | null = null;
+
+  try {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`);
+    const data = await res.json();
+    profile = data?.data || null; 
+  } catch (error) {
+    console.error('Error fetching Discord profile:', error);
+  }
+
+  return { ...props, profile };
+};

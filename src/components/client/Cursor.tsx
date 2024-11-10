@@ -2,67 +2,60 @@ import { useEffect, useRef, useState } from "react";
 import useMousePosition from "@/lib/useMousePosition";
 
 export default function Cursor() {
-    const { x, y, delayX, delayY } = useMousePosition();
+    const { x, y } = useMousePosition();
     const [isClicking, setIsClicking] = useState(false);
-    const mouseRef = useRef<HTMLDivElement | null>(null);
-    const dotRef = useRef<HTMLDivElement | null>(null);
+    const cursorRef = useRef<HTMLDivElement | null>(null);
+    const innerDotRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        if (!mouseRef.current || !dotRef.current) return;
-
-        const cursor = mouseRef.current;
-        const cursorDot = dotRef.current;
-
-        const mouseOut = () => {
-            cursor.style.opacity = '0';
-        };
-
-        const mouseOver = () => {
-            cursor.style.opacity = '1';
-        };
-
-        const click = () => {
+        const handleMouseOver = () => cursorRef.current!.style.opacity = "1";
+        const handleMouseOut = () => cursorRef.current!.style.opacity = "0";
+        const handleMouseClick = () => {
             setIsClicking(true);
-            setTimeout(() => {
-                setIsClicking(false);
-            }, 100);
+            setTimeout(() => setIsClicking(false), 150);
         };
 
-        document.addEventListener("mouseout", mouseOut);
-        document.addEventListener("mouseover", mouseOver);
-        document.addEventListener("click", click);
+        document.addEventListener("mouseover", handleMouseOver);
+        document.addEventListener("mouseout", handleMouseOut);
+        document.addEventListener("mousedown", handleMouseClick);
 
         return () => {
-            document.removeEventListener("mouseout", mouseOut);
-            document.removeEventListener("mouseover", mouseOver);
-            document.removeEventListener("click", click);
+            document.removeEventListener("mouseover", handleMouseOver);
+            document.removeEventListener("mouseout", handleMouseOut);
+            document.removeEventListener("mousedown", handleMouseClick);
         };
     }, []);
 
     return (
         <>
             <div
-                className={`hidden lg:block fixed ring-2 ring-primary rounded-full w-10 h-10 bg-white/50 dark:bg-black/50 pointer-events-none`}
+                ref={cursorRef}
+                className={`hidden lg:block fixed pointer-events-none transition-opacity duration-200 
+                    ${isClicking ? 'scale-90 bg-primary/50' : 'scale-100 bg-transparent'} 
+                    rounded-full border-2 border-primary`}
                 style={{
-                    left: (delayX ?? 0) - 16,
-                    top: (delayY ?? 0) - 16,
-                    zIndex: 9999999999999,
-                    transition: 'opacity 0.1s ease-in-out',
-                    opacity: 0,
+                    width: "40px",
+                    height: "40px",
+                    left: (x ?? 0) - 20,
+                    top: (y ?? 0) - 20,
+                    transition: "transform 0.15s ease-out, opacity 0.1s ease",
+                    zIndex: 9999999,
                 }}
-                ref={mouseRef}
-            >
-                <div className="w-full h-full flex justify-center items-center">
-                    <div
-                        className="bg-primary rounded-full w-2 h-2 fixed pointer-events-none"
-                        style={{
-                            left: x ?? 0,
-                            top: y ?? 0,
-                        }}
-                        ref={dotRef}
-                    />
-                </div>
-            </div>
+            />
+
+            <div
+                ref={innerDotRef}
+                className={`fixed pointer-events-none rounded-full transition-transform duration-100
+                    ${isClicking ? 'scale-125' : 'scale-100'} bg-primary`}
+                style={{
+                    width: "8px",
+                    height: "8px",
+                    left: x ?? 0,
+                    top: y ?? 0,
+                    zIndex: 9999999,
+                    transform: "translate(-50%, -50%)",
+                }}
+            />
         </>
     );
-};
+}

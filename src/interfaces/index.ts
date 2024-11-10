@@ -2,7 +2,7 @@ export * from './components/gloweffect';
 export * from './components/button';
 export * from './components/contextmenu';
 export * from './components/Input';
-export * from './components/key';
+export * from './components/keyshortcut';
 export * from './components/footer';
 export * from './components/header';
 
