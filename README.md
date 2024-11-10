@@ -23,24 +23,29 @@ This is a simple Next.js portfolio template, themed according to time.
 Make sure to update the pre-configured values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
 
 ### Themes
-To change the colors of the themes see the configuration of `k4itrun.config.ts` --> `tailwindColors`.
+To change the colors of the themes see the configuration of [tailwindColors](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L34).
 
-1. [Primary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L35): Handle lighter colors.
-2. [Secondary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L36): Handles the darkest colors.
+1. [Primary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L35) Handle lighter colors.
+2. [Secondary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L36) Handles the darkest colors.
 
 ## Deployment
 
 ### Self Hosting
 
-1. Clone [this repository](https://github.com/k4itrun/k4itrun.github.io) with `git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git`.
-2. Run `npm i` to install dependencies.
+1. Clone the repository with:
+```git clone https://github.com/IgorKowalczyk/k4itrun.github.io.git```
+2. Install dependencies:
+```npm i```
 3. Copy `.env.example` and rename it to `.env`.
-4. In the `.env` file, set these values:
-   - `DISCORD_ID` for account info (public).
-   - `WEBHOOK` for the contact form (coming soon).
-5. Update values in [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (like `name`, `description`, `socials`, etc.).
-6. Run `npm run build` to build the project or `npm run dev` to start it in development mode.
-7. Open [http://localhost:3000](http://localhost:3000) to view the site.
+4. Set these values in the `.env` file:
+   - `DISCORD_ID`: for public account info.
+   - `WEBHOOK`: for the contact form (coming soon).
+5. Edit the configuration in [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (e.g., `name`, `description`, `socials`).
+6. Build the project:
+```npm run build```
+7. For development mode, run:
+```npm run dev```
+8. Open [http://localhost:3000](http://localhost:3000) to view your site!
 
 ### ▲ Vercel (recommended)
 
