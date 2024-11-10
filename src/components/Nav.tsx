@@ -1,5 +1,7 @@
 import { headerConfig, metaConfig } from '@k4itrunconfig';
 import { useTheme } from "@/context/ThemeProvider";
+import Button from "@/components/client/Button";
+
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import { TransitionChild, Transition } from "@headlessui/react";
@@ -11,19 +13,19 @@ const randomColor = (): string => '#' + Array.from({ length: 6 }, () => '0123456
 
 export default function Nav() {
     const router = useRouter();
-    const [heartColor, setHeartColor] = useState<string|any>(metaConfig.tailwindColors.primary);
+    const [heartColor, setHeartColor] = useState<string | any>(metaConfig.tailwindColors.primary);
     const [isOpen, setMenu] = useState(false);
     const [isSettingsOpen, setSettingsState] = useState(false);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const { isTheme, setTheme } = useTheme();
 
-    const setIsOpen = (value: Boolean|any) => {
+    const setIsOpen = (value: Boolean | any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
         setMenu(value);
     };
 
-    const setSettingsOpen = (value: Boolean|any) => {
+    const setSettingsOpen = (value: Boolean | any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
         setSettingsState(value);
     };
@@ -138,6 +140,24 @@ export default function Nav() {
 
                                         </Link>
                                     </div>
+
+
+                                    <div className="flex justify-end">
+                                        <a
+                                            href={`https://github.com/${metaConfig.accounts.github.repo}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <Button className="mt-6 flex items-center gap-1">
+                                                <i className="hover:bg-gray-500/10 dark:hover:bg-gray-700/10 bg-gray-500/5 dark:bg-gray-700/5 text-sm text-zinc-400 dark:text-zinc-200 p-1 rounded-full">
+                                                    <i className="fas fa-code" />
+                                                </i>
+                                                <span className="text-xs text-zinc-300">View Source Code</span>
+                                                <i className="fal fa-arrow-right -rotate-45 text-xs" />
+                                            </Button>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
