@@ -20,13 +20,13 @@ This is a simple Next.js portfolio template, themed according to time.
 ## Information
 
 ### Config
-Make sure to update the pre-configured values in the `k4itrun.config.ts` file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
+Make sure to update the pre-configured values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
 
 ### Themes
-To change the colors of the themes see the configuration of `k4itrun.config.ts` --> `tailwindColors` --> (`primary`, `secondary`)
+To change the colors of the themes see the configuration of `k4itrun.config.ts` --> `tailwindColors`.
 
-1. Primary: Handle lighter colors.
-2. Secondary: Handles the darkest colors.
+1. [Primary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L35): Handle lighter colors.
+2. [Secondary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L36): Handles the darkest colors.
 
 ## Deployment
 
@@ -38,7 +38,7 @@ To change the colors of the themes see the configuration of `k4itrun.config.ts` 
 4. In the `.env` file, set these values:
    - `DISCORD_ID` for account info (public).
    - `WEBHOOK` for the contact form (coming soon).
-5. Update values in `k4itrun.config.ts` (like `name`, `description`, `socials`, etc.).
+5. Update values in [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) (like `name`, `description`, `socials`, etc.).
 6. Run `npm run build` to build the project or `npm run dev` to start it in development mode.
 7. Open [http://localhost:3000](http://localhost:3000) to view the site.
 
@@ -50,22 +50,21 @@ To change the colors of the themes see the configuration of `k4itrun.config.ts` 
 2. Add your `DISCORD_ID` for account info (public).
 3. Add your `WEBHOOK` for the contact form (coming soon).
 4. Hit the `Deploy` button and wait for it to deploy.
-5. Once deployed, click `Visit` to see your site live.
-6. In your forked repo, update values in the `k4itrun.config.ts` file (like `name`, `description`, `socials`, etc.). 
+5. In your forked repo, update values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (like `name`, `description`, `socials`, etc.). 
 
 ### Other options
 To deploy this site, you can use platforms like:
 
-1. Vercel (recommended for Next.js)
-2. Netlify
-3. AWS
-4. DigitalOcean
+1. [Vercel](https://vercel.com/) (recommended for Next.js)
+2. [Netlify](https://www.netlify.com/)
+3. [AWS](https://aws.amazon.com/)
+4. [DigitalOcean](https://www.digitalocean.com/) and more...
 
 Simply push your code to a GitHub repository, and connect it to your preferred platform for continuous deployment.
 
 ## Environment Variables
 
-You can configure environment variables in the `.env.local` file. Example:
+You can configure environment variables in the `.env` file. Example:
 
 | Variable              | Description                                                      | Required |
 | --------------------- | ---------------------------------------------------------------- | -------- |
