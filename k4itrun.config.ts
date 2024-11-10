@@ -33,12 +33,12 @@ export const metaConfig: MetaConfig = {
         },
     },
     tailwindColors: {
-        primary: "#ff3700",
-        secondary: "#270e07"
+        primary: "#ff3700",  // --> CLEARER!
+        secondary: "#270e07" // --> DARKER!
     },
     errors: {
-        404: "This page could not be found.",
-        500: "An error occurred while processing your request."
+        404: "Page not found.",
+        500: "Error processing your request."
     }
 };
 
