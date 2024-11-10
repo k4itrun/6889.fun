@@ -14,10 +14,6 @@ package-lock.json
 # Backup files
 *.bak
 
-# Build/compile output folder
-dist/
-config/config.json
-
 # Environment variables
 .env*.local
 .env
@@ -32,3 +28,4 @@ config/config.json
 
 # Folder for temporary files (e.g., file uploads)
 tmp/
+[id]
