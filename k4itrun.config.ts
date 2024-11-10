@@ -1,9 +1,8 @@
 import { MetaConfig, Social, Page, Tech } from "@/interfaces";
-
-import { NextRouter } from 'next/router';
+import { version } from "./package.json";
 
 export const metaConfig: MetaConfig = {
-    version: '2.0',
+    version,
     name: 'k4itrun',
     description: "Currently working on various projects. Stay tuned for updates.",
     shortDescription: "Developer, designer, and innovator.",
@@ -15,7 +14,6 @@ export const metaConfig: MetaConfig = {
             username: "k4itrun",
             repo: "k4itrun.github.io",
             url: `https://github.com/k4itrun`,
-            key: process.env.GITHUB_KEY,
         },
         discord: {
             username: "@k4itrun",
@@ -57,32 +55,6 @@ export const technologiesConfig: Tech[] = [
 export const headerConfig = {
     title: metaConfig.name,
     description: metaConfig.shortDescription,
-    pages: (router: NextRouter): Page[] => [ // Disabled
-        {
-            link: '/',
-            label: 'Home',
-            icon: { default: 'fal fa-home', active: 'fas fa-home' },
-            active: router.pathname === '/'
-        },
-        {
-            link: '/about',
-            label: 'About',
-            icon: { default: 'fal fa-user', active: 'fas fa-user' },
-            active: router.pathname === '/about'
-        },
-        {
-            link: '/projects',
-            label: 'Projects',
-            icon: { default: 'fal fa-project-diagram', active: 'fas fa-project-diagram' },
-            active: router.pathname === '/projects'
-        },
-        {
-            link: '/posts',
-            label: 'Posts',
-            icon: { default: 'fal fa-newspaper', active: 'fas fa-newspaper' },
-            active: router.pathname === '/posts'
-        }
-    ],
     socials: [
         { name: "spotify", link: metaConfig.accounts.spotify.url },
         { name: "github", link: metaConfig.accounts.github.url },

@@ -1,4 +1,4 @@
-import { redirectsConfig } from './k4itrun.config';
+import { redirectsConfig, metaConfig } from './k4itrun.config';
 
 import type { NextConfig } from "next";
 
@@ -27,7 +27,7 @@ const nextConfg: NextConfig = {
     },
     pageExtensions: ["jsx", "js", "ts", "tsx"],
     env: {
-        VERSION: process.env.npm_package_version,
+        VERSION: metaConfig.version,
     },
     eslint: {
         ignoreDuringBuilds: true,

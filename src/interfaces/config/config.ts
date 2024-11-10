@@ -10,7 +10,7 @@ export interface MetaConfig {
       username: string;
       repo: string;
       url?: string;
-      key?: string | undefined;
+      key?: string;
     };
     youtube: {
       username: string;

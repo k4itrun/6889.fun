@@ -11,7 +11,7 @@ export default async (
     let lanyard: LanyardResponse | null = null;
 
     try {
-        const res = await axios.get(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`);
+        const res = await axios.get(`https://api.lanyard.rest/v1/users/${metaConfig.accounts.discord.id}`,{headers: {'Content-Type': 'application/json'}});
         lanyard = res?.data?.data;
         response.send(lanyard);
     } catch (error) {

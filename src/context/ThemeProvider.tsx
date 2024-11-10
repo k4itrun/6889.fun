@@ -1,7 +1,7 @@
 import { ThemeContextType, ThemeProviderProps } from "@/interfaces";
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = 'dark' | 'light';
+type Theme = 'dark' | 'light' | 'system';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -28,14 +28,42 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     setIsInitialized(true);
   }, []);
 
+  const getDayOrNightTheme = (): Theme => {
+    const currentHour = new Date().getHours();
+    return currentHour >= 6 && currentHour < 18 ? 'dark' : 'light';
+  };
+
   useEffect(() => {
     if (isInitialized) {
-      document.documentElement.classList.toggle("dark", theme === "dark");
+      if (theme === 'system') {
+        const systemTheme = getDayOrNightTheme();
+        document.documentElement.classList.toggle("dark", systemTheme === "dark");
+      } else {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      }
     }
   }, [theme, isInitialized]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (theme === 'system') {
+        const systemTheme = mediaQuery.matches ? "dark" : "light";
+        document.documentElement.classList.toggle("dark", systemTheme === "dark");
+      }
+    };
+
+    if (theme === 'system') {
+      mediaQuery.addEventListener('change', handleChange);
+    }
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [theme]);
+
   const toggleTheme = () => {
-    const newTheme: Theme = theme === "light" ? "dark" : "light";
+    const newTheme: Theme = theme === "light" ? "dark" : "system";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };

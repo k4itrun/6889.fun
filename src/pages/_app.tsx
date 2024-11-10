@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 
-import { MyAppProps } from "@/interfaces";
+import { MyAppProps, EventActions } from "@/interfaces";
 import { headerConfig } from '@k4itrunconfig';
 
 import { ContextMenu, MenuItem } from '@/components/client/ContextMenu';
@@ -16,8 +16,7 @@ import Progress from '@/lib/useProgress';
 import Router from 'next/router';
 import Head from 'next/head';
 
-import { Fragment, useEffect, useState } from 'react';
-import { Transition } from '@headlessui/react';
+import { useEffect, useState } from 'react';
 
 export default function MyApp({ Component, pageProps }: MyAppProps) {
   const betters = ['design', 'write', 'develop', 'moderate', 'create', 'explore', 'collaborate'];
@@ -26,6 +25,61 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
     const randomBetter = betters[Math.floor(Math.random() * betters.length)];
     return randomBetter || "default";
   });
+
+  function renderContextMenu({
+    hasBack,
+    hasForward,
+    goBack,
+    goForward,
+    refreshPage,
+    viewGithub,
+    viewYoutube
+  }: EventActions) {
+
+    const renderMenuItem = (icon: JSX.Element, text: string, kbd: string[] = [], onClick: () => void) => (
+      <MenuItem icon={icon} text={text} kbd={kbd} onClick={onClick} />
+    );
+
+    return (
+      <>
+        <div>
+          {hasBack && renderMenuItem(
+            <i className="fa fa-arrow-left" />, 
+            "Back", 
+            ["Alt", "◀"],
+            goBack, 
+          )}
+          {hasForward && renderMenuItem(
+            <i className="fa fa-arrow-right" />, 
+            "Forward", 
+            ["Alt", "▶"],
+            goForward, 
+          )}
+          {renderMenuItem(
+            <i className="fa fa-redo" />, 
+            "Refresh",
+            ["Ctrl", "R"],
+            refreshPage, 
+          )}
+        </div>
+        <div className="pt-3">
+          {renderMenuItem(
+            <i className="fab fa-github" />, 
+            "Github", 
+            [],
+            viewGithub
+          )}
+          {renderMenuItem(
+            <i className="fab fa-youtube" />, 
+            "YouTube", 
+            [], 
+            viewYoutube
+          )}
+        </div>
+      </>
+    );
+  }
+
 
   useEffect(() => {
     setBetter(better);
@@ -63,40 +117,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
           <Cursor />
-          <ContextMenu
-            content={(event) => (
-              <>
-                <div>
-                  {event.hasBack && (
-                    <MenuItem
-                      icon={<i className="fa fa-arrow-left" />}
-                      text="Back"
-                      kbd={["Alt", "◀"]}
-                      onClick={event.goBack}
-                    />
-                  )}
-                  {event.hasForward && (
-                    <MenuItem
-                      icon={<i className="fa fa-arrow-right" />}
-                      text="Forward"
-                      kbd={["Alt", "▶"]}
-                      onClick={event.goForward}
-                    />
-                  )}
-                  <MenuItem
-                    icon={<i className="fa fa-redo" />}
-                    text="Refresh"
-                    kbd={["Ctrl", "R"]}
-                    onClick={event.refreshPage}
-                  />
-                </div>
-                <div className="pt-3">
-                  <MenuItem icon={<i className="fab fa-github" />} text="Github" onClick={event.viewGithub} />
-                  <MenuItem icon={<i className="fab fa-youtube" />} text="YouTube" onClick={event.viewYoutube} />
-                </div>
-              </>
-            )}
-          >
+          <ContextMenu content={renderContextMenu}>
             <Progress />
             <main className="border-primary/30 dark:border-secondary border-b-[8px] border-t-[0px] h-full w-full">
               <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">

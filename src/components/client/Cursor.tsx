@@ -44,7 +44,7 @@ export default function Cursor() {
                     left: (x ?? 0) - 20,
                     top: (y ?? 0) - 20,
                     transition: "transform 0.15s ease-out, opacity 0.1s ease",
-                    zIndex: 9999999,
+                    zIndex: 10*10000,
                 }}
             />
 
@@ -57,7 +57,7 @@ export default function Cursor() {
                     height: "8px",
                     left: x ?? 0,
                     top: y ?? 0,
-                    zIndex: 9999999,
+                    zIndex: 10*10000,
                     transform: "translate(-50%, -50%)",
                 }}
             />
