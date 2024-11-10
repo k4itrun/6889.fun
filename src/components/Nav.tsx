@@ -144,7 +144,7 @@ export default function Nav() {
 
                                     <div className="flex justify-end">
                                         <a
-                                            href={`https://github.com/${metaConfig.accounts.github.repo}`}
+                                            href={`https://github.com/k4itrun/${metaConfig.accounts.github.repo}`}
                                             target="_blank"
                                             rel="noreferrer"
                                         >
