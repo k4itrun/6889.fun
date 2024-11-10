@@ -10,7 +10,7 @@ export default async (
 ): Promise<void> => {
     let repos: Repository[] | null = null;
     try {
-        const res = await axios.get(`https://api.github.com/users/${metaConfig.accounts.github.username}/repos`,{headers: {'Content-Type': 'application/json'}});
+        const res = await axios.get(`https://api.github.com/users/${metaConfig.accounts.github.username}/repos`);
         repos = res?.data;
         response.send(repos);
     } catch (error) {
