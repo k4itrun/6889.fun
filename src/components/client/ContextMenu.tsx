@@ -76,7 +76,7 @@ export function Item({ icon, text, kbd, onClick, ...props }: ItemProps) {
     return (
         <>
             <div onClick={onClick} className="flex flex-col text-sm" {...props}>
-                <div className="flex gap-2 w-full justify-between items-center hover:bg-gray-600/5 p-2 px-4 transition-all duration-200">
+                <div className="flex gap-2 w-full justify-between items-center hover:bg-primary/10 p-2 px-4 transition-all duration-200">
                     <div className="flex items-center gap-2">
                         {icon}
                         <p className="text-sm">{text}</p>

@@ -132,8 +132,8 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
             <Footer better={better} />
           </ContextMenu>
 
-          <div className="color-layout layout-purple position-right-top" />
-          <div className="color-layout layout-blue position-left-bottom" />
+          <div className="color-layout layout-primary position-right-top" />
+          <div className="color-layout layout-secondary position-left-bottom" />
 
         </PageProvider>
       </ThemeProvider>

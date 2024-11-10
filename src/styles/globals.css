@@ -35,8 +35,11 @@
   --color-text-idle: rgb(255, 187, 0);
   --color-text-offline: #727272;
 
-  --color-layout-blue: #3D25FA;
-  --color-layout-purple: #fa25d6;
+  --color-layout-primary-light: #f10505;
+  --color-layout-secondary-light: #ff0000;
+
+  --color-layout-primary-dark: #f10505;
+  --color-layout-secondary-dark: #ff3700;
 }
 
 body {
@@ -280,11 +283,20 @@ body {
   position: fixed;
 }
 
-.layout-blue {
-  background: radial-gradient(at 150% 0%, var(--color-layout-blue) 0, transparent 50%);
+.layout-primary {
+  background: radial-gradient(at 150% 0%, var(--color-layout-primary-light) 0, transparent 50%);
 }
 
-.layout-purple {
+.layout-secondary {
   top: 25%;
-  background: radial-gradient(at 0% 150%, var(--color-layout-purple) 0, transparent 50%);
+  background: radial-gradient(at 0% 120%, var(--color-layout-secondary-light) 0, transparent 50%);
+}
+
+.dark .layout-primary {
+  background: radial-gradient(at 150% 0%, var(--color-layout-primary-dark) 0, transparent 50%);
+}
+
+.dark .layout-secondary {
+  top: 25%;
+  background: radial-gradient(at 0% 150%, var(--color-layout-secondary-dark) 0, transparent 50%);
 }

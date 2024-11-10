@@ -1,4 +1,5 @@
 export * from './components/gloweffect';
+export * from './components/button';
 export * from './components/contextmenu';
 export * from './components/Input';
 export * from './components/key';

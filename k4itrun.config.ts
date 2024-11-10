@@ -7,6 +7,7 @@ export const metaConfig: MetaConfig = {
     name: 'k4itrun',
     description: "Currently working on various projects. Stay tuned for updates.",
     shortDescription: "Developer, designer, and innovator.",
+    email: 'contact@w1sh.xyz',
     webhook: process.env.WEBHOOK,
     url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://localhost:${process.env.PORT || 3000}`,
     accounts: {
@@ -34,8 +35,8 @@ export const metaConfig: MetaConfig = {
         },
     },
     tailwindColors: {
-        primary: "#4F3DFE",
-        secondary: "#0B0A1F"
+        primary: "#ff3700",
+        secondary: "#270e07"
     },
     errors: {
         404: "This page could not be found.",
@@ -56,7 +57,7 @@ export const technologiesConfig: Tech[] = [
 export const headerConfig = {
     title: metaConfig.name,
     description: metaConfig.shortDescription,
-    pages: (router: NextRouter): Page[] => [
+    pages: (router: NextRouter): Page[] => [ // Disabled
         {
             link: '/',
             label: 'Home',
@@ -91,7 +92,7 @@ export const headerConfig = {
 };
 
 export const SWRConfig = {
-    interval: 1000,
+    interval: 3 * 1000,
 };
 
 export const redirectsConfig = [

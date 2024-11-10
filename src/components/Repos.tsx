@@ -25,7 +25,7 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
                         <span className="relative">repositories</span>
                     </span>
                     <p className="text-xl text-gray-600 dark:text-white/50 font-normal">
-                        Github random Code.
+                        More than {repositories?.length || '1'} repositories that may be useless.
                     </p>
                 </h1>
 

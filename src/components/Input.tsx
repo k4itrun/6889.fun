@@ -15,9 +15,9 @@ function Input(props: InputProps) {
         ...rest
     } = props;
 
-    const [value, setValue] = useState<string>("");
-    const [focused, setFocused] = useState<boolean>(false);
-    const [IType, setType] = useState<string>(type);
+    const [value, setValue] = useState<string|any>("");
+    const [focused, setFocused] = useState<boolean|any>(false);
+    const [IType, setType] = useState<string|any>(type);
 
     useEffect(() => {
         setValue(IValue);

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Tilt from "react-parallax-tilt";
 
 export default function GlowEffect({ children, className }: GlowEffectProps) {
-  const [enabled, setEnabled] = useState<boolean>(true);
+  const [enabled, setEnabled] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function GlowEffect({ children, className }: GlowEffectProps) {
     };
   }, []);
 
-  if (!enabled) return <>{children}</>;
+  if (!enabled) return (<>{children}</>);
 
   return (
     <>
