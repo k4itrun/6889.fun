@@ -109,7 +109,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
             >
               <div
                 style={{ zIndex: 99999 }}
-                className="fixed bg-black/50 w-full h-screen flex justify-center items-center pointer-events-none"
+                className="backdrop-blur-sm fixed bg-black/50 w-full h-screen flex justify-center items-center pointer-events-none"
               >
                 <div className="flex items-center gap-x-6 animate-pulse">
                   <div className="text-center">
