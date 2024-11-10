@@ -72,7 +72,7 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
                                                 </Tippy>
                                                 <div className="flex items-center">
                                                     <img
-                                                        src={`https://skillicons.dev/icons?i=${repo.language?.toLowerCase() || "empty"}`}
+                                                        src={`https://skillicons.dev/icons?i=${repo.language?.replace(/\.| /g, "").toLowerCase() || "None"}`}
                                                         alt={repo.language}
                                                         className="w-4 h-4 mr-2"
                                                     />
