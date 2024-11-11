@@ -5,9 +5,9 @@ export default function Tech() {
     <>
       <div className="mx-auto max-w-7xl my-24">
         <h1 className="font-display text-5xl font-medium sm:text-5xl text-black dark:text-white text-right">
-          My <span className="relative whitespace-nowrap text-primary">
+          My <span className="relative whitespace-nowrap text-color-layout">
             <svg
-              className="absolute -mt-1 ml-1 top-3/5 left-0 h-[0.45em] w-full fill-primary/20 rotate-180"
+              className="absolute -mt-1 ml-1 top-3/5 left-0 h-[0.45em] w-full fill-color-layout rotate-180"
               viewBox="0 0 418 42"
               aria-hidden="true"
               preserveAspectRatio="none"
@@ -25,7 +25,7 @@ export default function Tech() {
             technologiesConfig ?
               technologiesConfig ? (
                 technologiesConfig.map((tech, index) => (
-                  <div key={index} className="group flex justify-between items-center relative bg-gray-600/5 dark:shadow-2xl overflow-hidden border border-gray-500/25 hover:border-primary hover:shadow-xl rounded-lg p-2.5 transition-all duration-200">
+                  <div key={index} className="group flex justify-between items-center relative bg-gray-600/5 dark:shadow-2xl overflow-hidden border border-gray-500/25 hover:border-color-layout hover:shadow-xl rounded-lg p-2.5 transition-all duration-200">
                     <img
                       src={tech.src}
                       width="32"

@@ -1,5 +1,3 @@
-import {metaConfig} from './k4itrun.config'
-
 import tailwindTypography from "@tailwindcss/typography";
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,8 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        ...metaConfig.tailwindColors
-      }
+        'color-layout': 'var(--color-layout)',
+        white: '#ffffff',
+        black: '#000000',
+      },
+      fontFamily: {
+        sans: ['Lexend Deca', 'sans-serif'],
+        serif: ['Merriweather', 'serif'],
+      },
     },
   },
   plugins: [tailwindTypography]

@@ -13,9 +13,9 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
         <>
             <div className="mx-auto max-w-7xl my-24">
                 <h1 className="font-display text-5xl font-medium sm:text-5xl text-gray-900 dark:text-white">
-                    My <span className="relative whitespace-nowrap text-primary">
+                    My <span className="relative whitespace-nowrap text-color-layout">
                         <svg
-                            className="absolute -mt-1 ml-1 top-3/5 left-0 h-[0.45em] w-full fill-primary/20 rotate-180"
+                            className="absolute -mt-1 ml-1 top-3/5 left-0 h-[0.45em] w-full fill-color-layout rotate-180"
                             viewBox="0 0 418 42"
                             aria-hidden="true"
                             preserveAspectRatio="none"
@@ -41,7 +41,7 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
                                             href={`https://github.com/${repo.full_name}`}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="group relative bg-gray-100 dark:bg-gray-600/5 dark:shadow-2xl border border-gray-300 hover:border-primary dark:hover:border-primary dark:border-gray-500/25 hover:shadow-xl rounded-lg p-2.5 transition-all duration-200"
+                                            className="group relative bg-gray-100 dark:bg-gray-600/5 dark:shadow-2xl border border-gray-300 hover:border-color-layout dark:hover:border-color-layout dark:border-gray-500/25 hover:shadow-xl rounded-lg p-2.5 transition-all duration-200"
                                         >
                                             <img
                                                 alt={repo.full_name}

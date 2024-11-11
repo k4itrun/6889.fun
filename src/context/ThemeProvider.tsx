@@ -1,7 +1,5 @@
-import { ThemeContextType, ThemeProviderProps } from "@/interfaces";
+import { ThemeContextType, ThemeProviderProps, Theme, ColorOption } from "@/interfaces";
 import { createContext, useContext, useEffect, useState } from "react";
-
-type Theme = 'dark' | 'light' | 'system';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -16,17 +14,42 @@ export function useTheme(): ThemeContextType {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>('dark');
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const [selectedColor, setSelectedColor] = useState<ColorOption>({ name: "Red", hex: "#FF0000" });
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as Theme | null;
+    const storedColor = localStorage.getItem("selectedColor");
+
     if (storedTheme) {
       setTheme(storedTheme);
     } else {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       setTheme(systemTheme);
     }
+
+    if (storedColor) {
+      setSelectedColor(JSON.parse(storedColor));
+    }
+
     setIsInitialized(true);
   }, []);
+
+  const changeColor = (newColor: ColorOption) => {
+    setSelectedColor(newColor);
+    localStorage.setItem("selectedColor", JSON.stringify(newColor));
+    document.documentElement.style.setProperty('--color-layout', newColor.hex);
+  };
+
+  const changeTheme = (newTheme: Theme) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    if (selectedColor) {
+      document.documentElement.style.setProperty('--color-layout', selectedColor.hex);
+    }
+  }, [selectedColor]);
 
   const getDayOrNightTheme = (): Theme => {
     const currentHour = new Date().getHours();
@@ -68,13 +91,14 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     localStorage.setItem("theme", newTheme);
   };
 
-  const changeTheme = (newTheme: Theme) => {
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
-
   return (
-    <ThemeContext.Provider value={{ isTheme: theme, toggleTheme, setTheme: changeTheme }}>
+    <ThemeContext.Provider value={{
+      isTheme: theme,
+      toggleTheme,
+      setTheme: changeTheme,
+      selectedColor,
+      setColor: changeColor
+    }}>
       {children}
     </ThemeContext.Provider>
   );

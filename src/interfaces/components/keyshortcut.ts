@@ -1,4 +1,4 @@
-export interface KeyProps {
+export interface KeyKeyShortcutProps {
     keys: string[];
-    [key: string]: any; // To support any other additional accessories
+    [key: string]: any;
 }

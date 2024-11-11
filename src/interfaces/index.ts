@@ -3,7 +3,6 @@ export * from './components/button';
 export * from './components/contextmenu';
 export * from './components/keyshortcut';
 export * from './components/footer';
-export * from './components/header';
 
 export * from './context/pageprovider';
 export * from './context/themeprovider';

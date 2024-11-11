@@ -13,7 +13,7 @@ export default function Button({
   const baseClasses = "px-4 py-2 rounded-lg min-h-[44px] relative overflow-hidden transition-all duration-200";
   
   const stateClasses = {
-    default: "bg-primary text-white hover:shadow-2xl",
+    default: "bg-color-layout text-white hover:shadow-2xl",
     loading: "bg-gray-500 text-gray-200 cursor-wait",
     success: "bg-green-500 text-white",
     error: "bg-red-500 text-white",

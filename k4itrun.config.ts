@@ -1,4 +1,4 @@
-import { MetaConfig, Social, Page, Tech } from "@/interfaces";
+import { MetaConfig, TechnologiesConfig, HeaderConfig, SWRIConfig, RedirectConfig } from "@/interfaces";
 import { version } from "./package.json";
 
 export const metaConfig: MetaConfig = {
@@ -31,17 +31,13 @@ export const metaConfig: MetaConfig = {
             url: "https://open.spotify.com/intl-es/artist/3EiLUeyEcA6fbRPSHkG5kb",
         },
     },
-    tailwindColors: {
-        primary: "#ff3700",  // --> CLEARER!
-        secondary: "#270e07" // --> DARKER!
-    },
     errors: {
         404: "Page not found.",
         500: "Error processing your request."
     }
 };
 
-export const technologiesConfig: Tech[] = [
+export const technologiesConfig: TechnologiesConfig[] = [
     "HTML", "CSS", "TailwindCSS", "Bootstrap", "JavaScript", "TypeScript",
     "Node.js", "Next.js", "React", "Express", "Nest.js", "Elixir",
     "Go", "Rust", "Bash", "Python", "PHP", "Git"
@@ -51,7 +47,7 @@ export const technologiesConfig: Tech[] = [
 }));
 
 
-export const headerConfig = {
+export const headerConfig: HeaderConfig = {
     title: metaConfig.name,
     description: metaConfig.shortDescription,
     socials: [
@@ -59,14 +55,14 @@ export const headerConfig = {
         { name: "github", link: metaConfig.accounts.github.url },
         { name: "youtube", link: metaConfig.accounts.youtube.url },
         { name: "instagram", link: metaConfig.accounts.instagram.url },
-    ] as Social[],
+    ],
 };
 
-export const SWRConfig = {
+export const SWRConfig: SWRIConfig = {
     interval: 3 * 1000,
 };
 
-export const redirectsConfig = [
+export const redirectsConfig: RedirectConfig[] = [
     { source: "/discord", destination: metaConfig.accounts.discord.server, permanent: true },
     { source: "/discord-server", destination: "/discord", permanent: true },
     { source: "/spotify", destination: metaConfig.accounts.spotify.url, permanent: true },

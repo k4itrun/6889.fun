@@ -53,7 +53,7 @@ export function ContextMenu({ content, children }: ContextMenuProps) {
     return (
         <>
             <div
-                className="context-menu absolute bg-white dark:bg-secondary rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
+                className="context-menu absolute bg-white dark:bg-black rounded-lg shadow-xl py-2 w-72 divide-y divide-gray-600/10 space-y-2"
                 style={{
                     display: "none",
                     zIndex: 9*10000,
@@ -69,7 +69,7 @@ export function ContextMenu({ content, children }: ContextMenuProps) {
 export function MenuItem({ icon, text, kbd, onClick, ...props }: ItemProps) {
     return (
         <div className="text-sm flex flex-col" onClick={onClick} {...props}>
-            <div className="flex gap-2 justify-between items-center w-full hover:bg-primary/10 p-2 px-4 transition-all duration-200">
+            <div className="flex gap-2 justify-between items-center w-full hover:bg-black/5 dark:hover:bg-white/5 p-2 px-4 transition-all duration-200">
                 <div className="flex items-center gap-2">
                     {icon}
                     <p>{text}</p>

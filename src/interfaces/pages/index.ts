@@ -83,11 +83,6 @@ export interface Repository {
     forks: number;
 }
 
-export interface Tech {
-    name: string;
-    src: string;
-}
-
 export interface MyAppProps {
     Component: React.ComponentType;
     pageProps: Record<string, any>;

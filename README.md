@@ -7,7 +7,6 @@ This is a simple Next.js portfolio template, designed with a theme that changes 
 ## Table of Contents
 1. [Information](#information)
    - [Config](#config)
-   - [Themes](#themes)
 2. [Deployment](#deployment)
       - [Self Hosting](#self-Hosting)
       - [▲ Vercel (recommended)](#-vercel-recommended-for-next-js)
@@ -20,12 +19,6 @@ This is a simple Next.js portfolio template, designed with a theme that changes 
 
 ### Config
 Make sure to update the pre-configured values in the [k4itrun.config.ts](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L4) file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
-
-### Themes
-To change the colors of the themes see the configuration of [tailwindColors](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L34).
-
-1. [Primary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L35) Handle lighter colors.
-2. [Secondary](https://github.com/k4itrun/6889.fun/blob/main/k4itrun.config.ts#L36) Handles the darkest colors.
 
 ## Deployment
 

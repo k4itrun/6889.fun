@@ -1,18 +1,18 @@
-import {NextNProgressProps} from '@/interfaces'
-import { metaConfig } from '@k4itrunconfig';
+import { NextNProgressProps } from '@/interfaces';
+import tailwindConfig from 'tailwind.config';
 
 import { useEffect, useRef } from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 
-const NextNProgress: React.FC<NextNProgressProps> = ({
-  color = metaConfig.tailwindColors.primary,
+export default function NextNProgress({
+  color = tailwindConfig.theme.extend.colors['color-layout'],
   startPosition = 0.3,
   stopDelayMs = 200,
   height = 3,
   showOnShallow = true,
   options,
-}) => {
+}: NextNProgressProps) {
   const timer = useRef<NodeJS.Timeout | null>(null);
 
   const routeChangeStart = (_: string, { shallow }: { shallow: boolean }) => {
@@ -60,6 +60,4 @@ const NextNProgress: React.FC<NextNProgressProps> = ({
       }
     `}</style>
   );
-};
-
-export default NextNProgress;
+}

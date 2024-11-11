@@ -1,6 +1,7 @@
 import { headerConfig, metaConfig } from '@k4itrunconfig';
 import { useTheme } from "@/context/ThemeProvider";
 import Button from "@/components/client/Button";
+import tailwindConfig from 'tailwind.config';
 
 import { useState } from "react";
 import { useRouter } from 'next/router';
@@ -11,14 +12,24 @@ const { socials } = headerConfig;
 
 const randomColor = (): string => '#' + Array.from({ length: 6 }, () => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
 
+const colorOptions = [
+    { name: "Red", hex: "#FF0000" },
+    { name: "Green", hex: "#00FF00" },
+    { name: "Blue", hex: "#0000FF" },
+    { name: "Yellow", hex: "#FFFF00" },
+    { name: "Magenta", hex: "#FF00FF" },
+    { name: "Cyan", hex: "#00FFFF" },
+];
+
 export default function Nav() {
     const router = useRouter();
-    const [heartColor, setHeartColor] = useState<string | any>(metaConfig.tailwindColors.primary);
-    const [isOpen, setMenu] = useState(false);
-    const [isSettingsOpen, setSettingsState] = useState(false);
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const [heartColor, setHeartColor] = useState<string>(tailwindConfig.theme.extend.colors['color-layout']);
+    const [isOpen, setMenu] = useState<boolean>(false);
+    const [isSettingsOpen, setSettingsState] = useState<boolean>(false);
+    const [isThemeDropdownOpen, setThemeDropdownOpen] = useState<boolean>(false);
+    const [isColorDropdownOpen, setColorDropdownOpen] = useState<boolean>(false);
 
-    const { isTheme, setTheme } = useTheme();
+    const { isTheme, setTheme, selectedColor, setColor } = useTheme();
 
     const setIsOpen = (value: Boolean | any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
@@ -29,6 +40,7 @@ export default function Nav() {
         document.body.style.overflow = value ? 'hidden' : 'auto';
         setSettingsState(value);
     };
+
 
     return (
         <>
@@ -70,52 +82,106 @@ export default function Nav() {
                     leaveTo="opacity-0 scale-95"
                 >
                     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
-                        <div className="bg-white/60 dark:bg-secondary/60 p-6 rounded-lg max-w-md w-full shadow-lg">
+                        <div className="bg-white dark:bg-black p-6 rounded-lg max-w-md w-full shadow-lg">
                             <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Settings</h2>
-                                <i onClick={() => setSettingsOpen(false)} className="fa fa-times w-12 h-12 hover:bg-secondary/10 dark:hover:bg-secondary text-xl flex items-center justify-center transition-all duration-200 rounded-lg " />
+                                <h2 className="text-xl font-semibold text-black dark:text-white">Settings</h2>
+                                <i onClick={() => setSettingsOpen(false)} className="fa fa-times w-12 h-12 hover:bg-black/10 dark:hover:bg-white/10 text-xl flex items-center justify-center transition-all duration-200 rounded-lg " />
                             </div>
-                            <p className="text-gray-600 dark:text-gray-300 mb-6">
+                            <p className="text-black dark:text-white mb-6">
                                 Change settings like theme or decorations. Changes are saved automatically.
                             </p>
                             <div className="space-y-4">
-                                <div>
-                                    <label className="flex items-center gap-2 text-gray-900 dark:text-gray-200">
-                                        <i className="fas fa-adjust"></i>
-                                        <span className="font-semibold">Theme</span>
-                                    </label>
-                                    <div className="relative mt-2">
-                                        <button
-                                            onClick={() => setDropdownOpen(!isDropdownOpen)}
-                                            className="w-full p-2 bg-primary/20 dark:bg-primary/20 rounded-lg text-gray-900 dark:text-gray-100 flex justify-between items-center"
-                                        >
-                                            {isTheme.charAt(0).toUpperCase() + isTheme.slice(1)}
-                                            <i className={`fas fa-chevron-down transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}></i>
-                                        </button>
-                                        {isDropdownOpen && (
-                                            <div className="absolute top-full left-0 mt-2 w-full bg-white/50 dark:bg-primary/30 rounded-lg shadow-lg z-10 backdrop-blur-sm">
-                                                <button
-                                                    onClick={() => { setTheme("system"); setDropdownOpen(false); }}
-                                                    className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-gray-900 dark:text-gray-100 hover:bg-primary/10 dark:hover:bg-primary/20"
-                                                >
-                                                    System
-                                                </button>
-                                                <button
-                                                    onClick={() => { setTheme("dark"); setDropdownOpen(false); }}
-                                                    className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-gray-900 dark:text-gray-100 hover:bg-primary/10 dark:hover:bg-primary/20"
-                                                >
-                                                    Dark
-                                                </button>
-                                                <button
-                                                    onClick={() => { setTheme("light"); setDropdownOpen(false); }}
-                                                    className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-gray-900 dark:text-gray-100 hover:bg-primary/10 dark:hover:bg-primary/20"
-                                                >
-                                                    Light
-                                                </button>
-                                            </div>
-                                        )}
-
+                                <div className="flex gap-8">
+                                    <div className="w-1/2">
+                                        <label className="flex items-center gap-2 text-black dark:text-white">
+                                            <i className="fas fa-adjust"></i>
+                                            <span className="font-semibold">Theme</span>
+                                        </label>
+                                        <div className="relative mt-2">
+                                            <button
+                                                onClick={() => setThemeDropdownOpen(!isThemeDropdownOpen)}
+                                                className="w-full p-2 bg-black/5 hover:bg-black/20 text-black dark:bg-white/5 dark:hover:bg-white/20 dark:text-white rounded-lg text-gray-900 flex justify-between items-center transition-all duration-300 ease-in-out"
+                                            >
+                                                {isTheme.charAt(0).toUpperCase() + isTheme.slice(1)}
+                                                <i className={`fas fa-chevron-down transition-transform ${isThemeDropdownOpen ? "rotate-180" : ""}`}></i>
+                                            </button>
+                                            {isThemeDropdownOpen && (
+                                                <div className="absolute top-full left-0 mt-2 w-full bg-black/5 dark:bg-white/5 rounded-lg shadow-lg z-10 backdrop-blur-sm">
+                                                    <button
+                                                        onClick={() => {
+                                                            setTheme("system");
+                                                            setThemeDropdownOpen(false);
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-black hover:bg-black/20 dark:text-white dark:hover:bg-white/20"
+                                                    >
+                                                        System
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setTheme("dark");
+                                                            setThemeDropdownOpen(false);
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-black hover:bg-black/20 dark:text-white dark:hover:bg-white/20"
+                                                    >
+                                                        Dark
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            setTheme("light");
+                                                            setThemeDropdownOpen(false);
+                                                        }}
+                                                        className="block w-full text-left px-4 py-2 rounded-lg transition-all duration-200 text-black hover:bg-black/20 dark:text-white dark:hover:bg-white/20"
+                                                    >
+                                                        Light
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
+
+                                    <div className="w-1/2">
+                                        <label className="flex items-center gap-2 text-gray-900 dark:text-gray-200">
+                                            <i className="fas fa-palette"></i>
+                                            <span className="font-semibold">Colors</span>
+                                        </label>
+                                        <div className="relative mt-2">
+                                            <button
+                                                onClick={() => setColorDropdownOpen(!isColorDropdownOpen)}
+                                                className="w-full p-2 bg-black/5 hover:bg-black/20 text-black dark:bg-white/5 dark:hover:bg-white/20 dark:text-white rounded-lg text-gray-900 flex justify-between items-center transition-all duration-300 ease-in-out"
+                                            >
+                                                {selectedColor.name}
+                                                <i className={`fas fa-chevron-down transition-transform ${isColorDropdownOpen ? "rotate-180" : ""}`}></i>
+                                            </button>
+                                            {isColorDropdownOpen && (
+                                                <div className="absolute top-full left-0 mt-2 w-full bg-black/10 dark:bg-white/10 rounded-lg shadow-xl z-10 backdrop-blur-sm">
+                                                    {colorOptions.map((color) => (
+                                                        <button
+                                                            key={color.hex}
+                                                            onClick={() => {
+                                                                setColor(color);
+                                                                setColorDropdownOpen(false);
+                                                            }}
+                                                            className="flex items-center gap-2 w-full px-4 py-2 text-left rounded-lg transition-all duration-200 text-black hover:bg-black/20 dark:text-white dark:hover:bg-white/20"
+                                                        >
+                                                            <span
+                                                                className="w-5 h-5 rounded-full"
+                                                                style={{
+                                                                    backgroundColor: color.hex,
+                                                                    border: '2px solid #2d2d2d',
+                                                                }}
+                                                                onMouseEnter={(e) => e.target.style.border = `2px solid #1a1a1a`}
+                                                                onMouseLeave={(e) => e.target.style.border = '#2d2d2d'}
+                                                            />
+
+                                                            {color.name}
+                                                        </button>
+                                                    ))}
+                                                </div>
+
+                                            )}
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div className="mt-8">
@@ -149,10 +215,10 @@ export default function Nav() {
                                             rel="noreferrer"
                                         >
                                             <Button className="mt-6 flex items-center gap-1">
-                                                <i className="hover:bg-gray-500/10 dark:hover:bg-gray-700/10 bg-gray-500/5 dark:bg-gray-700/5 text-sm text-zinc-400 dark:text-zinc-200 p-1 rounded-full">
+                                                <i className=" text-sm text-zinc-400 dark:text-zinc-400 p-1 rounded-full">
                                                     <i className="fas fa-code" />
                                                 </i>
-                                                <span className="text-xs text-zinc-300">View Source Code</span>
+                                                <span className="text-xs text-zinc-300 dark:text-zinc-300">View Source Code</span>
                                                 <i className="fal fa-arrow-right -rotate-45 text-xs" />
                                             </Button>
                                         </a>

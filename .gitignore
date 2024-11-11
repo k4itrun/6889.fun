@@ -13,6 +13,7 @@ package-lock.json
 
 # Backup files
 *.bak
+template.tsx
 
 # Environment variables
 .env*.local

@@ -28,7 +28,7 @@ export default function Profile({ profile, _profile }: ProfileProps) {
   return (
     <>
       <GlowEffect >
-        <div className="bg-primary/5 dark:bg-neutral-700/10 shadow-xl rounded-lg w-full h-auto mt-6">
+        <div className="bg-white/50 dark:bg-black/50 shadow-xl rounded-lg w-full h-auto mt-6">
           {
             _profile ? (
               profile ? (
@@ -70,7 +70,7 @@ export default function Profile({ profile, _profile }: ProfileProps) {
                           animation="shift-away"
                           arrow={false}
                         >
-                          <div className={`bg-white dark:bg-secondary w-8 h-8 border-2 border-${profile.discord_status} rounded-full`} />
+                          <div className={`bg-white dark:bg-black w-8 h-8 border-2 border-${profile.discord_status} rounded-full`} />
                         </Tippy>
                       </div>
                     </div>

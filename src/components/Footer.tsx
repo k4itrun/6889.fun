@@ -1,4 +1,5 @@
 import { FooterProps } from "@/interfaces";
+import tailwindConfig from 'tailwind.config';
 import { metaConfig } from "@k4itrunconfig";
 
 import { useState, useEffect } from "react";
@@ -7,7 +8,7 @@ import Link from "next/link";
 const randomColor = (): string => '#' + Array.from({ length: 6 }, () => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
 
 export default function Footer({ better }: FooterProps) {
-    const [heartColor, setHeartColor] = useState<string|any>(metaConfig.tailwindColors.primary);
+    const [heartColor, setHeartColor] = useState<string>(tailwindConfig.theme.extend.colors['color-layout']);
 
     useEffect(() => {
         const colorInterval = setInterval(() => setHeartColor(randomColor()), 1000);
@@ -15,11 +16,11 @@ export default function Footer({ better }: FooterProps) {
     }, []);
 
     return (
-        <footer className="bg-primary/10 dark:bg-secondary/55 w-full px-6 lg:px-12 py-8 text-zinc-400">
+        <footer className="bg-white/50 dark:bg-black/50 w-full px-6 lg:px-12 py-8 text-zinc-400">
             <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start space-y-4 lg:space-y-0">
                 <Link href="/" className="text-2xl font-bold flex items-center space-x-2">
-                    <span className="bg-primary dark:bg-primary text-xs px-2 py-1 rounded-lg">v{metaConfig.version}</span>
-                    <span className="hover:text-secondary dark:hover:text-primary transition-colors duration-200">{metaConfig.name}</span>
+                    <span className="bg-color-layout text-xs px-2 py-1 rounded-lg">v{metaConfig.version}</span>
+                    <span className="hover:text-black dark:hover:text-white transition-colors duration-200">{metaConfig.name}</span>
                 </Link>
                 <div className="text-center lg:text-right">
                     <p className="mb-1">

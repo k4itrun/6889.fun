@@ -9,30 +9,55 @@ export interface MetaConfig {
     github: {
       username: string;
       repo: string;
-      url?: string;
+      url: string;
       key?: string;
     };
     youtube: {
       username: string;
-      url?: string;
+      url: string;
     };
     discord: {
       username: string;
       server: string;
-      id?: string|any;
+      id: string | any;
     };
     instagram: {
       username: string;
-      url?: string;
+      url: string;
     };
     spotify: {
-      url?: string;
+      url: string;
     };
   };
   webhook?: string | any;
-  tailwindColors: Record<string, string>;
   errors: {
     404: string;
     500: string;
   };
+}
+
+export interface TechnologiesConfig {
+  name: string;
+  src: string;
+}
+
+interface Social {
+  name: string;
+  link: string;
+}
+
+export interface HeaderConfig {
+  title: string;
+  description: string;
+  socials: Social[];
+}
+
+export interface SWRIConfig {
+  interval: number;
+}
+
+export interface RedirectConfig {
+  source: string;
+  destination: string;
+  permanent: boolean;
 }

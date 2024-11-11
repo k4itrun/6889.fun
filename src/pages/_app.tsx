@@ -119,7 +119,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
           <Cursor />
           <ContextMenu content={renderContextMenu}>
             <Progress />
-            <main className="border-primary/30 dark:border-secondary border-b-[8px] border-t-[0px] h-full w-full">
+            <main className="border-black/10 dark:border-black border-b-[8px] border-t-[0px] h-full w-full">
               <div className="min-h-screen max-w-screen-lg p-5 w-full md:w-10/12 lg:w-8/12 mx-auto transition-all duration-300">
                 <Nav />
                 <Component {...pageProps} />
