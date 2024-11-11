@@ -169,8 +169,8 @@ export default function Nav() {
                                                                     backgroundColor: color.hex,
                                                                     border: '2px solid #2d2d2d',
                                                                 }}
-                                                                onMouseEnter={(e) => e.target.style.border = `2px solid #1a1a1a`}
-                                                                onMouseLeave={(e) => e.target.style.border = '#2d2d2d'}
+                                                                onMouseEnter={(e) => (e.target as HTMLSpanElement).style.border = `2px solid #1a1a1a`}
+                                                                onMouseLeave={(e) => (e.target as HTMLSpanElement).style.border = '#2d2d2d'}
                                                             />
 
                                                             {color.name}
