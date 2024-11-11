@@ -17,8 +17,6 @@ export default function MyDocument({ profile }: MyDocumentProps) {
         {/*<meta name="description" content={headerConfig.description} />*/}
         <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="icon" href={avatarUrl} type="image/x-icon" />
       </Head>
       <body>
