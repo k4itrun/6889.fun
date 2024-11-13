@@ -113,8 +113,7 @@ export interface Profile {
     active_on_discord_desktop: boolean;
     active_on_discord_mobile: boolean;
     listening_to_spotify: boolean;
-    spotify: Spotify;
-
+    spotify: Spotify|null;
 }
 
 export interface LanyardResponse {
