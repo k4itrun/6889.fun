@@ -32,7 +32,7 @@ export default function Profile({ profile, _profile }: ProfileProps) {
 
   const activities = profile?.activities.filter(activity => activity.type !== 2 && activity.type !== 4) || [];
   const activity = activities?.[0];
-  
+
   const spotify = profile?.spotify;
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function Profile({ profile, _profile }: ProfileProps) {
       const totalDuration = endTimeSpotify - startTimeSpotify;
 
       const storedElapsedTime = localStorage.getItem('elapsedSpotifyTime');
-      const initialElapsedTime = storedElapsedTime? Math.min(Number(storedElapsedTime), totalDuration): 0;
+      const initialElapsedTime = storedElapsedTime ? Math.min(Number(storedElapsedTime), totalDuration) : 0;
 
       setElapsedSpotifyTime(initialElapsedTime);
 
@@ -95,11 +95,11 @@ export default function Profile({ profile, _profile }: ProfileProps) {
   useEffect(() => {
     const currentStart = spotify?.timestamps?.start;
     const currentEnd = spotify?.timestamps?.end;
-  
+
     if (currentStart !== undefined && currentEnd !== undefined) {
       const storedStart = Number(localStorage.getItem('elapsedSpotifyTimeStart'));
       const storedEnd = Number(localStorage.getItem('elapsedSpotifyTimeEnd'));
-  
+
       if (currentStart !== storedStart || currentEnd !== storedEnd) {
         setElapsedSpotifyTime(0);
         localStorage.setItem('elapsedSpotifyTimeStart', String(currentStart));
@@ -108,7 +108,7 @@ export default function Profile({ profile, _profile }: ProfileProps) {
       }
     }
   }, [spotify]);
-  
+
   const progressSpotify = spotify?.timestamps?.start && spotify?.timestamps?.end
     ? (elapsedSpotifyTime / (spotify.timestamps.end - spotify.timestamps.start)) * 100
     : 0;
@@ -175,7 +175,10 @@ export default function Profile({ profile, _profile }: ProfileProps) {
                                   <p className="text-sm text-green-500">Listening to Spotify</p>
                                 </div>
                               </div>
-                              <p className="mt-2 text-sm">{spotify.album?.length > 70 ? `${spotify.album.substring(0, 70)}...` : spotify.album}</p>
+                              <div className="flex justify-between mt-2 text-sm">
+                                <p className="text-gray-500">{spotify.artist?.length > 15 ? `${spotify.artist.substring(0, 15)}...` : spotify.artist}</p>
+                                <p>{spotify.album?.length > 15 ? `${spotify.album.substring(0, 15)}...` : spotify.album}</p>
+                              </div>
                               <div className="flex items-center space-x-2 mt-3">
                                 <img
                                   src={encodeImgBase64(spotify.album_art_url)}
