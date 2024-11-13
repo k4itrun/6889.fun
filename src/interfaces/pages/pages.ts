@@ -61,7 +61,7 @@ export interface DiscordUser {
     avatar: string;
 }
 
-interface Activity {
+export interface Activity {
     id: string;
     name: string;
     type: number;
@@ -93,7 +93,7 @@ interface Activity {
     buttons?: string[];
 }
 
-interface Spotify {
+export interface Spotify {
     timestamps: {
         start: number;
         end: number;
