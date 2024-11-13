@@ -32,7 +32,9 @@ export function SpotifyTooltip({ spotify, elapsedSpotifyTime, progressSpotify }:
                                     : spotify.song
                             }
                         </p>
-                        <p className="text-sm text-green-500">Listening to Spotify</p>
+                        <p className="text-sm text-green-500 flex items-center">
+                            <i className="fab fa-spotify mr-1" /> Listening to Spotify
+                        </p>
                     </div>
                 </div>
                 <div className="flex justify-between mt-2 text-sm">
