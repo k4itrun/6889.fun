@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from 'next/router';
 import { TransitionChild, Transition } from "@headlessui/react";
 import Link from "next/link";
+import tinycolor from "tinycolor2";
 
 const { socials } = headerConfig;
 
@@ -23,13 +24,16 @@ const colorOptions = [
 
 export default function Nav() {
     const router = useRouter();
+    
     const [heartColor, setHeartColor] = useState<string>(tailwindConfig.theme.extend.colors['color-layout']);
+
     const [isOpen, setMenu] = useState<boolean>(false);
     const [isSettingsOpen, setSettingsState] = useState<boolean>(false);
+
     const [isThemeDropdownOpen, setThemeDropdownOpen] = useState<boolean>(false);
     const [isColorDropdownOpen, setColorDropdownOpen] = useState<boolean>(false);
 
-    const { isTheme, setTheme, selectedColor, setColor } = useTheme();
+    const { selectedTheme, setTheme, selectedColor, setColor } = useTheme();
 
     const setIsOpen = (value: Boolean | any) => {
         document.body.style.overflow = value ? 'hidden' : 'auto';
@@ -102,11 +106,11 @@ export default function Nav() {
                                                 onClick={() => setThemeDropdownOpen(!isThemeDropdownOpen)}
                                                 className="w-full p-2 bg-black/5 hover:bg-black/20 text-black dark:bg-white/5 dark:hover:bg-white/20 dark:text-white rounded-lg text-gray-900 flex justify-between items-center transition-all duration-300 ease-in-out"
                                             >
-                                                {isTheme.charAt(0).toUpperCase() + isTheme.slice(1)}
+                                                {selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)}
                                                 <i className={`fas fa-chevron-down transition-transform ${isThemeDropdownOpen ? "rotate-180" : ""}`}></i>
                                             </button>
                                             {isThemeDropdownOpen && (
-                                                <div className="absolute top-full left-0 mt-2 w-full bg-black/5 dark:bg-white/5 rounded-lg shadow-lg z-10 backdrop-blur-sm">
+                                                <div className="absolute top-full left-0 mt-2 w-full bg-[rgb(242,242,242)] dark:bg-[rgb(13,13,13)] rounded-lg shadow-lg z-10 backdrop-blur-sm">
                                                     <button
                                                         onClick={() => {
                                                             setTheme("system");
@@ -153,31 +157,44 @@ export default function Nav() {
                                                 <i className={`fas fa-chevron-down transition-transform ${isColorDropdownOpen ? "rotate-180" : ""}`}></i>
                                             </button>
                                             {isColorDropdownOpen && (
-                                                <div className="absolute top-full left-0 mt-2 w-full bg-black/10 dark:bg-white/10 rounded-lg shadow-xl z-10 backdrop-blur-sm">
-                                                    {colorOptions.map((color) => (
-                                                        <button
-                                                            key={color.hex}
-                                                            onClick={() => {
-                                                                setColor(color);
-                                                                setColorDropdownOpen(false);
-                                                            }}
-                                                            className="flex items-center gap-2 w-full px-4 py-2 text-left rounded-lg transition-all duration-200 text-black hover:bg-black/20 dark:text-white dark:hover:bg-white/20"
-                                                        >
-                                                            <span
-                                                                className="w-5 h-5 rounded-full"
-                                                                style={{
-                                                                    backgroundColor: color.hex,
-                                                                    border: '2px solid #2d2d2d',
+                                                <div className="absolute top-full left-0 mt-2 w-full bg-[rgb(242,242,242)] dark:bg-[rgb(13,13,13)] rounded-lg shadow-xl z-10 backdrop-blur-sm">
+                                                    {colorOptions.map((color) => {
+                                                        const darkerBorderColor = tinycolor(color.hex).darken(10).toString();
+                                                        return (
+                                                            <button
+                                                                key={color.hex}
+                                                                onClick={() => {
+                                                                    setColor(color);
+                                                                    setColorDropdownOpen(false);
                                                                 }}
-                                                                onMouseEnter={(e) => (e.target as HTMLSpanElement).style.border = `2px solid #1a1a1a`}
-                                                                onMouseLeave={(e) => (e.target as HTMLSpanElement).style.border = '#2d2d2d'}
-                                                            />
+                                                                className={`flex items-center gap-3 w-full px-4 py-2 text-left rounded-lg transition-all duration-200 ${color.hex === selectedColor.hex
+                                                                    ? 'text-black'
+                                                                    : 'text-black dark:text-white hover:bg-black/20 dark:hover:bg-white/20'
+                                                                    }`}
+                                                                style={{
+                                                                    backgroundColor: color.hex === selectedColor.hex ? color.hex : '',
+                                                                }}
+                                                            >
+                                                                <span
+                                                                    className="w-5 h-5 rounded-full transition-all duration-200"
+                                                                    style={{
+                                                                        backgroundColor: color.hex,
+                                                                        border: `2px solid ${color.hex === selectedColor.hex ? darkerBorderColor : darkerBorderColor}`,
+                                                                        boxShadow: `0 0 5px ${color.hex}`,
+                                                                    }}
+                                                                    onMouseEnter={(e) => ((e.target as HTMLSpanElement).style.boxShadow = `0 0 8px ${color.hex}`)}
+                                                                    onMouseLeave={(e) => ((e.target as HTMLSpanElement).style.boxShadow = `0 0 5px ${color.hex}`)}
+                                                                />
 
-                                                            {color.name}
-                                                        </button>
-                                                    ))}
+                                                                <span>{color.name}</span>
+
+                                                                {color.hex === selectedColor.hex && (
+                                                                    <span className="ml-auto text-black font-bold">✓</span>
+                                                                )}
+                                                            </button>
+                                                        );
+                                                    })}
                                                 </div>
-
                                             )}
                                         </div>
                                     </div>

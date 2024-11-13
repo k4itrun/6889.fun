@@ -29,4 +29,3 @@ template.tsx
 
 # Folder for temporary files (e.g., file uploads)
 tmp/
-*[id]*/

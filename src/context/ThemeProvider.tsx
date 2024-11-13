@@ -1,4 +1,5 @@
-import { ThemeContextType, ThemeProviderProps, Theme, ColorOption } from "@/interfaces";
+import { Theme, Color, ThemeContextType, ThemeProviderProps } from '@/interfaces';
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -12,19 +13,19 @@ export function useTheme(): ThemeContextType {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [selectedTheme, setSelectedTheme] = useState<Theme>('dark');
+  const [selectedColor, setSelectedColor] = useState<Color>({ name: "Green", hex: "#00FF00" });
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
-  const [selectedColor, setSelectedColor] = useState<ColorOption>({ name: "Red", hex: "#FF0000" });
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
+    const storedTheme = localStorage.getItem("selectedTheme") as Theme | null;
     const storedColor = localStorage.getItem("selectedColor");
 
     if (storedTheme) {
-      setTheme(storedTheme);
+      setSelectedTheme(storedTheme);
     } else {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      setTheme(systemTheme);
+      setSelectedTheme(systemTheme);
     }
 
     if (storedColor) {
@@ -34,15 +35,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     setIsInitialized(true);
   }, []);
 
-  const changeColor = (newColor: ColorOption) => {
+  const changeColor = (newColor: Color) => {
     setSelectedColor(newColor);
     localStorage.setItem("selectedColor", JSON.stringify(newColor));
     document.documentElement.style.setProperty('--color-layout', newColor.hex);
   };
 
   const changeTheme = (newTheme: Theme) => {
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    setSelectedTheme(newTheme);
+    localStorage.setItem("selectedTheme", newTheme);
   };
 
   useEffect(() => {
@@ -53,51 +54,51 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const getDayOrNightTheme = (): Theme => {
     const currentHour = new Date().getHours();
-    return currentHour >= 6 && currentHour < 18 ? 'dark' : 'light';
+    return currentHour >= 6 && currentHour < 18 ? 'light' : 'dark';
   };
 
   useEffect(() => {
     if (isInitialized) {
-      if (theme === 'system') {
+      if (selectedTheme === 'system') {
         const systemTheme = getDayOrNightTheme();
         document.documentElement.classList.toggle("dark", systemTheme === "dark");
       } else {
-        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.classList.toggle("dark", selectedTheme === "dark");
       }
     }
-  }, [theme, isInitialized]);
+  }, [selectedTheme, isInitialized]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = () => {
-      if (theme === 'system') {
+      if (selectedTheme === 'system') {
         const systemTheme = mediaQuery.matches ? "dark" : "light";
         document.documentElement.classList.toggle("dark", systemTheme === "dark");
       }
     };
 
-    if (theme === 'system') {
+    if (selectedTheme === 'system') {
       mediaQuery.addEventListener('change', handleChange);
     }
 
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
-  }, [theme]);
+  }, [selectedTheme]);
 
   const toggleTheme = () => {
-    const newTheme: Theme = theme === "light" ? "dark" : "system";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    const newTheme: Theme = selectedTheme === "light" ? "dark" : selectedTheme === "dark" ? "system" : "light";
+    setSelectedTheme(newTheme);
+    localStorage.setItem("selectedTheme", newTheme);
   };
 
   return (
     <ThemeContext.Provider value={{
-      isTheme: theme,
-      toggleTheme,
+      selectedTheme: selectedTheme,
+      toggleTheme: toggleTheme,
       setTheme: changeTheme,
-      selectedColor,
-      setColor: changeColor
+      selectedColor: selectedColor,
+      setColor: changeColor,
     }}>
       {children}
     </ThemeContext.Provider>

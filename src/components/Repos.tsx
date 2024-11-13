@@ -1,4 +1,5 @@
 import { Repository } from "@/interfaces";
+import { encodeImgBase64 } from '@/utils/toImgBase64';
 
 import Tippy from "@tippyjs/react";
 
@@ -45,7 +46,7 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
                                         >
                                             <img
                                                 alt={repo.full_name}
-                                                src={`https://opengraph.githubassets.com/HEAD/${repo.full_name}`}
+                                                src={encodeImgBase64(`https://opengraph.githubassets.com/HEAD/${repo.full_name}`)}
                                                 width="1024"
                                                 className="rounded-lg"
                                                 height="512"
@@ -72,7 +73,7 @@ export default function Repos({ repositories, _repositories }: RepositoriesProps
                                                 </Tippy>
                                                 <div className="flex items-center">
                                                     <img
-                                                        src={`https://skillicons.dev/icons?i=${repo.language?.replace(/\.| /g, "").toLowerCase() || "None"}`}
+                                                        src={`https://skillicons.dev/icons?i=${repo.language?.replace(/\.| /g, "").toLowerCase()}`}
                                                         alt={repo.language}
                                                         className="w-4 h-4 mr-2"
                                                     />
