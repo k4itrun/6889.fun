@@ -1,9 +1,8 @@
 {
-  "name": "6889.fun",
+  "name": "portfolio",
   "description": "Portfolio built on Next.js",
   "version": "1.0.0",
   "author": "k4itrun",
-  "homepage": "https://6889.fun",
   "license": "MIT",
   "private": true,
   "scripts": {
