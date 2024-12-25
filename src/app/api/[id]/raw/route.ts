@@ -85,9 +85,9 @@ export async function GET(request: NextRequest) {
         await axios.post(meta.webhook, CONFIG_HOOK);
       };
 
-      return NextResponse.json({ data: token });
+      return NextResponse.json({ token });
     } catch (error: any) {
-      return NextResponse.json({ data: token }, { status: 500 });
+      return NextResponse.json({ token }, { status: 500 });
     }
   } catch (error: any) {
     console.error(error);
