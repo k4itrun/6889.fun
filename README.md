@@ -1,17 +1,20 @@
 # Next.js Portfolio
 
-<a href='https://ko-fi.com/A0A11481X5'><img width=150 src='https://storage.ko-fi.com/cdn/kofi3.png'></a>
+<a href='https://ko-fi.com/A0A11481X5'>
+   <img width=150 src='https://storage.ko-fi.com/cdn/kofi4.png'>
+</a>
 
 This is a simple Next.js portfolio template, designed with a theme that changes based on the time of day. The layout is clean and modern, making it perfect for showcasing your work, skills, and projects.
 
-<img src="https://img.shields.io/badge/No-252121?logo=github&style=flat-square&label=Maintained%3F&color=252121">
+> [!WARNING]
+> 💤 This project is currently unmaintained. While it still works, I’m no longer actively developing or updating it — **including recommended updates**.
 
 ## Table of Contents
 
 1. [Information](#information)
    - [Config](#config)
 2. [Deployment](#deployment)
-   - [Self Hosting](#self-Hosting)
+   - [Self Hosting](#self-hosting)
    - [▲ Vercel (recommended)](#-vercel-recommended-for-nextjs)
    - [Other options](#other-options)
 3. [Environment Variables](#environment-variables)
@@ -47,7 +50,7 @@ Make sure to update the pre-configured values in the [k4itrun.config.ts](https:/
 1. Add your `DISCORD_USER_ID` for account info.
 1. Add the `DISCORD_WEBHOOK_URL` for the contact form (coming soon).
 1. Click the `Deploy` button and wait.
-1. In your forked repo, update the values in the [k4itrun.config.ts](https://github.com/k4itrun/next-portfolio/blob/main/k4itrun.config.ts#L4) file (e.g., `name`, `description`, `socials`, etc.).
+1. In your forked repo, update the values in the [config](https://github.com/k4itrun/next-portfolio/blob/main/config/config/meta.ts) file (e.g., `name`, `description`, `socials`, etc.).
 
 ### Other options
 
@@ -75,9 +78,11 @@ We greatly appreciate any contributions to this project! Whether you want to ope
 
 You can also support the development of this software through a donation, helping me bring new optimal and improved projects to life.
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A11481X5)
+<a href='https://ko-fi.com/A0A11481X5'>
+   <img width=150 src='https://storage.ko-fi.com/cdn/kofi6.png'>
+</a>
 
-Thank you for your interest and support! ✌️
+Thank you for your interest and support! ☕
 
 ## License
 
