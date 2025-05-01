@@ -32,14 +32,14 @@ Make sure to update the pre-configured values in the [k4itrun.config.ts](https:/
 ### Self Hosting
 
 1. Clone the repo: `git clone https://github.com/k4itrun/next-portfolio.git`
-2. Install dependencies: `npm i`
-3. Copy `.env.example` and rename it to `.env`.
+2. Install dependencies: `pnpm i && pnpm update --latest`
+3. Copy `.example.env` and rename it to `.env`.
 4. Set these values in `.env`:
    - `DISCORD_USER_ID`: for public account info.
    - `DISCORD_WEBHOOK_URL`: for the contact form (coming soon).
-5. Edit [k4itrun.config.ts](https://github.com/k4itrun/next-portfolio/blob/main/k4itrun.config.ts#L4) (e.g., `name`, `description`, `socials`).
-6. Build the project: `npm run build`
-7. For development, run: `npm run dev`
+5. Edit [config](https://github.com/k4itrun/next-portfolio/blob/main/config/config/meta.ts) (e.g., `name`, `description`, `socials`).
+6. Build the project: `pnpm run build`
+7. For development, run: `pnpm run dev`
 8. Open [http://localhost:3000](http://localhost:3000) to view the site!
 
 ### ▲ Vercel (recommended for Next.js)
@@ -57,9 +57,10 @@ Make sure to update the pre-configured values in the [k4itrun.config.ts](https:/
 To deploy this site, you can use platforms like:
 
 1. [Vercel](https://vercel.com/) (recommended for Next.js)
-2. [Netlify](https://www.netlify.com/)
-3. [AWS](https://aws.amazon.com/)
-4. [DigitalOcean](https://www.digitalocean.com/) and more...
+2. [Koyeb](https://koyeb.com/)
+3. [Netlify](https://www.netlify.com/)
+4. [AWS](https://aws.amazon.com/)
+5. [DigitalOcean](https://www.digitalocean.com/) and more...
 
 Simply push your code to a GitHub repository, and connect it to your preferred platform for continuous deployment.
 

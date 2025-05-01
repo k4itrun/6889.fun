@@ -20,9 +20,12 @@ const contentHeaders = (contentType: string) => [{ key: "Content-Type", value: c
 
 const nextConfig: NextConfig = {
  reactStrictMode: true,
- experimental: {
-  turbo: {
-   minify: true,
+ turbopack: {
+  resolveExtensions: ["jsx", "js", "ts", "tsx"],
+  moduleIds: process.env.NODE_ENV === "production" ? "deterministic" : "named",
+  root: process.cwd(),
+  resolveAlias: {
+   "@/*": ["./src/*"],
   },
  },
  pageExtensions: ["jsx", "js", "ts", "tsx"],
