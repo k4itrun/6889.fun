@@ -1,0 +1,229 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+ --color-layout: hsl(240, 100%, 50%);
+
+ --font-lexend: 'Lexend Deca', system-ui, sans-serif;
+}
+
+@layer base {
+ :root {
+  --color-avatar-dnd: hsl(0, 100%, 50%);
+  --color-avatar-dnd-border: hsl(0, 95%, 45%);
+  --color-avatar-online: hsl(120, 100%, 25%);
+  --color-avatar-idle: hsl(50, 100%, 50%);
+  --color-avatar-offline: hsl(0, 0%, 50%);
+
+  --color-border-dnd: hsl(0, 95%, 45%);
+  --color-border-online: hsl(140, 95%, 40%);
+  --color-border-idle: hsl(45, 90%, 50%);
+  --color-border-offline: hsl(0, 0%, 50%);
+
+  --color-text-online: hsl(140, 70%, 70%);
+  --color-text-dnd: hsl(0, 80%, 60%);
+  --color-text-idle: hsl(45, 100%, 60%);
+  --color-text-offline: hsl(0, 0%, 45%);
+ }
+
+ * {
+  scrollbar-color: hsl(0, 0%, 0%) transparent;
+  scrollbar-width: thin;
+  cursor: none !important;
+ }
+
+ html {
+  font-family: 'Lexend Deca', sans-serif;
+ }
+
+ body {
+  --icon-unknown-color: black;
+  background: var(--color-bg-light);
+  overflow-x: hidden !important;
+ }
+
+ .dark body {
+  --icon-unknown-color: white;
+  background: var(--color-bg-dark);
+  overflow-x: hidden !important;
+ }
+}
+
+@layer components {
+ .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+ }
+
+ @media (min-width: 1400px) {
+  .container {
+   max-width: 1400px;
+  }
+ }
+
+ .layout-primary {
+  background: radial-gradient(at 150% 0%, var(--color-layout) 0, transparent 50%);
+ }
+
+ .layout-secondary {
+  top: 25%;
+  background: radial-gradient(at 0% 120%, var(--color-layout) 0, transparent 50%);
+ }
+
+ .color-layout {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  filter: blur(44px);
+  opacity: 25%;
+  z-index: -1;
+ }
+
+ .pulse-avatar-dnd {
+  @apply rounded-full;
+  background-color: var(--color-avatar-dnd);
+  border-color: var(--color-avatar-dnd-border);
+  animation: pulse-dnd 2s infinite;
+ }
+
+ .pulse-avatar-online {
+  @apply rounded-full;
+  background-color: var(--color-avatar-online);
+  animation: pulse-online 2s infinite;
+ }
+
+ .pulse-avatar-idle {
+  @apply rounded-full;
+  background-color: var(--color-avatar-idle);
+  animation: pulse-idle 2s infinite;
+ }
+
+ .pulse-avatar-offline {
+  @apply rounded-full;
+  background-color: var(--color-avatar-offline);
+  animation: pulse-offline 2s infinite;
+ }
+
+ .border-dnd {
+  border-color: var(--color-border-dnd);
+ }
+
+ .border-online {
+  border-color: var(--color-border-online);
+ }
+
+ .border-idle {
+  border-color: var(--color-border-idle);
+ }
+
+ .border-offline {
+  border-color: var(--color-border-offline);
+ }
+
+ .text-online {
+  color: var(--color-text-online);
+ }
+
+ .text-dnd {
+  color: var(--color-text-dnd);
+ }
+
+ .text-idle {
+  color: var(--color-text-idle);
+ }
+
+ .text-offline {
+  color: var(--color-text-offline);
+ }
+
+ .text-circle {
+  font-size: 16px;
+  margin-bottom: 5px;
+ }
+
+ .weight-900 {
+  @apply font-black;
+ }
+ .weight-800 {
+  @apply font-extrabold;
+ }
+ .weight-700 {
+  @apply font-bold;
+ }
+ .weight-600 {
+  @apply font-semibold;
+ }
+ .weight-500 {
+  @apply font-medium;
+ }
+ .weight-400 {
+  @apply font-normal;
+ }
+ .weight-300 {
+  @apply font-light;
+ }
+ .weight-200 {
+  @apply font-extralight;
+ }
+ .weight-100 {
+  @apply font-thin;
+ }
+}
+
+@layer utilities {
+ @keyframes pulse-dnd {
+  0% {
+   box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+  70% {
+   box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+  100% {
+   box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+ }
+
+ @keyframes pulse-idle {
+  0% {
+   box-shadow: 0 0 0 0 rgba(250, 166, 26, 0.7);
+  }
+  70% {
+   box-shadow: 0 0 0 10px rgba(250, 166, 26, 0);
+  }
+  100% {
+   box-shadow: 0 0 0 0 rgba(250, 166, 26, 0);
+  }
+ }
+
+ @keyframes pulse-online {
+  0% {
+   box-shadow: 0 0 0 0 rgba(67, 181, 129, 0.7);
+  }
+  70% {
+   box-shadow: 0 0 0 10px rgba(67, 181, 129, 0);
+  }
+  100% {
+   box-shadow: 0 0 0 0 rgba(67, 181, 129, 0);
+  }
+ }
+
+ @keyframes pulse-offline {
+  0% {
+   box-shadow: 0 0 0 0 rgba(116, 127, 141, 0.7);
+  }
+  70% {
+   box-shadow: 0 0 0 10px rgba(116, 127, 141, 0);
+  }
+  100% {
+   box-shadow: 0 0 0 0 rgba(116, 127, 141, 0);
+  }
+ }
+}

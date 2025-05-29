@@ -1,13 +1,9 @@
-# Next.js Portfolio
+![Header](https://github.com/k4itrun/next-portfolio/assets/103044629/93637d28-0dd0-4df4-86be-341856f0c393)
 
-<a href='https://ko-fi.com/A0A11481X5'>
-   <img width=150 src='https://storage.ko-fi.com/cdn/kofi4.png'>
-</a>
-
-This is a simple Next.js portfolio template, designed with a theme that changes based on the time of day. The layout is clean and modern, making it perfect for showcasing your work, skills, and projects.
+---
 
 > [!WARNING]
-> 💤 This project is currently unmaintained. While it still works, I’m no longer actively developing or updating it — **including recommended updates**.
+> I am not currently supporting this project in recommended updates, in the future maybe yes, for now you will have this minimalist version.
 
 ## Table of Contents
 
@@ -17,7 +13,7 @@ This is a simple Next.js portfolio template, designed with a theme that changes 
    - [Self Hosting](#self-hosting)
    - [▲ Vercel (recommended)](#-vercel-recommended-for-nextjs)
    - [Other options](#other-options)
-3. [Environment Variables](#environment-variables)
+3. [Env](#env-file)
 4. [Contributing](#contributing)
 5. [License](#license)
 
@@ -25,7 +21,7 @@ This is a simple Next.js portfolio template, designed with a theme that changes 
 
 ### Config
 
-Make sure to update the pre-configured values in the [k4itrun.config.ts](https://github.com/k4itrun/next-portfolio/blob/main/k4itrun.config.ts#L4) file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
+Make sure to update the pre-configured values in the [`config.ts`](config/config/meta.ts) file (such as `name`, `description`, `socials`, etc.) before deploying your site. Edit them in your forked repository.
 
 ## Deployment
 
@@ -33,11 +29,11 @@ Make sure to update the pre-configured values in the [k4itrun.config.ts](https:/
 
 1. Clone the repo: `git clone https://github.com/k4itrun/next-portfolio.git`
 2. Install dependencies: `pnpm i && pnpm update --latest`
-3. Copy `.example.env` and rename it to `.env`.
+3. Copy `example.env` and rename it to `.env`.
 4. Set these values in `.env`:
    - `DISCORD_USER_ID`: for public account info.
    - `DISCORD_WEBHOOK_URL`: for the contact form (coming soon).
-5. Edit [config](https://github.com/k4itrun/next-portfolio/blob/main/config/config/meta.ts) (e.g., `name`, `description`, `socials`).
+5. Edit [config](config/config/meta.ts) (e.g., `name`, `description`, `socials`).
 6. Build the project: `pnpm run build`
 7. For development, run: `pnpm run dev`
 8. Open [http://localhost:3000](http://localhost:3000) to view the site!
@@ -50,7 +46,7 @@ Make sure to update the pre-configured values in the [k4itrun.config.ts](https:/
 1. Add your `DISCORD_USER_ID` for account info.
 1. Add the `DISCORD_WEBHOOK_URL` for the contact form (coming soon).
 1. Click the `Deploy` button and wait.
-1. In your forked repo, update the values in the [config](https://github.com/k4itrun/next-portfolio/blob/main/config/config/meta.ts) file (e.g., `name`, `description`, `socials`, etc.).
+1. In your forked repo, update the values in the [config](config/meta.ts) file (e.g., `name`, `description`, `socials`, etc.).
 
 ### Other options
 
@@ -64,31 +60,58 @@ To deploy this site, you can use platforms like:
 
 Simply push your code to a GitHub repository, and connect it to your preferred platform for continuous deployment.
 
-## Environment Variables
+### [`.env`](example.env) file
 
-You can configure environment variables in the `.env` file. Example:
+> [!NOTE]
+> Remember that you must first modify the `example.env` file to `.env` for the environment variables to work.
 
-| Variable              | Description                         | Required |
-| --------------------- | ----------------------------------- | -------- |
-| `DISCORD_WEBHOOK_URL` | For the contact form (coming soon). | `No`     |
-| `DISCORD_USER_ID`     | For account info (public).          | `Yes`    |
+| Variable             | Description                                                           | Required |
+| -------------------- | --------------------------------------------------------------------- | -------- |
+| `DISCORD_USER_ID`    | For account info (public).                                            | `✅ Yes` |
+| `GITHUB_ACESS_TOKEN` | For [Github](https://github.com/k4itrun/next-portfolio) repositories. | `✅ Yes` |
 
 ## Contributing
 
-We greatly appreciate any contributions to this project! Whether you want to open new issues, submit pull requests, or share suggestions for improvements, your input is invaluable. We encourage you to refer to our [Contributing Guidelines](CONTRIBUTING.md) to facilitate a seamless collaboration process.
+### Reporting Issues
 
-You can also support the development of this software through a donation, helping me bring new optimal and improved projects to life.
+If you encounter any bugs or problems while using the tool, please open a [new Issue here](../../issues).
+To help us assist you faster, include as much detail as possible, such as:
 
-<a href='https://ko-fi.com/A0A11481X5'>
-   <img width=150 src='https://storage.ko-fi.com/cdn/kofi6.png'>
-</a>
+- What you were trying to do.
+- Any error messages or console logs.
+- Your environment details (OS, versions, etc.)
 
-Thank you for your interest and support! ☕
+The more info you provide, the quicker we can identify and fix the problem.
 
-## License
+### Pull Requests
 
-This project uses the MIT license. You can find the full license details in the [LICENSE](license.md) file.
+Thanks for wanting to contribute! To submit improvements or fixes, please follow these steps:
+
+1. Clone [this repository](https://github.com/k4itrun/next-portfolio.git) using `git clone https://github.com/k4itrun/next-portfolio.git`.
+2. Create a new branch from `main` with a clear, descriptive name, for example: `git checkout -b feature/your-feature-name`.
+3. Make your changes and commit them with clear, meaningful messages.
+4. Open a [new Pull Request here](../../pulls), explaining what you added or fixed and why.
+
+We’ll carefully review each PR and provide feedback if needed to help you get it merged.
+
+☕ **[Thank you for your support!](https://ko-fi.com/A0A11481X5)**
 
 ## Contact
 
-For any inquiries or support, you can reach out via [billoneta@proto.me](mailto:billoneta@proto.me).
+If you have any **Questions** or need **Help**, feel free to email me at [tsx@billoneta.xyz](mailto:tsx@billoneta.xyz) or better yet, start a discussion in our **[Github Community](../../discussions)**.
+
+## License
+
+This project is released under the **[MIT License](license.md)**. See LICENSE file for more info.
+
+<details>
+ <summary>You didn’t break it. It was waiting to break. 🎁</summary>
+
+<a href="https://star-history.com/#k4itrun/next-portfolio&Timeline">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=k4itrun/next-portfolio&type=Timeline&theme=dark" />
+    <img alt="Star History" src="https://api.star-history.com/svg?repos=k4itrun/next-portfolio&type=Timeline" />
+  </picture>
+</a>
+
+</details>
