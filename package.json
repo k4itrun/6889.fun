@@ -33,7 +33,7 @@
   "dependencies": {
     "@bprogress/next": "^3.2.12",
     "@headlessui/react": "^2.2.4",
-    "@next/mdx": "15.4.0-canary.51",
+    "@next/mdx": "15.4.0-canary.56",
     "@octokit/graphql": "^9.0.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@tippyjs/react": "^4.2.6",
@@ -43,7 +43,7 @@
     "clsx": "^2.1.1",
     "geist": "^1.4.2",
     "lucide-react": "^0.511.0",
-    "next": "15.3.2",
+    "next": "15.3.3",
     "next-compose-plugins": "^2.2.1",
     "next-nprogress-bar": "^2.4.7",
     "next-themes": "^0.4.6",
