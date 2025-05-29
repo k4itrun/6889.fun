@@ -37,7 +37,7 @@ export const meta: Meta = {
   github: {
    username: 'k4itrun',
    url: '/github',
-   repo: 'next-portfolio',
+   repo: 'billoneta.xyz',
   },
   discord: {
    username: '@k4itrun',

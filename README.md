@@ -1,4 +1,4 @@
-![Header](https://github.com/k4itrun/next-portfolio/assets/103044629/93637d28-0dd0-4df4-86be-341856f0c393)
+![Header](https://github.com/k4itrun/billoneta.xyz/assets/103044629/93637d28-0dd0-4df4-86be-341856f0c393)
 
 ---
 
@@ -27,7 +27,7 @@ Make sure to update the pre-configured values in the [`config.ts`](config/config
 
 ### Self Hosting
 
-1. Clone the repo: `git clone https://github.com/k4itrun/next-portfolio.git`
+1. Clone the repo: `git clone https://github.com/k4itrun/billoneta.xyz.git`
 2. Install dependencies: `pnpm i && pnpm update --latest`
 3. Copy `example.env` and rename it to `.env`.
 4. Set these values in `.env`:
@@ -40,9 +40,9 @@ Make sure to update the pre-configured values in the [`config.ts`](config/config
 
 ### ▲ Vercel (recommended for Next.js)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fnext-portfolio&env=DISCORD_USER_ID,DISCORD_WEBHOOK_URL&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fnext-portfolio%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fbilloneta.xyz&env=DISCORD_USER_ID,DISCORD_WEBHOOK_URL&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fbilloneta.xyz%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
 
-1. Click the button above or go to: [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fnext-portfolio&env=DISCORD_USER_ID,DISCORD_WEBHOOK_URL&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fnext-portfolio%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
+1. Click the button above or go to: [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fbilloneta.xyz&env=DISCORD_USER_ID,DISCORD_WEBHOOK_URL&envDescription=Environment%20Variables%20Docs&envLink=https%3A%2F%2Fgithub.com%2Fk4itrun%2Fbilloneta.xyz%23deployment&project-name=portfolio&repo-name=k4itrun-portfolio&demo-title=Example%20deploy&demo-description=Example%20production%20deploy%20from%20Github%20Repository&demo-url=https%3A%2F%2F9ll.fun&demo-image=https%3A%2F%2Fi.imgur.com%2FT4VsRuy.png)
 1. Add your `DISCORD_USER_ID` for account info.
 1. Add the `DISCORD_WEBHOOK_URL` for the contact form (coming soon).
 1. Click the `Deploy` button and wait.
@@ -68,7 +68,7 @@ Simply push your code to a GitHub repository, and connect it to your preferred p
 | Variable             | Description                                                           | Required |
 | -------------------- | --------------------------------------------------------------------- | -------- |
 | `DISCORD_USER_ID`    | For account info (public).                                            | `✅ Yes` |
-| `GITHUB_ACESS_TOKEN` | For [Github](https://github.com/k4itrun/next-portfolio) repositories. | `✅ Yes` |
+| `GITHUB_ACESS_TOKEN` | For [Github](https://github.com/k4itrun/billoneta.xyz) repositories. | `✅ Yes` |
 
 ## Contributing
 
@@ -87,7 +87,7 @@ The more info you provide, the quicker we can identify and fix the problem.
 
 Thanks for wanting to contribute! To submit improvements or fixes, please follow these steps:
 
-1. Clone [this repository](https://github.com/k4itrun/next-portfolio.git) using `git clone https://github.com/k4itrun/next-portfolio.git`.
+1. Clone [this repository](https://github.com/k4itrun/billoneta.xyz.git) using `git clone https://github.com/k4itrun/billoneta.xyz.git`.
 2. Create a new branch from `main` with a clear, descriptive name, for example: `git checkout -b feature/your-feature-name`.
 3. Make your changes and commit them with clear, meaningful messages.
 4. Open a [new Pull Request here](../../pulls), explaining what you added or fixed and why.
@@ -107,10 +107,10 @@ This project is released under the **[MIT License](license.md)**. See LICENSE fi
 <details>
  <summary>You didn’t break it. It was waiting to break. 🎁</summary>
 
-<a href="https://star-history.com/#k4itrun/next-portfolio&Timeline">
+<a href="https://star-history.com/#k4itrun/billoneta.xyz&Timeline">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=k4itrun/next-portfolio&type=Timeline&theme=dark" />
-    <img alt="Star History" src="https://api.star-history.com/svg?repos=k4itrun/next-portfolio&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=k4itrun/billoneta.xyz&type=Timeline&theme=dark" />
+    <img alt="Star History" src="https://api.star-history.com/svg?repos=k4itrun/billoneta.xyz&type=Timeline" />
   </picture>
 </a>
 
