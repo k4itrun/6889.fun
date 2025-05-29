@@ -25,12 +25,6 @@ export const Settings = () => {
  const [liveColor, setLiveColor] = useState<string>('');
 
  useEffect(() => {
-  const cssVar = getComputedStyle(document.documentElement).getPropertyValue('--color-layout').trim();
-  const parsed = tinycolor(cssVar).toHexString();
-  setLiveColor(parsed);
- }, []);
-
- useEffect(() => {
   const timeout = setTimeout(() => {
    localStorage.setItem('color', liveColor);
    window.dispatchEvent(new Event('color'));
@@ -38,6 +32,13 @@ export const Settings = () => {
 
   return () => clearTimeout(timeout);
  }, [liveColor]);
+
+ useEffect(() => {
+  const cssColor = getComputedStyle(document.documentElement).getPropertyValue('--color-layout').trim();
+  const storedColor = localStorage.getItem('color');
+  const parsedColor = tinycolor(cssColor).toHexString();
+  setLiveColor(storedColor ?? parsedColor);
+ }, []);
 
  useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {

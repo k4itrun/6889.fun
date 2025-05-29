@@ -21,21 +21,6 @@ export const metadata: Metadata = {
   canonical: './',
  },
  keywords: meta.keywords,
- openGraph: {
-  url: meta.url,
-  siteName: meta.title,
-  title: meta.title,
-  description: meta.description,
-  images: [
-   {
-    url: '/opengraph-image.png',
-    width: 1200,
-    height: 630,
-   },
-  ],
-  locale: 'en_US',
-  type: 'website',
- },
  twitter: {
   title: meta.title,
   description: meta.description,
