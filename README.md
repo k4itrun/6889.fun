@@ -65,9 +65,9 @@ Simply push your code to a GitHub repository, and connect it to your preferred p
 > [!NOTE]
 > Remember that you must first modify the `example.env` file to `.env` for the environment variables to work.
 
-| Variable             | Description                                                           | Required |
-| -------------------- | --------------------------------------------------------------------- | -------- |
-| `DISCORD_USER_ID`    | For account info (public).                                            | `✅ Yes` |
+| Variable             | Description                                                          | Required |
+| -------------------- | -------------------------------------------------------------------- | -------- |
+| `DISCORD_USER_ID`    | For account info (public).                                           | `✅ Yes` |
 | `GITHUB_ACESS_TOKEN` | For [Github](https://github.com/k4itrun/billoneta.xyz) repositories. | `✅ Yes` |
 
 ## Contributing
