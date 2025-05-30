@@ -1,4 +1,7 @@
 {
  "$schema": "https://json.schemastore.org/lefthook.json",
- "extends": ["node_modules/@k4i/utils/dist/src/lefthook-config/base.json"]
+ "extends": ["node_modules/@billoneta/config/dist/lefthook-config/base.json"],
+ "commit-msg": {
+  "exclude_tags": "commitlint"
+ }
 }
