@@ -67,7 +67,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react-parallax-tilt:
         specifier: ^1.7.296
-        version: 1.7.296(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 1.7.297(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       swr:
         specifier: ^2.3.3
         version: 2.3.3(react@19.1.0)
@@ -3057,8 +3057,8 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
-  react-parallax-tilt@1.7.296:
-    resolution: {integrity: sha512-PYQ05RGIMAPKT5+8qXHjDcqA0b7htKDjEqYzjl28CP/0XYww60FwWbQpALjHng2PgjApHtSQ6AVcEk3g+EDt6Q==}
+  react-parallax-tilt@1.7.297:
+    resolution: {integrity: sha512-atTRlHvL38nQ+FpW4/VQ0VVeZ/ib82buSLfIsaeOD8yOTKheYFihY/dwXgcIx68cIlD5rePYQ8m/Z+VE1Rahkg==}
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -6664,7 +6664,7 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
-  react-parallax-tilt@1.7.296(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-parallax-tilt@1.7.297(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
